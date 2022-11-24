@@ -2998,8 +2998,8 @@ input, select, textarea {
 		/* Header */
 
 			#header {
-				padding: 6em 3em 3em 3em;
-				width: 30%;
+				padding: 4em 3em 3em 3em;
+				width: 50%;
 			}
 
 				#header h1 {
@@ -3058,7 +3058,7 @@ input, select, textarea {
 				background-position: top left, center center;
 				background-size: auto,		cover;
 				left: auto;
-				padding: 6em 4em;
+				padding: 3em 3em;
 				position: relative;
 				text-align: center;
 				top: auto;
