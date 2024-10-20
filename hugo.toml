@@ -1,3 +1,17 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = "https://pranavvkumar21.github.io/"
+languageCode = "en-us"
+title = "TechTinkerTales"
+theme = "papermod"
+
+[params]
+  author = "Pranav"
+  description = "My personal journey into tech, robotics, and AI."
+  ShowReadingTime = true
+  ShowToc = true
+  ShowWordCount = true
+
+[params.social]
+  twitter = "https://twitter.com/yourusername"
+  github  = "https://github.com/yourusername"
+
+
