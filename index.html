@@ -4,9 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pranav Vijaya Kumar - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-TOP8J8GKoXSPo6e7i0rGUNShUMpOWcZH/5LiCFYl8aAkaI0s5momkGLumZ5qX6Ch12eDqO4MZLecW0XN6EU2AA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div id="particles-js"></div>
   <nav class="navbar">
     <div class="container nav-content">
       <a href="#hero" class="logo">Pranav</a>
@@ -22,12 +27,12 @@
   <section id="hero" class="hero section">
     <div class="container hero-wrapper">
       <div class="hero-text">
-        <h1>Robotics &amp; AI Engineer</h1>
-        <p>Building intelligent systems for the physical world.</p>
+        <h1>Pranav Vijaya Kumar</h1>
+        <p>Graduate robotics engineer building intelligent systems for the physical world.</p>
         <a href="#projects" class="btn">View Projects</a>
       </div>
       <div class="hero-image">
-        <img src="https://via.placeholder.com/400x400" alt="Portrait of Pranav" />
+        <img src="https://images.unsplash.com/photo-1581091012184-4d0d5be1d2a8?auto=format&fit=crop&w=400&q=80" alt="Robotics workbench" />
       </div>
     </div>
   </section>
@@ -37,27 +42,66 @@
       <h2>Projects</h2>
       <div class="project-grid">
         <div class="project-card fade">
-          <h3>LangChain IAM Agent</h3>
-          <p class="tech">LangChain, FastAPI, PostgreSQL</p>
-          <p>Agentic framework for role mining and access automation.</p>
-          <div class="links">
-            <a href="https://github.com/pranavvkumar21/iam-agent" target="_blank" rel="noopener">GitHub</a>
+          <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=400&q=80" alt="AI IAM" />
+          <h3>AI-Powered IAM System</h3>
+          <p class="summary">LangChain agents for IAM automation.</p>
+          <div class="modal-info">
+            <p>Developing an AI-powered IAM system using LangChain agents for data analysis, role clustering, and compliance validation.</p>
+            <p><strong>Tools:</strong> LangChain, SQL, FastAPI, Docker, GitHub Actions</p>
+            <div class="links">
+              <a href="https://github.com/pranavvkumar21/iam-agent" target="_blank" rel="noopener">GitHub</a>
+            </div>
           </div>
         </div>
         <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Position Fusion" />
           <h3>Modular Position Fusion</h3>
-          <p class="tech">ROS2, Python, Docker</p>
-          <p>Sensor-agnostic localization across land, air, and sea.</p>
-          <div class="links">
-            <a href="https://github.com/pranavvkumar21/position-fusion" target="_blank" rel="noopener">GitHub</a>
+          <p class="summary">Sensor-agnostic localization across land, air, and sea.</p>
+          <div class="modal-info">
+            <p>Collaborative DSTL project delivering a platform and sensor-agnostic modular position fusion system for diverse terrains and domains.</p>
+            <p><strong>Tools:</strong> ROS, Python, Docker</p>
+            <div class="links">
+              <a href="https://github.com/pranavvkumar21/position-fusion" target="_blank" rel="noopener">GitHub</a>
+            </div>
           </div>
         </div>
         <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1604085589098-356a1a6d1f91?auto=format&fit=crop&w=400&q=80" alt="Quadruped" />
+          <h3>Quadruped Locomotion</h3>
+          <p class="summary">PPO training for stable robotic gait.</p>
+          <div class="modal-info">
+            <p>Generated the URDF model of a quadruped and trained actor-critic policies using proximal policy optimization for rhythmic locomotion.</p>
+            <p><strong>Tools:</strong> PyBullet, PPO, Python</p>
+          </div>
+        </div>
+        <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1581092335091-1b9d46fca28e?auto=format&fit=crop&w=400&q=80" alt="SCARA" />
+          <h3>SCARA Soft Gripper Robot</h3>
+          <p class="summary">Palletising eggs with soft actuators.</p>
+          <div class="modal-info">
+            <p>Designed a 3 DOF SCARA manipulator integrating pneumatic bellow actuators for egg palletising, reducing packaging costs by 40%.</p>
+            <p><strong>Tools:</strong> SolidWorks, YOLOv2, Arduino</p>
+          </div>
+        </div>
+        <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=400&q=80" alt="BotTube" />
           <h3>BotTube Autonomous Pipeline</h3>
-          <p class="tech">LangChain, GPT-4, YouTube API</p>
-          <p>Autonomous agent creating and uploading videos daily.</p>
-          <div class="links">
-            <a href="https://github.com/pranavvkumar21/bottube" target="_blank" rel="noopener">GitHub</a>
+          <p class="summary">Autonomous agent creating videos daily.</p>
+          <div class="modal-info">
+            <p>Developed BotTube, an autonomous pipeline using LangChain and GPT-4 to generate scripts, narration, visuals and upload videos with minimal input.</p>
+            <p><strong>Tools:</strong> LangChain, GPT-4, YouTube API</p>
+            <div class="links">
+              <a href="https://github.com/pranavvkumar21/bottube" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1609587412973-7d13f8b2ba5a?auto=format&fit=crop&w=400&q=80" alt="Teleoperation" />
+          <h3>Vision-Guided Teleoperation</h3>
+          <p class="summary">Hand tracking controlling InMoov arm.</p>
+          <div class="modal-info">
+            <p>Built an ESP32-controlled InMoov arm with custom PID control and MediaPipe-based hand tracking for real-time teleoperation.</p>
+            <p><strong>Tools:</strong> ESP32, MediaPipe, PID Control</p>
           </div>
         </div>
       </div>
@@ -68,10 +112,10 @@
     <div class="container fade">
       <h2>About Me</h2>
       <p>
-        I am Pranav Vijaya Kumar, a robotics and AI engineer based in Exeter, UK.
-        My experience spans ROS2, LangChain, reinforcement learning, and
-        simulation tooling. I enjoy building resilient systems that bridge
-        intelligent software with real-world machines.
+        Graduate robotics engineer with expertise in mechanical design, programming,
+        deep learning algorithms, and SLAM. Proficient in developing soft, mobile,
+        and assistive robotic systems. Recently contributed as a Research Assistant
+        at the University of Exeter on a collaborative modular position fusion project.
       </p>
     </div>
   </section>
@@ -79,11 +123,26 @@
   <section id="contact" class="contact section">
     <div class="container fade">
       <h2>Contact</h2>
-      <form id="contact-form">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn">Send</button>
+      <div class="contact-info">
+        <p><i class="fa fa-map-marker-alt"></i>16 Landscore Road, Exeter EX4 1EW, United Kingdom</p>
+        <p><i class="fa fa-phone"></i><a href="tel:+447824074707">+44 7824 074707</a></p>
+        <p><i class="fa fa-envelope"></i><a href="mailto:pranavvkumar21@gmail.com">pranavvkumar21@gmail.com</a></p>
+        <p><i class="fa fa-envelope"></i><a href="mailto:p.vijaya-kumar@exeter.ac.uk">p.vijaya-kumar@exeter.ac.uk</a></p>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <div class="input-group">
+          <i class="fa fa-user"></i>
+          <input type="text" name="name" placeholder="Your Name" required />
+        </div>
+        <div class="input-group">
+          <i class="fa fa-envelope"></i>
+          <input type="email" name="email" placeholder="Your Email" required />
+        </div>
+        <div class="input-group">
+          <i class="fa fa-comment"></i>
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn"><i class="fa fa-paper-plane"></i> Send</button>
       </form>
     </div>
   </section>
@@ -92,12 +151,22 @@
     <div class="container">
       <p>&copy; 2024 Pranav Vijaya Kumar</p>
       <div class="social">
-        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/pranavvkumar21" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/pranavvkumar21" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank" rel="noopener"><i class="fa fa-cube"></i></a>
       </div>
     </div>
   </footer>
 
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h3 id="modal-title"></h3>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
