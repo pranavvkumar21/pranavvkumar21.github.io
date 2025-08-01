@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === modal) modal.classList.remove('open');
   });
 
+
   // Contact form mailto handler
   const form = document.getElementById('contact-form');
   form.addEventListener('submit', e => {
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = mailto;
     form.reset();
   });
+
 
   // Particles background
   if (window.particlesJS) {
@@ -74,4 +76,5 @@ document.addEventListener('DOMContentLoaded', () => {
       retina_detect: true
     });
   }
+
 });
