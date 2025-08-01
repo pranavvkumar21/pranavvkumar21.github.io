@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pranav Vijaya Kumar - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-TOP8J8GKoXSPo6e7i0rGUNShUMpOWcZH/5LiCFYl8aAkaI0s5momkGLumZ5qX6Ch12eDqO4MZLecW0XN6EU2AA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="particles-js"></div>
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="#hero" class="logo">Pranav</a>
+      <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="hero" class="hero section">
+    <div class="container hero-wrapper">
+      <div class="hero-text">
+        <h1>Pranav Vijaya Kumar</h1>
+        <p>Graduate robotics engineer building intelligent systems for the physical world.</p>
+        <a href="#projects" class="btn">View Projects</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1581091012184-4d0d5be1d2a8?auto=format&fit=crop&w=400&q=80" alt="Robotics workbench" />
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects section">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <!-- Robotic Emotion Modeling -->
+        <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80" alt="Microbial fuel cell" />
+          <h3>Robotic Emotion Modeling</h3>
+          <p class="summary">Bio-inspired emotions from microbial fuel cells.</p>
+          <div class="modal-info">
+            <p>Designed and built a microbial fuel cell system to simulate emotional states in robots.</p>
+            <p>Mapped electrical output to a circumplex emotion model enabling dynamic personality modulation.</p>
+            <p><strong>Tools:</strong> Microbial Fuel Cells, Embedded Systems</p>
+          </div>
+        </div>
+        <!-- Quadruped Locomotion Prototype -->
+        <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1604085589098-356a1a6d1f91?auto=format&fit=crop&w=400&q=80" alt="Quadruped" />
+          <h3>Quadruped Locomotion Prototype</h3>
+          <p class="summary">PPO training for stable robotic gait.</p>
+          <div class="modal-info">
+            <p>Built the URDF model of a quadruped and integrated it into PyBullet for rhythmic locomotion training.</p>
+            <p>Modified PPO reward functions to improve gait stability and convergence, achieving ~75% average reward.</p>
+            <p><strong>Tools:</strong> URDF, PyBullet, PPO, Python</p>
+          </div>
+        </div>
+        <!-- BotTube Autonomous Pipeline -->
+        <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=400&q=80" alt="BotTube" />
+          <h3>BotTube Autonomous Pipeline</h3>
+          <p class="summary">Agentic pipeline creating daily videos.</p>
+          <div class="modal-info">
+            <p>Autonomous system using LangChain, GPT-4 and the YouTube API to collect data, generate scripts and visuals, and upload ~3 videos per day.</p>
+            <p><strong>Tools:</strong> LangChain, GPT-4, YouTube API</p>
+            <div class="links">
+              <a href="https://github.com/pranavvkumar21/bottube" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <!-- Job Tracking Agent -->
+        <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1581092335091-1b9d46fca28e?auto=format&fit=crop&w=400&q=80" alt="Job tracker" />
+          <h3>Job Tracking Agent</h3>
+          <p class="summary">Automates job application updates.</p>
+          <div class="modal-info">
+            <p>Built a LangChain-powered agent using the Gmail API to extract application updates and log them to Google Sheets.</p>
+            <p><strong>Tools:</strong> LangChain, Gmail API, Google Sheets</p>
+            <div class="links">
+              <a href="https://github.com/pranavvkumar21/job-tracker" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <!-- Vision-Guided Teleoperation -->
+        <div class="project-card fade">
+          <img src="https://images.unsplash.com/photo-1609587412973-7d13f8b2ba5a?auto=format&fit=crop&w=400&q=80" alt="Teleoperation" />
+          <h3>Vision-Guided Teleoperation</h3>
+          <p class="summary">Hand tracking controlling InMoov arm.</p>
+          <div class="modal-info">
+            <p>Built and assembled an ESP32-controlled InMoov arm with custom PID control and Bluetooth interface.</p>
+            <p>Used MediaPipe and vector math to extract finger angles and compute real-time joint errors for teleoperation.</p>
+            <p><strong>Tools:</strong> ESP32, MediaPipe, PID Control</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about section">
+    <div class="container fade">
+      <h2>About Me</h2>
+      <p>
+        Graduate robotics engineer with expertise in mechanical design, programming,
+        deep learning algorithms, and SLAM. Proficient in developing soft, mobile,
+        and assistive robotic systems. Recently contributed as a Research Assistant
+        at the University of Exeter on a collaborative modular position fusion project.
+      </p>
+    </div>
+  </section>
+
+  <section id="publications" class="publications section">
+    <div class="container fade">
+      <h2>Publications</h2>
+      <ul class="pub-list">
+        <li><a href="https://ieeexplore.ieee.org/xpl/conhome/9265488/proceeding" target="_blank" rel="noopener">Design And Manufacture of Octagonal Rover for Space Applications</a></li>
+        <li><a href="https://iopscience.iop.org/article/10.1088/1757-899X/1132/1/012011/meta" target="_blank" rel="noopener">Design Optimization and Analysis of External Corrugation and Geometry of Asymmetrical Bellow Flexible Pneumatic Actuator</a></li>
+        <li><a href="https://iopscience.iop.org/article/10.1088/1757-899X/1132/1/012010/meta" target="_blank" rel="noopener">Design, Analysis, Manufacturing and Testing of a SCARA Robot with Pneumatic Gripper for the Poultry Industry</a></li>
+        <li><a href="https://iopscience.iop.org/article/10.1088/1742-6596/2070/1/012207/meta" target="_blank" rel="noopener">Design and Control of an Automated SCARA Robotic Arm with a Pneumatic Soft Gripper</a></li>
+        <li><a href="https://iopscience.iop.org/article/10.1088/1742-6596/2070/1/012183/meta" target="_blank" rel="noopener">Investigations on the Stability of a Two-Wheeled Vehicle with a Tendency to Topple Sideways</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="contact section">
+    <div class="container fade">
+      <h2>Contact</h2>
+      <div class="contact-info">
+        <p><i class="fa fa-map-marker-alt"></i>16 Landscore Road, Exeter EX4 1EW, United Kingdom</p>
+        <p><i class="fa fa-phone"></i><a href="tel:+447824074707">+44 7824 074707</a></p>
+        <p><i class="fa fa-envelope"></i><a href="mailto:pranavvkumar21@gmail.com">pranavvkumar21@gmail.com</a></p>
+        <p><i class="fa fa-envelope"></i><a href="mailto:p.vijaya-kumar@exeter.ac.uk">p.vijaya-kumar@exeter.ac.uk</a></p>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <div class="input-group">
+          <i class="fa fa-user"></i>
+          <input type="text" name="name" placeholder="Your Name" required />
+        </div>
+        <div class="input-group">
+          <i class="fa fa-envelope"></i>
+          <input type="email" name="email" placeholder="Your Email" required />
+        </div>
+        <div class="input-group">
+          <i class="fa fa-comment"></i>
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn"><i class="fa fa-paper-plane"></i> Send</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Pranav Vijaya Kumar</p>
+      <div class="social">
+        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/pranavvkumar21" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank" rel="noopener"><i class="fa fa-cube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h3 id="modal-title"></h3>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
