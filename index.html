@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pranav Vijaya Kumar - Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="#hero" class="logo">Pranav</a>
+      <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="hero" class="hero section">
+    <div class="container hero-wrapper">
+      <div class="hero-text">
+        <h1>Robotics &amp; AI Engineer</h1>
+        <p>Building intelligent systems for the physical world.</p>
+        <a href="#projects" class="btn">View Projects</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://via.placeholder.com/400x400" alt="Portrait of Pranav" />
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects section">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <div class="project-card fade">
+          <h3>LangChain IAM Agent</h3>
+          <p class="tech">LangChain, FastAPI, PostgreSQL</p>
+          <p>Agentic framework for role mining and access automation.</p>
+          <div class="links">
+            <a href="https://github.com/pranavvkumar21/iam-agent" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <div class="project-card fade">
+          <h3>Modular Position Fusion</h3>
+          <p class="tech">ROS2, Python, Docker</p>
+          <p>Sensor-agnostic localization across land, air, and sea.</p>
+          <div class="links">
+            <a href="https://github.com/pranavvkumar21/position-fusion" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <div class="project-card fade">
+          <h3>BotTube Autonomous Pipeline</h3>
+          <p class="tech">LangChain, GPT-4, YouTube API</p>
+          <p>Autonomous agent creating and uploading videos daily.</p>
+          <div class="links">
+            <a href="https://github.com/pranavvkumar21/bottube" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about section">
+    <div class="container fade">
+      <h2>About Me</h2>
+      <p>
+        I am Pranav Vijaya Kumar, a robotics and AI engineer based in Exeter, UK.
+        My experience spans ROS2, LangChain, reinforcement learning, and
+        simulation tooling. I enjoy building resilient systems that bridge
+        intelligent software with real-world machines.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact section">
+    <div class="container fade">
+      <h2>Contact</h2>
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Pranav Vijaya Kumar</p>
+      <div class="social">
+        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/pranavvkumar21" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
