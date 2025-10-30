@@ -1,217 +1,1092 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pranav Vijaya Kumar - Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-TOP8J8GKoXSPo6e7i0rGUNShUMpOWcZH/5LiCFYl8aAkaI0s5momkGLumZ5qX6Ch12eDqO4MZLecW0XN6EU2AA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranav Kumar - Robotics Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent-color: #00ffc6;
+            --accent-dark: #00cc9e;
+            --bg-color: #0d0d0d;
+            --text-color: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --card-bg: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Robotics Animated Background */
+        .robotics-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: var(--bg-color);
+            overflow: hidden;
+        }
+
+        .grid-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 198, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 198, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 20s linear infinite;
+        }
+
+        @keyframes gridScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Circuit Board Nodes */
+        .circuit-board {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 255, 198, 0.6);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .node-1 { top: 20%; left: 15%; animation-delay: 0s; }
+        .node-2 { top: 40%; left: 75%; animation-delay: 0.5s; }
+        .node-3 { top: 60%; left: 25%; animation-delay: 1s; }
+        .node-4 { top: 80%; left: 65%; animation-delay: 1.5s; }
+        .node-5 { top: 30%; left: 50%; animation-delay: 2s; }
+        .node-6 { top: 70%; left: 85%; animation-delay: 2.5s; }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.5);
+                opacity: 0.7;
+            }
+        }
+
+        /* Circuit Connections */
+        .connection {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--accent-color), 
+                transparent);
+            opacity: 0.3;
+            animation: flow 4s ease-in-out infinite;
+        }
+
+        .connection-1 {
+            top: 20%;
+            left: 15%;
+            width: 300px;
+            transform: rotate(25deg);
+            animation-delay: 0s;
+        }
+
+        .connection-2 {
+            top: 40%;
+            left: 25%;
+            width: 400px;
+            transform: rotate(-15deg);
+            animation-delay: 0.8s;
+        }
+
+        .connection-3 {
+            top: 60%;
+            left: 25%;
+            width: 350px;
+            transform: rotate(35deg);
+            animation-delay: 1.6s;
+        }
+
+        .connection-4 {
+            top: 30%;
+            left: 50%;
+            width: 250px;
+            transform: rotate(-25deg);
+            animation-delay: 2.4s;
+        }
+
+        .connection-5 {
+            top: 70%;
+            left: 65%;
+            width: 200px;
+            transform: rotate(45deg);
+            animation-delay: 3.2s;
+        }
+
+        @keyframes flow {
+            0%, 100% {
+                opacity: 0.2;
+                box-shadow: 0 0 5px rgba(0, 255, 198, 0.3);
+            }
+            50% {
+                opacity: 0.5;
+                box-shadow: 0 0 15px rgba(0, 255, 198, 0.6);
+            }
+        }
+
+        /* Floating Robotics Icons */
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .icon-item {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.15;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .icon-1 { top: 10%; left: 20%; animation-duration: 15s; animation-delay: 0s; }
+        .icon-2 { top: 25%; left: 70%; animation-duration: 18s; animation-delay: 2s; }
+        .icon-3 { top: 45%; left: 10%; animation-duration: 22s; animation-delay: 4s; }
+        .icon-4 { top: 55%; left: 80%; animation-duration: 16s; animation-delay: 1s; }
+        .icon-5 { top: 70%; left: 30%; animation-duration: 20s; animation-delay: 3s; }
+        .icon-6 { top: 80%; left: 60%; animation-duration: 19s; animation-delay: 5s; }
+        .icon-7 { top: 15%; left: 85%; animation-duration: 17s; animation-delay: 2.5s; }
+        .icon-8 { top: 35%; left: 45%; animation-duration: 21s; animation-delay: 1.5s; }
+        .icon-9 { top: 65%; left: 15%; animation-duration: 23s; animation-delay: 3.5s; }
+        .icon-10 { top: 90%; left: 75%; animation-duration: 18s; animation-delay: 0.5s; }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-60px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-30px) rotate(3deg);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 255, 198, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content Container */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .status {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-weight: 400;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-top: 1.5rem;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 30px rgba(0, 255, 198, 0.4);
+            margin-bottom: 2rem;
+            animation: photoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes photoGlow {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(0, 255, 198, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(0, 255, 198, 0.6);
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        .about-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 198, 0.2);
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            padding: 0;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 198, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .ai-note {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        .project-card h3,
+        .project-card p,
+        .project-card .project-tech {
+            padding: 0 2rem;
+        }
+
+        .project-card h3 {
+            padding-top: 1.5rem;
+        }
+
+        .project-card .project-tech {
+            padding-bottom: 2rem;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 198, 0.3);
+        }
+
+        .project-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 198, 0.1);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+        }
+
+	.project-links {
+	    display: flex;
+	    justify-content: center;
+	    gap: 1rem;
+	    margin-top: 1rem;
+	    padding: 0 2rem 1.5rem;
+	}
+
+        .project-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: var(--accent-dark);
+        }
+
+        /* Publications Section */
+        .pub-list {
+            list-style: none;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 198, 0.2);
+            overflow: hidden;
+        }
+
+        .pub-list li {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0, 255, 198, 0.1);
+            transition: background 0.3s;
+        }
+
+        .pub-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pub-list li:hover {
+            background: rgba(0, 255, 198, 0.05);
+        }
+
+        .pub-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .pub-list a:hover {
+            color: var(--accent-color);
+        }
+
+        /* GitHub Stats Section */
+        .github-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 198, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 198, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .stat-info h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .github-readme-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .github-readme-stats img {
+            max-width: 100%;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 198, 0.2);
+        }
+
+        /* Contact Section */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 198, 0.2);
+            text-align: center;
+            min-width: 200px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 198, 0.3);
+        }
+
+        .contact-item .icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item h3 {
+            color: var(--accent-color);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a, .contact-item p {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 198, 0.2);
+            margin-top: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 198, 0.2);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .submit-btn {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--card-bg);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 198, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(13, 13, 13, 0.95);
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0, 255, 198, 0.1);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-  <nav class="navbar">
-    <div class="container nav-content">
-      <a href="#hero" class="logo">Pranav</a>
-      <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
-      <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+    <!-- Robotics Animated Background -->
+    <div class="robotics-background">
+        <div class="circuit-board">
+            <div class="node node-1"></div>
+            <div class="node node-2"></div>
+            <div class="node node-3"></div>
+            <div class="node node-4"></div>
+            <div class="node node-5"></div>
+            <div class="node node-6"></div>
+            <div class="connection connection-1"></div>
+            <div class="connection connection-2"></div>
+            <div class="connection connection-3"></div>
+            <div class="connection connection-4"></div>
+            <div class="connection connection-5"></div>
+        </div>
+        <div class="floating-icons">
+            <div class="icon-item icon-1">⚙</div>
+            <div class="icon-item icon-2">⚡</div>
+            <div class="icon-item icon-3">🤖</div>
+            <div class="icon-item icon-4">⚙</div>
+            <div class="icon-item icon-5">🔧</div>
+            <div class="icon-item icon-6">⚡</div>
+            <div class="icon-item icon-7">🤖</div>
+            <div class="icon-item icon-8">⚙</div>
+            <div class="icon-item icon-9">⚡</div>
+            <div class="icon-item icon-10">🔩</div>
+        </div>
+        <div class="grid-pattern"></div>
     </div>
-  </nav>
 
-  <section id="hero" class="hero section">
-    <div class="container hero-wrapper">
-      <div class="hero-text">
-        <h1>Pranav Vijaya Kumar</h1>
-        <p>I'm Pranav, a robotics engineer passionate about creating sustainable automation solutions that grow with real-world needs. My vision is to design intelligent systems that not only solve today's problems but scale responsibly for the future.</p>
-        <a href="#projects" class="btn">View Projects</a>
-      </div>
-      <div class="hero-image">
-        <img src="assets/cover.jpg" alt="Robotics workbench" />
-      </div>
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Navigation -->
+        <nav>
+            <a href="#home" class="logo">Pranav</a>
+            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#github">GitHub Stats</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <img src="assets/cover.jpg" alt="Pranav Kumar" class="profile-photo">
+            <h1>Pranav Vijaya Kumar</h1>
+            <p>Robotics Engineer & Developer</p>
+            <p>Creating sustainable automation solutions that grow with real-world needs</p>
+            <p class="status">Open to Opportunities</p>
+            <a href="#projects" class="submit-btn" style="margin-top: 2rem;">View Projects</a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>I've always been fascinated by the idea of machines thinking, adapting, and solving problems just like we do. That curiosity pushed me from mechanical engineering into robotics, where I learned to blend hardware, software, and intelligence into something truly impactful.</p>
+                <p>From designing a microbial fuel cell that gave robots bio-inspired emotions to developing cross-domain localization systems tested on land, air, and sea, I've explored what it really means to make machines smarter and more resilient. Along the way, I've worked on quadrupeds that learn to walk, agentic AI systems that automate entire workflows, and vision-guided teleoperation that makes robots feel like an extension of the human hand.</p>
+                <p>Today, I'm focused on building robotics and AI systems that don't just function but leave a mark—solutions that scale, adapt, and drive sustainability. My journey has been about turning complex challenges into elegant automation, and I'm just getting started.</p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="assets/emotion_modeling_for_robots.png" alt="Emotion Modeling for Robots" class="project-image">
+                    <span class="ai-note">AI image</span>
+                    <h3>Robotic Emotion Modeling</h3>
+                    <p>Bio inspired emotions from microbial fuel cells</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Robotics</span>
+                        <span class="tech-tag">Bio-inspired</span>
+                        <span class="tech-tag">AI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> View Details</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="assets/ruff.png" alt="Ruff" class="project-image">
+                    <span class="ai-note">AI image</span>
+                    <h3>Quadruped Locomotion Prototype</h3>
+                    <p>PPO training for stable rhythmic gait</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">PPO</span>
+                        <span class="tech-tag">Robotics</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/pranavvkumar21/Ruff_ppo" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="assets/bottube.png" alt="BotTube" class="project-image">
+                    <span class="ai-note">AI image</span>
+                    <h3>BotTube Autonomous Pipeline</h3>
+                    <p>Agentic pipeline creating daily videos</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AI Agents</span>
+                        <span class="tech-tag">Automation</span>
+                        <span class="tech-tag">Content Generation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/pranavvkumar21/BotTube" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="assets/project_jobs.png" alt="Job Tracking Agent" class="project-image">
+                    <span class="ai-note">AI image</span>
+                    <h3>Job Tracking Agent</h3>
+                    <p>Automates application updates to Sheets</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AI Agents</span>
+                        <span class="tech-tag">Automation</span>
+                        <span class="tech-tag">Gmail API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/pranavvkumar21/jobs" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="assets/vision_guided_teleoperation.png" alt="Vision Guided Teleoperation" class="project-image">
+                    <span class="ai-note">AI image</span>
+                    <h3>Vision Guided Teleoperation</h3>
+                    <p>Hand tracking controlling InMoov arm</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">ESP32</span>
+                        <span class="tech-tag">MediaPipe</span>
+                        <span class="tech-tag">PID Control</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/pranavvkumar21/" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub (Coming Soon)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications">
+            <h2>Publications</h2>
+            <ul class="pub-list">
+                <li><a href="https://ieeexplore.ieee.org/xpl/conhome/9265488/proceeding" target="_blank">Design And Manufacture of Octagonal Rover for Space Applications</a></li>
+                <li><a href="https://iopscience.iop.org/article/10.1088/1742-6596/2070/1/012207/meta" target="_blank">Design and Control of an Automated SCARA Robotic Arm with a Pneumatic Soft Gripper</a></li>
+                <li><a href="https://iopscience.iop.org/article/10.1088/1742-6596/2070/1/012183/meta" target="_blank">Investigations on the Stability of a Two-Wheeled Vehicle with a Tendency to Topple Sideways</a></li>
+            </ul>
+        </section>
+
+        <!-- GitHub Stats Section -->
+        <section id="github">
+            <h2>GitHub Statistics</h2>
+            <div class="github-stats" id="githubStats">
+                <div class="loading">Loading GitHub statistics...</div>
+            </div>
+            <div class="github-readme-stats">
+                <img src="https://github-readme-stats.vercel.app/api?username=pranavvkumar21&show_icons=true&theme=radical&hide_border=true&bg_color=0d0d0d&title_color=00ffc6&icon_color=00ffc6&text_color=f5f5f5" alt="GitHub Stats">
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pranavvkumar21&layout=compact&theme=radical&hide_border=true&bg_color=0d0d0d&title_color=00ffc6&text_color=f5f5f5" alt="Top Languages">
+                <img src="https://github-readme-streak-stats.herokuapp.com/?user=pranavvkumar21&theme=radical&hide_border=true&background=0d0d0d&ring=00ffc6&fire=00ffc6&currStreakLabel=00ffc6" alt="GitHub Streak">
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+		<div class="contact-links">
+		    <div class="contact-item">
+			<div class="icon"><i class="fas fa-envelope"></i></div>
+			<h3>Email</h3>
+			<a href="mailto:pranavvkumar21@gmail.com" target="_blank">pranavvkumar21@gmail.com</a>
+			<a href="mailto:p.vijaya-kumar@exeter.ac.uk" target="_blank">p.vijaya-kumar@exeter.ac.uk</a>
+		    </div>
+		    <div class="contact-item">
+			<div class="icon"><i class="fab fa-linkedin-in"></i></div>
+			<h3>LinkedIn</h3>
+			<a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank">pranavvijayakumar216</a>
+		    </div>
+		    <div class="contact-item">
+			<div class="icon"><i class="fab fa-github"></i></div>
+			<h3>GitHub</h3>
+			<a href="https://github.com/pranavvkumar21" target="_blank">pranavvkumar21</a>
+		    </div>
+		    <div class="contact-item">
+			<div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+			<h3>Location</h3>
+			<p>16 Landscore Road, Exeter EX4 1EW, United Kingdom</p>
+		    </div>
+		    <div class="contact-item">
+			<div class="icon"><i class="fab fa-whatsapp"></i></div>
+			<h3>Phone</h3>
+			<a href="tel:+447824074707">+44 7824 074707 (whatsapp)</a>
+			<a href="tel:+919496968268">+91 9496 968268</a>
+		    </div>
+		    <div class="contact-item">
+			<div class="icon"><i class="fas fa-coffee"></i></div>
+			<h3>Buy Me a Coffee</h3>
+			<a href="https://buymeacoffee.com/pranavvkumar" target="_blank">Support My Work</a>
+		    </div>
+		</div>
+            
+            <div class="contact-form">
+                <form id="contact-form">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="name" placeholder="Your Name" required />
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Your Email" required />
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-comment"></i>
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Pranav Vijaya Kumar</p>
+                <div class="social">
+                    <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/pranavvkumar21" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank"><i class="fas fa-cube"></i></a>
+                </div>
+            </div>
+        </footer>
     </div>
-  </section>
 
-  <!-- UPDATE IMG paths in src to match your asset folder -->
-<section id="projects" class="projects section">
-  <div class="container">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <!-- Robotic Emotion Modeling via Microbial Fuel Cells -->
-      <div class="project-card fade">
-        <div class="img-wrap" style="position:relative;">
-          <img src="assets/emotion_modeling_for_robots.png" alt="Microbial fuel cell emotions cover" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;" />
-          <span class="ai-note" style="position:absolute;right:8px;top:8px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:2px 6px;border-radius:6px;">AI image</span>
-        </div>
-        <h3>Robotic Emotion Modeling</h3>
-        <p class="summary">Bio inspired emotions from microbial fuel cells.</p>
-        <div class="modal-info">
-          <p>Built a working microbial fuel cell stack and mapped voltage dynamics to a circumplex emotion model, letting embedded robots express state dependent behaviors.</p>
-          <p><strong>Focus:</strong> bio signals to affect models, low power embedded integration, real time state modulation.</p>
-          <p><strong>Tools:</strong> microbial fuel cells, embedded firmware, Python.</p>
-          <div class="links">
-          </div>
-        </div>
-      </div>
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('nav ul');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-      <!-- Quadruped Locomotion Prototype -->
-      <div class="project-card fade">
-        <div class="img-wrap" style="position:relative;">
-          <img src="/assets/ruff.png" alt="Quadruped PPO cover" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;" />
-          <span class="ai-note" style="position:absolute;right:8px;top:8px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:2px 6px;border-radius:6px;">AI image</span>
-        </div>
-        <h3>Quadruped Locomotion Prototype</h3>
-        <p class="summary">PPO training for stable rhythmic gait.</p>
-        <div class="modal-info">
-          <p>Authored URDF and PyBullet sim, then tuned PPO rewards and curriculum for gait stability and convergence. Achieved consistent average returns across runs with robust stance transitions.</p>
-          <p><strong>Focus:</strong> reward shaping, action scaling, reset strategies, sim to sim reproducibility.</p>
-          <p><strong>Tools:</strong> URDF, PyBullet, PPO, Python, C++.</p>
-          <div class="links">
-            <a href="https://github.com/pranavvkumar21/Ruff_ppo" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </div>
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
 
-      <!-- BotTube Autonomous Pipeline -->
-      <div class="project-card fade">
-        <div class="img-wrap" style="position:relative;">
-          <img src="assets/bottube.png" alt="BotTube autonomous pipeline cover" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;" />
-          <span class="ai-note" style="position:absolute;right:8px;top:8px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:2px 6px;border-radius:6px;">AI image</span>
-        </div>
-        <h3>BotTube Autonomous Pipeline</h3>
-        <p class="summary">Agentic pipeline creating daily videos.</p>
-        <div class="modal-info">
-          <p>End to end agent that ingests data, drafts scripts, renders visuals and audio, and schedules uploads with minimal touch.</p>
-          <p><strong>Focus:</strong> agent orchestration, failure recovery, API rate limits, low cost batching.</p>
-          <p><strong>Tools:</strong> LangChain, GPT 4, YouTube API, FastAPI, Docker.</p>
-          <div class="links">
-            <a href="https://github.com/pranavvkumar21/BotTube" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </div>
+        // Fetch GitHub Statistics
+        async function fetchGitHubStats() {
+            const username = 'pranavvkumar21';
+            const statsContainer = document.getElementById('githubStats');
+            
+            try {
+                // Fetch user data
+                const userResponse = await fetch(`https://api.github.com/users/${username}`);
+                const userData = await userResponse.json();
+                
+                // Fetch repositories
+                const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+                const reposData = await reposResponse.json();
+                
+                // Calculate statistics
+                const totalRepos = userData.public_repos;
+                const totalStars = reposData.reduce((acc, repo) => acc + repo.stargazers_count, 0);
+                const totalForks = reposData.reduce((acc, repo) => acc + repo.forks_count, 0);
+                const followers = userData.followers;
+                const following = userData.following;
+                
+                // Display stats
+                statsContainer.innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-info">
+                            <h3>${totalRepos}</h3>
+                            <p>Public Repositories</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <h3>${totalStars}</h3>
+                            <p>Total Stars</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🍴</div>
+                        <div class="stat-info">
+                            <h3>${totalForks}</h3>
+                            <p>Total Forks</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3>${followers}</h3>
+                            <p>Followers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔗</div>
+                        <div class="stat-info">
+                            <h3>${following}</h3>
+                            <p>Following</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <h3>${new Date(userData.created_at).getFullYear()}</h3>
+                            <p>Member Since</p>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error fetching GitHub stats:', error);
+                statsContainer.innerHTML = '<div class="loading">Unable to load GitHub statistics at this time.</div>';
+            }
+        }
 
-      <!-- Job Tracking Agent -->
-      <div class="project-card fade">
-        <div class="img-wrap" style="position:relative;">
-          <img src="assets/project_jobs.png" alt="Job tracking agent cover" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;" />
-          <span class="ai-note" style="position:absolute;right:8px;top:8px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:2px 6px;border-radius:6px;">AI image</span>
-        </div>
-        <h3>Job Tracking Agent</h3>
-        <p class="summary">Automates application updates to Sheets.</p>
-        <div class="modal-info">
-          <p>Mailbox agent that extracts status mails and writes structured logs to Sheets with dedupe, company grouping, and alerting hooks.</p>
-          <p><strong>Focus:</strong> email parsing, schema design, idempotent writes, quick deploy.</p>
-          <p><strong>Tools:</strong> LangChain, Gmail API, Google Sheets, Python.</p>
-          <div class="links">
-            <a href="https://github.com/pranavvkumar21/jobs" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-      </div>
+        // Load GitHub stats when page loads
+        window.addEventListener('load', fetchGitHubStats);
 
-      <!-- Vision Guided Teleoperation -->
-      <div class="project-card fade">
-        <div class="img-wrap" style="position:relative;">
-          <img src="assets/vision_guided_teleoperation.png" alt="Vision guided teleoperation cover" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;" />
-          <span class="ai-note" style="position:absolute;right:8px;top:8px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:2px 6px;border-radius:6px;">AI image</span>
-        </div>
-        <h3>Vision Guided Teleoperation</h3>
-        <p class="summary">Hand tracking controlling InMoov arm.</p>
-        <div class="modal-info">
-          <p>ESP32 controlled InMoov arm with custom PID. MediaPipe based finger angle extraction feeds joint error computation for smooth teleop.</p>
-          <p><strong>Focus:</strong> low latency pipeline, filtering, stability and responsiveness.</p>
-          <p><strong>Tools:</strong> ESP32, MediaPipe, PID, Bluetooth, Python.</p>
-          <div class="links">
-            <a href="https://github.com/pranavvkumar21/" target="_blank" rel="noopener">GitHub repo will be updated soon</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-<section id="about" class="about section">
-  <div class="container fade">
-    <h2>About Me</h2>
-    <p>
-      I’ve always been fascinated by the idea of machines thinking, adapting, and solving problems just like we do. That curiosity pushed me from mechanical engineering into robotics, where I learned to blend hardware, software, and intelligence into something truly impactful.
-    </p>
-    <p>
-      From designing a microbial fuel cell that gave robots bio-inspired emotions to developing cross-domain localization systems tested on land, air, and sea, I’ve explored what it really means to make machines smarter and more resilient. Along the way, I’ve worked on quadrupeds that learn to walk, agentic AI systems that automate entire workflows, and vision-guided teleoperation that makes robots feel like an extension of the human hand.
-    </p>
-    <p>
-      Today, I’m focused on building robotics and AI systems that don’t just function but leave a mark—solutions that scale, adapt, and drive sustainability. My journey has been about turning complex challenges into elegant automation, and I’m just getting started.
-    </p>
-  </div>
-</section>
-
-
-  <section id="publications" class="publications section">
-    <div class="container fade">
-      <h2>Publications</h2>
-      <ul class="pub-list">
-        <li><a href="https://ieeexplore.ieee.org/xpl/conhome/9265488/proceeding" target="_blank" rel="noopener">Design And Manufacture of Octagonal Rover for Space Applications</a></li>
-        <li><a href="https://iopscience.iop.org/article/10.1088/1757-899X/1132/1/012011/meta" target="_blank" rel="noopener">Design Optimization and Analysis of External Corrugation and Geometry of Asymmetrical Bellow Flexible Pneumatic Actuator</a></li>
-        <li><a href="https://iopscience.iop.org/article/10.1088/1757-899X/1132/1/012010/meta" target="_blank" rel="noopener">Design, Analysis, Manufacturing and Testing of a SCARA Robot with Pneumatic Gripper for the Poultry Industry</a></li>
-        <li><a href="https://iopscience.iop.org/article/10.1088/1742-6596/2070/1/012207/meta" target="_blank" rel="noopener">Design and Control of an Automated SCARA Robotic Arm with a Pneumatic Soft Gripper</a></li>
-        <li><a href="https://iopscience.iop.org/article/10.1088/1742-6596/2070/1/012183/meta" target="_blank" rel="noopener">Investigations on the Stability of a Two-Wheeled Vehicle with a Tendency to Topple Sideways</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="contact" class="contact section">
-    <div class="container fade">
-      <h2>Contact</h2>
-      <div class="contact-info">
-        <p><i class="fa fa-map-marker-alt"></i>16 Landscore Road, Exeter EX4 1EW, United Kingdom</p>
-        <p><i class="fa fa-phone"></i><a href="tel:+447824074707">+44 7824 074707 (whatsapp)</a></p>
-        <p><i class="fa fa-phone"></i><a href="tel:+919496968268">+91 9496 968268</a></p>
-        <p><i class="fa fa-envelope"></i><a href="mailto:pranavvkumar21@gmail.com">pranavvkumar21@gmail.com</a></p>
-        <p><i class="fa fa-envelope"></i><a href="mailto:p.vijaya-kumar@exeter.ac.uk">p.vijaya-kumar@exeter.ac.uk</a></p>
-      </div>
-      <form id="contact-form" class="contact-form">
-        <div class="input-group">
-          <i class="fa fa-user"></i>
-          <input type="text" name="name" placeholder="Your Name" required />
-        </div>
-        <div class="input-group">
-          <i class="fa fa-envelope"></i>
-          <input type="email" name="email" placeholder="Your Email" required />
-        </div>
-        <div class="input-group">
-          <i class="fa fa-comment"></i>
-          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        </div>
-        <button type="submit" class="btn"><i class="fa fa-paper-plane"></i> Send</button>
-      </form>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2024 Pranav Vijaya Kumar</p>
-      <div class="social">
-        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/pranavvkumar21" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-        <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank" rel="noopener"><i class="fa fa-cube"></i></a>
-      </div>
-    </div>
-  </footer>
-
-  <div id="project-modal" class="modal">
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <h3 id="modal-title"></h3>
-      <div class="modal-body"></div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="script.js"></script>
+        // Simple form submission handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
