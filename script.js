@@ -289,3 +289,29 @@ async function loadProjectsFromJSON() {
 }
 
 window.addEventListener('DOMContentLoaded', loadProjectsFromJSON);
+
+// Load Publications from JSON
+async function loadPublications() {
+    const pubList = document.getElementById('pubList');
+    
+    try {
+        const response = await fetch('publications.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        const data = await response.json();
+        
+        pubList.innerHTML = '';
+        data.publications.forEach(pub => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${pub.url}" target="_blank">${pub.title}</a>`;
+            pubList.appendChild(li);
+        });
+    } catch (error) {
+        console.error('Error loading publications:', error);
+        pubList.innerHTML = '<li>Error loading publications</li>';
+    }
+}
+
+// Call the function when DOM is loaded
+window.addEventListener('DOMContentLoaded', loadPublications);

@@ -82,7 +82,7 @@
                         <span class="label">Projects</span>
                     </div>
                     <div class="stat-item">
-                        <span class="number">3</span>
+                        <span class="number">5</span>
                         <span class="label">Publications</span>
                     </div>
                     <div class="stat-item">
@@ -140,12 +140,9 @@
         <!-- Publications Section -->
         <section id="publications">
             <h2>Publications</h2>
-            <ul class="pub-list">
-                <li><a href="https://ieeexplore.ieee.org/xpl/conhome/9265488/proceeding" target="_blank">Design And Manufacture of Octagonal Rover for Space Applications</a></li>
-                <li><a href="https://iopscience.iop.org/article/10.1088/1742-6596/2070/1/012207/meta" target="_blank">Design and Control of an Automated SCARA Robotic Arm with a Pneumatic Soft Gripper</a></li>
-                <li><a href="https://iopscience.iop.org/article/10.1088/1742-6596/2070/1/012183/meta" target="_blank">Investigations on the Stability of a Two-Wheeled Vehicle with a Tendency to Topple Sideways</a></li>
-            </ul>
+            <ul class="pub-list" id="pubList"></ul>
         </section>
+
 
         <!-- GitHub Stats Section -->
         <section id="github">
@@ -191,15 +188,15 @@
                     <a href="tel:+447824074707">+44 7824 074707 (whatsapp)</a>
                     <a href="tel:+919496968268">+91 9496 968268</a>
                 </div>
-                <div class="contact-item">
+                <!-- <div class="contact-item">
                     <div class="icon"><i class="fas fa-coffee"></i></div>
                     <h3>Buy Me a Coffee</h3>
                     <a href="https://buymeacoffee.com/pranavvkumar" target="_blank">Support My Work</a>
-                </div>
+                </div> -->
             </div>
             
             <div class="contact-form">
-                <form id="contact-form">
+                <form id="contact-form" action="https://formspree.io/f/xgvrnvba" method="POST">
                     <div class="input-group">
                         <i class="fas fa-user"></i>
                         <input type="text" name="name" placeholder="Your Name" required />
@@ -212,9 +209,15 @@
                         <i class="fas fa-comment"></i>
                         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission">
+                    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
                 </form>
+                <div id="form-status" style="display: none; margin-top: 15px;"></div>
             </div>
+
         </section>
 
         <!-- Footer -->
