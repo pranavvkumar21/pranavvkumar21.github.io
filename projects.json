@@ -1,0 +1,32 @@
+[ {
+    "name": "Progeny Task79 - Modular Position Fusion System",
+    "description": "A sensor-agnostic and platform-agnostic ROS package for position data fusion, designed to combine inputs from multiple sensors for robust, accurate estimation. Ideal for robotics and multi-sensor navigation platforms.",
+    "url": ""
+  },
+  {
+    "name": "Bio-Inspired Rhythmic Locomotion with Quadruped Robot",
+    "description": "Demonstrates a rhythm generator that naturally stimulates periodic motor patterns within reinforcement learning frameworks. Built using Stable-Baselines3 and Isaac Lab to enable robotics research on rhythmic locomotion in Python.",
+    "url": "https://github.com/pranavvkumar21/Ruff_ppo"
+  },
+  {
+    "name": "SAGE - Smart Access & Governance Engine",
+    "description": "A LangChain + LLM framework with PostgreSQL backend for automating role mining and access management workflows, reducing manual review time by over 50%. Features a FastAPI-based IAM chatbot supporting database queries, automated reporting, and admin actions such as password resets and access provisioning.",
+    "url": ""
+  },
+  {
+    "name": "AI LinkedIn Job Application Bot",
+    "description": "Automates LinkedIn Easy Apply end-to-end: locates jobs, answers application questions using AI over your PDFs and notes, and logs everything in DuckDB. Focuses on reliability, concise responses, and seamless extensibility.",
+    "url": "https://github.com/pranavvkumar21/the_last_application"
+  },
+  {
+    "name": "Bottube",
+    "description": "Bottube scrapes Reddit posts, uses AI to craft and voice stories, generates visuals, produces a video, and uploads directly to YouTube. Integrates multiple AI models and media pipelines for seamless automated content creation.",
+    "url": "https://github.com/pranavvkumar21/BotTube"
+  },
+ 
+  {
+    "name": "Project Jobs",
+    "description": "Automated bot for logging job applications from Gmail, recruiter spam, and rejections into a spreadsheet. Integrates Gmail API, Google Sheets, and supports LLM-powered parsing (Ollama/ChatGPT), giving you clarity and organization in your job search.",
+    "url": "https://github.com/pranavvkumar21/jobs"
+  }
+]
