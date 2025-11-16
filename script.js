@@ -315,3 +315,51 @@ async function loadPublications() {
 
 // Call the function when DOM is loaded
 window.addEventListener('DOMContentLoaded', loadPublications);
+// Handle Contact Form Submission
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        
+        // Show loading state
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                formStatus.style.display = 'block';
+                formStatus.style.color = '#4CAF50';
+                formStatus.innerHTML = '✓ Message sent successfully! I\'ll get back to you soon.';
+                contactForm.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            formStatus.style.display = 'block';
+            formStatus.style.color = '#f44336';
+            formStatus.innerHTML = '✗ Oops! Something went wrong. Please try again.';
+        } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Hide status message after 5 seconds
+            setTimeout(() => {
+                formStatus.style.display = 'none';
+            }, 5000);
+        }
+    });
+}
