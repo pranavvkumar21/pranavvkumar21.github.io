@@ -45,7 +45,7 @@
 /* Theme Toggle Button */
 .theme-toggle {
     position: fixed;
-    top: 2rem;
+    bottom: 2rem;
     right: 2rem;
     z-index: 1000;
     background: var(--glass-bg);
@@ -84,7 +84,7 @@
 /* Hide theme toggle on mobile initially */
 @media (max-width: 768px) {
     .theme-toggle {
-        top: 1rem;
+        bottom: 1rem;
         right: 1rem;
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
@@ -553,7 +553,7 @@ nav a:hover::after {
     font-weight: 800;
     line-height: 1.1;
     margin: 0;
-    background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 100%);
+    background: linear-gradient(135deg, var(--text-color) 0%, var(--accent-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

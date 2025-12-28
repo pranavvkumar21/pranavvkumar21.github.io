@@ -1,4 +1,11 @@
-[ {
+[   {
+    "name": "Steve vs Gravity",
+    "description": "Steve vs Gravity trains a Unitree G1 humanoid robot to perform natural locomotion by imitating motion ",
+    "fullDescription": "Steve vs Gravity trains a Unitree G1 humanoid robot to perform natural locomotion by imitating motion capture data. The project uses PPO with residual joint position actions (not absolute positions) to learn robust walking and dynamic movements. Motion data from the LAFAN1 dataset is retargeted to the Unitree G1 using the GMR (General Motion Retargeting) pipeline.",
+    "image": "assets/steve_steve_walk_run_01_chk.gif",
+    "url": "https://github.com/pranavvkumar21/Steve_vs_gravity"
+  },
+  {
     "name": "Progeny Task79 - Modular Position Fusion System",
     "description": "A sensor-agnostic and platform-agnostic ROS package for position data fusion, designed to combine inputs from multiple sensors for robust, accurate estimation. Ideal for robotics and multi-sensor navigation platforms.",
     "fullDescription": "This comprehensive ROS package addresses the critical challenge of sensor fusion in modern robotics. Progeny Task79 provides a unified framework that seamlessly integrates data from LIDAR, cameras, IMUs, GPS, and other positioning sensors. The system features adaptive weighting algorithms that automatically adjust based on sensor reliability and environmental conditions. Key innovations include real-time outlier detection, multi-threaded processing for low latency, and configurable fusion strategies. The package supports both indoor and outdoor navigation scenarios, making it perfect for autonomous vehicles, drones, and mobile robots. Built with modularity in mind, it can be easily extended to support new sensor types and fusion algorithms.",
@@ -9,7 +16,7 @@
     "name": "Bio-Inspired Rhythmic Locomotion with Quadruped Robot",
     "description": "Demonstrates a rhythm generator that naturally stimulates periodic motor patterns within reinforcement learning frameworks. Built using Stable-Baselines3 and Isaac Lab to enable robotics research on rhythmic locomotion in Python.",
     "fullDescription": "This project explores bio-inspired locomotion by implementing Central Pattern Generators (CPGs) within deep reinforcement learning frameworks. The system mimics the neural circuits found in animals that generate rhythmic movements like walking, running, and swimming. Using Stable-Baselines3 and Isaac Lab, the quadruped learns to coordinate its four legs through emergent rhythmic patterns rather than explicit gait programming. The research demonstrates how biological principles can enhance robotic locomotion, resulting in more natural, energy-efficient movement patterns. Key features include adaptive gait transitions, terrain-aware rhythm modulation, and real-time stability control. The implementation showcases the potential of combining neuroscience insights with modern AI to create more robust and adaptable robotic systems.",
-    "image": "assets/ruff.webp",
+    "image": "assets/ruff_2.gif",
     "url": "https://github.com/pranavvkumar21/Ruff_ppo"
   },
   {
@@ -39,5 +46,12 @@
     "fullDescription": "Project Jobs streamlines job search management by automatically parsing and categorizing email communications throughout the application process. Using the Gmail API, the system continuously monitors your inbox for job-related emails, including application confirmations, recruiter outreach, interview invitations, and rejection notifications. Advanced LLM integration (supporting both Ollama for local processing and ChatGPT for cloud-based analysis) enables intelligent email classification and data extraction. The system automatically populates Google Sheets with structured data including company names, position titles, application dates, and current status. Smart duplicate detection prevents redundant entries, while sentiment analysis helps track recruiter engagement levels. The dashboard provides visual insights into application funnel metrics, response rates, and market trends to optimize your job search strategy.",
     "image": "assets/project_jobs.webp",
     "url": "https://github.com/pranavvkumar21/jobs"
+  },
+  {
+    "name": "Soft SCARA Robot with Pneumatic Soft Gripper",
+    "description": "An innovative soft robotics system featuring a SCARA robot equipped with a pneumatic soft gripper and YOLO CNN computer vision for automated egg palletisation. Combines soft robotics principles with advanced machine learning for delicate object handling.",
+    "fullDescription": "This cutting-edge robotics project integrates soft robotics technology with computer vision to create an automated egg palletisation system. The SCARA (Selective Compliance Assembly Robot Arm) configuration provides precise positioning while the pneumatic soft gripper ensures gentle handling of fragile objects like eggs. The system leverages YOLO (You Only Look Once) convolutional neural networks for real-time object detection and classification, enabling accurate identification and positioning of eggs for optimal palletisation patterns. The soft gripper, made from compliant materials and actuated by pneumatic pressure, adapts to the egg's shape without applying excessive force that could cause breakage. Advanced control algorithms coordinate the robot's movements with the vision system's feedback to achieve consistent and reliable palletisation. The project demonstrates the potential of combining traditional industrial robotics with bio-inspired soft robotics and modern AI techniques to solve complex automation challenges in food processing industries. Key innovations include force-sensitive gripping, adaptive motion planning, and robust computer vision algorithms optimized for varying lighting conditions and egg orientations.",
+    "image": "assets/cover.webp",
+    "url": ""
   }
 ]
