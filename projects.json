@@ -1,32 +1,43 @@
 [ {
     "name": "Progeny Task79 - Modular Position Fusion System",
     "description": "A sensor-agnostic and platform-agnostic ROS package for position data fusion, designed to combine inputs from multiple sensors for robust, accurate estimation. Ideal for robotics and multi-sensor navigation platforms.",
+    "fullDescription": "This comprehensive ROS package addresses the critical challenge of sensor fusion in modern robotics. Progeny Task79 provides a unified framework that seamlessly integrates data from LIDAR, cameras, IMUs, GPS, and other positioning sensors. The system features adaptive weighting algorithms that automatically adjust based on sensor reliability and environmental conditions. Key innovations include real-time outlier detection, multi-threaded processing for low latency, and configurable fusion strategies. The package supports both indoor and outdoor navigation scenarios, making it perfect for autonomous vehicles, drones, and mobile robots. Built with modularity in mind, it can be easily extended to support new sensor types and fusion algorithms.",
+    "image": "assets/cover.webp",
     "url": ""
   },
   {
     "name": "Bio-Inspired Rhythmic Locomotion with Quadruped Robot",
     "description": "Demonstrates a rhythm generator that naturally stimulates periodic motor patterns within reinforcement learning frameworks. Built using Stable-Baselines3 and Isaac Lab to enable robotics research on rhythmic locomotion in Python.",
+    "fullDescription": "This project explores bio-inspired locomotion by implementing Central Pattern Generators (CPGs) within deep reinforcement learning frameworks. The system mimics the neural circuits found in animals that generate rhythmic movements like walking, running, and swimming. Using Stable-Baselines3 and Isaac Lab, the quadruped learns to coordinate its four legs through emergent rhythmic patterns rather than explicit gait programming. The research demonstrates how biological principles can enhance robotic locomotion, resulting in more natural, energy-efficient movement patterns. Key features include adaptive gait transitions, terrain-aware rhythm modulation, and real-time stability control. The implementation showcases the potential of combining neuroscience insights with modern AI to create more robust and adaptable robotic systems.",
+    "image": "assets/ruff.webp",
     "url": "https://github.com/pranavvkumar21/Ruff_ppo"
   },
   {
     "name": "SAGE - Smart Access & Governance Engine",
     "description": "A LangChain + LLM framework with PostgreSQL backend for automating role mining and access management workflows, reducing manual review time by over 50%. Features a FastAPI-based IAM chatbot supporting database queries, automated reporting, and admin actions such as password resets and access provisioning.",
+    "fullDescription": "SAGE revolutionizes enterprise access management by combining large language models with traditional IAM systems. The platform automatically analyzes user behavior patterns, role relationships, and access histories to intelligently mine and suggest role definitions. The LangChain framework enables natural language queries for complex access investigations, while the PostgreSQL backend ensures enterprise-grade security and scalability. The FastAPI chatbot interface allows administrators to perform routine tasks through conversational commands, from generating compliance reports to provisioning new user access. Machine learning algorithms continuously learn from admin decisions to improve role suggestions and detect access anomalies. The system integrates with popular enterprise directories and supports multi-tenant configurations for large organizations.",
+    "image": "assets/cover.webp",
     "url": ""
   },
   {
     "name": "AI LinkedIn Job Application Bot",
     "description": "Automates LinkedIn Easy Apply end-to-end: locates jobs, answers application questions using AI over your PDFs and notes, and logs everything in DuckDB. Focuses on reliability, concise responses, and seamless extensibility.",
+    "fullDescription": "This intelligent automation system transforms the job application process by combining web scraping, natural language processing, and database management. The bot navigates LinkedIn's interface to identify relevant job opportunities based on customizable criteria. When applying, it uses advanced AI to parse application questions and generate contextually appropriate responses by analyzing your resume, cover letter templates, and personal notes stored as PDFs. The DuckDB integration provides powerful analytics on application patterns, response rates, and job market trends. Features include smart duplicate detection, customizable response templates, rate limiting to avoid detection, and comprehensive logging for application tracking. The extensible architecture allows easy integration with other job boards and recruitment platforms.",
+    "image": "assets/cover.webp",
     "url": "https://github.com/pranavvkumar21/the_last_application"
   },
   {
     "name": "Bottube",
     "description": "Bottube scrapes Reddit posts, uses AI to craft and voice stories, generates visuals, produces a video, and uploads directly to YouTube. Integrates multiple AI models and media pipelines for seamless automated content creation.",
+    "fullDescription": "Bottube represents the cutting edge of automated content creation, orchestrating multiple AI systems to produce engaging YouTube videos from raw Reddit content. The pipeline begins by intelligently scraping trending posts and comments from targeted subreddits. Advanced NLP models then craft compelling narratives, while text-to-speech engines generate natural-sounding voiceovers with customizable voice profiles. The visual generation component creates relevant images, animations, and transitions using AI art models. The video assembly process synchronizes audio, visuals, and subtitles with precise timing. Finally, the system automatically uploads content with optimized titles, descriptions, and tags to maximize reach. The platform supports multiple content styles, from storytelling to educational content, and includes analytics integration for performance tracking.",
+    "image": "assets/bottube.webp",
     "url": "https://github.com/pranavvkumar21/BotTube"
   },
- 
   {
     "name": "Project Jobs",
     "description": "Automated bot for logging job applications from Gmail, recruiter spam, and rejections into a spreadsheet. Integrates Gmail API, Google Sheets, and supports LLM-powered parsing (Ollama/ChatGPT), giving you clarity and organization in your job search.",
+    "fullDescription": "Project Jobs streamlines job search management by automatically parsing and categorizing email communications throughout the application process. Using the Gmail API, the system continuously monitors your inbox for job-related emails, including application confirmations, recruiter outreach, interview invitations, and rejection notifications. Advanced LLM integration (supporting both Ollama for local processing and ChatGPT for cloud-based analysis) enables intelligent email classification and data extraction. The system automatically populates Google Sheets with structured data including company names, position titles, application dates, and current status. Smart duplicate detection prevents redundant entries, while sentiment analysis helps track recruiter engagement levels. The dashboard provides visual insights into application funnel metrics, response rates, and market trends to optimize your job search strategy.",
+    "image": "assets/project_jobs.webp",
     "url": "https://github.com/pranavvkumar21/jobs"
   }
 ]

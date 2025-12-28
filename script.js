@@ -13,10 +13,10 @@ document.querySelectorAll('nav a').forEach(link => {
     });
 });
 
-// Create Particle System
+// Create Particle System with lazy loading
 function createParticles() {
     const container = document.querySelector('.robotics-background');
-    const particleCount = 40;
+    const particleCount = window.innerWidth < 768 ? 20 : 40; // Fewer particles on mobile
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -29,6 +29,23 @@ function createParticles() {
     }
 }
 
+// Lazy load particles only when needed
+const createParticlesLazy = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                createParticles();
+                observer.disconnect();
+            }
+        });
+    }, { rootMargin: '100px' });
+    
+    const background = document.querySelector('.robotics-background');
+    if (background) {
+        observer.observe(background);
+    }
+};
+
 // Create Morphing Blobs
 function createBlobs() {
     const container = document.querySelector('.robotics-background');
@@ -40,10 +57,10 @@ function createBlobs() {
     }
 }
 
-// Interactive Mouse Trail Effect
+// Interactive Mouse Trail Effect (optimized for performance)
 document.addEventListener('mousemove', (e) => {
-    // Throttle to improve performance
-    if (Math.random() > 0.8) {
+    // Only on desktop and throttle more aggressively
+    if (window.innerWidth > 768 && Math.random() > 0.9) {
         const glow = document.createElement('div');
         glow.className = 'cursor-glow';
         glow.style.left = e.pageX + 'px';
@@ -52,49 +69,79 @@ document.addEventListener('mousemove', (e) => {
         
         setTimeout(() => glow.remove(), 2000);
     }
-});
+}, { passive: true });
 
-// Enhanced Parallax Scrolling
-let ticking = false;
+// Utility function for debouncing
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
 
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            const scrolled = window.pageYOffset;
-            
-            // Grid moves slower for depth
-            const grid = document.querySelector('.grid-pattern');
-            if (grid) {
-                grid.style.transform = `translateY(${scrolled * 0.2}px)`;
-            }
-            
-            // Nodes move at different speeds
-            document.querySelectorAll('.node').forEach((node, i) => {
-                const speed = 0.15 + (i * 0.03);
-                node.style.transform = `translateY(${scrolled * speed}px) scale(1)`;
-            });
-            
-            // Icons float at different rates
-            document.querySelectorAll('.icon-item').forEach((icon, i) => {
-                const speed = 0.1 + (i * 0.02);
-                const currentTransform = window.getComputedStyle(icon).transform;
-                icon.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-            
-            // Blobs move very subtly
-            document.querySelectorAll('.blob').forEach((blob, i) => {
-                const speed = 0.05 + (i * 0.02);
-                blob.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-            
-            ticking = false;
-        });
-        
-        ticking = true;
+// Enhanced Parallax Scrolling with performance optimizations
+const handleParallaxScroll = debounce(() => {
+    const scrolled = window.pageYOffset;
+    
+    // Grid moves slower for depth
+    const grid = document.querySelector('.grid-pattern');
+    if (grid) {
+        grid.style.transform = `translateY(${scrolled * 0.2}px)`;
     }
-});
+    
+    // Only animate visible elements
+    document.querySelectorAll('.node').forEach((node, i) => {
+        const rect = node.getBoundingClientRect();
+        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+            const speed = 0.15 + (i * 0.03);
+            node.style.transform = `translateY(${scrolled * speed}px) scale(1)`;
+        }
+    });
+    
+    // Icons float at different rates - only if visible
+    document.querySelectorAll('.icon-item').forEach((icon, i) => {
+        const rect = icon.getBoundingClientRect();
+        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+            const speed = 0.1 + (i * 0.02);
+            icon.style.transform = `translateY(${scrolled * speed}px)`;
+        }
+    });
+    
+    // Blobs move very subtly - only if visible
+    document.querySelectorAll('.blob').forEach((blob, i) => {
+        const rect = blob.getBoundingClientRect();
+        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+            const speed = 0.05 + (i * 0.02);
+            blob.style.transform = `translateY(${scrolled * speed}px)`;
+        }
+    });
+}, 16); // 60fps
 
-// Fetch GitHub Statistics
+window.addEventListener('scroll', handleParallaxScroll, { passive: true });
+
+// Lazy load GitHub stats only when section is visible
+const loadGitHubStatsLazy = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                fetchGitHubStats();
+                observer.disconnect();
+            }
+        });
+    }, { rootMargin: '100px' });
+    
+    const githubSection = document.getElementById('github');
+    if (githubSection) {
+        observer.observe(githubSection);
+    }
+};
+
+// Fetch GitHub Statistics (unchanged but now lazy loaded)
 async function fetchGitHubStats() {
     const username = 'pranavvkumar21';
     const statsContainer = document.getElementById('githubStats');
@@ -183,11 +230,26 @@ async function fetchGitHubStats() {
     }
 }
 
-// Initialize everything when page loads
+// Initialize everything when page loads with performance priorities
 window.addEventListener('load', () => {
-    createParticles();
-    createBlobs();
-    fetchGitHubStats();
+    // Critical functionality first
+    loadProjectsFromJSON();
+    
+    // Defer non-critical features
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            createParticlesLazy();
+            createBlobs();
+            loadGitHubStatsLazy();
+        });
+    } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(() => {
+            createParticlesLazy();
+            createBlobs();
+            loadGitHubStatsLazy();
+        }, 100);
+    }
 });
 
 // Smooth scrolling for navigation links
@@ -258,14 +320,15 @@ async function loadProjectsFromJSON() {
 
     container.innerHTML = '';
 
-    repos.forEach(repo => {
+    repos.forEach((repo, index) => {
       const card = document.createElement('div');
       card.className = 'project-card';
+      card.setAttribute('data-project-index', index);
 
       let linksHtml = '';
       if (repo.url && repo.url.trim() !== '') {
         linksHtml = `
-          <a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="project-link">
+          <a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
             <i class="fab fa-github"></i> View on GitHub
           </a>
         `;
@@ -281,12 +344,76 @@ async function loadProjectsFromJSON() {
         </div>
       `;
 
+      // Add click event listener for modal
+      card.addEventListener('click', () => openProjectModal(repo));
+
       container.appendChild(card);
     });
   } catch(error) {
     container.innerHTML = `<p>Error loading projects: ${error.message}</p>`;
   }
 }
+
+// Modal functionality
+function openProjectModal(project) {
+  const modal = document.getElementById('projectModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalImage = document.getElementById('modalImage');
+  const modalDescription = document.getElementById('modalDescription');
+  const modalLinks = document.getElementById('modalLinks');
+
+  // Set modal content
+  modalTitle.textContent = project.name;
+  modalImage.src = project.image || 'assets/cover.jpg';
+  modalImage.alt = project.name;
+  modalDescription.textContent = project.fullDescription || project.description;
+
+  // Set modal links
+  let linksHtml = '';
+  if (project.url && project.url.trim() !== '') {
+    linksHtml = `
+      <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link">
+        <i class="fab fa-github"></i> View on GitHub
+      </a>
+    `;
+  } else {
+    linksHtml = `<span class="project-link unavailable">Code not publicly available</span>`;
+  }
+  modalLinks.innerHTML = linksHtml;
+
+  // Show modal
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeProjectModal() {
+  const modal = document.getElementById('projectModal');
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto'; // Re-enable background scrolling
+}
+
+// Initialize modal event listeners
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('projectModal');
+  const closeBtn = modal.querySelector('.close');
+
+  // Close modal when clicking the close button
+  closeBtn.addEventListener('click', closeProjectModal);
+
+  // Close modal when clicking outside the modal content
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeProjectModal();
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+      closeProjectModal();
+    }
+  });
+});
 
 window.addEventListener('DOMContentLoaded', loadProjectsFromJSON);
 
@@ -361,5 +488,106 @@ if (contactForm) {
                 formStatus.style.display = 'none';
             }, 5000);
         }
+    });
+}
+
+// Theme Toggle Functionality
+class ThemeManager {
+    constructor() {
+        this.currentTheme = localStorage.getItem('theme') || 'dark';
+        this.toggleButton = null;
+        this.init();
+    }
+
+    init() {
+        // Apply saved theme on page load
+        this.applyTheme(this.currentTheme);
+        
+        // Wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.setupToggle());
+        } else {
+            this.setupToggle();
+        }
+    }
+
+    setupToggle() {
+        // Create toggle button if it doesn't exist
+        if (!document.getElementById('themeToggle')) {
+            this.createToggleButton();
+        }
+        
+        this.toggleButton = document.getElementById('themeToggle');
+        if (this.toggleButton) {
+            this.toggleButton.addEventListener('click', () => this.toggleTheme());
+            this.updateToggleButton();
+        }
+    }
+
+    createToggleButton() {
+        const toggleButton = document.createElement('button');
+        toggleButton.id = 'themeToggle';
+        toggleButton.className = 'theme-toggle';
+        toggleButton.setAttribute('aria-label', 'Toggle theme');
+        
+        toggleButton.innerHTML = `
+            <span class="icon">🌙</span>
+            <span class="text">Dark</span>
+        `;
+        
+        document.body.insertBefore(toggleButton, document.body.firstChild);
+    }
+
+    applyTheme(theme) {
+        if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+        this.currentTheme = theme;
+        localStorage.setItem('theme', theme);
+    }
+
+    toggleTheme() {
+        const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+        this.applyTheme(newTheme);
+        this.updateToggleButton();
+        
+        // Add a subtle animation when switching themes
+        document.body.style.transition = 'all 0.3s ease';
+        setTimeout(() => {
+            document.body.style.transition = '';
+        }, 300);
+    }
+
+    updateToggleButton() {
+        if (!this.toggleButton) return;
+        
+        const icon = this.toggleButton.querySelector('.icon');
+        const text = this.toggleButton.querySelector('.text');
+        
+        if (this.currentTheme === 'light') {
+            icon.textContent = '☀️';
+            text.textContent = 'Light';
+        } else {
+            icon.textContent = '🌙';
+            text.textContent = 'Dark';
+        }
+    }
+}
+
+// Initialize theme manager
+new ThemeManager();
+
+// Register Service Worker for caching
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('Service Worker registered successfully:', registration.scope);
+            })
+            .catch((error) => {
+                console.log('Service Worker registration failed:', error);
+            });
     });
 }
