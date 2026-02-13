@@ -3,283 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
-    <link rel="preload" href="assets/cover.jpg" as="image">
-    
-    <!-- DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="//api.github.com">
-    <link rel="dns-prefetch" href="//github-readme-stats.vercel.app">
-    <link rel="dns-prefetch" href="//github-readme-streak-stats.herokuapp.com">
-    
-    <!-- Preconnect for fonts -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Critical CSS inline -->
-    <style>
-        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#0d0d0d;color:#f5f5f5;margin:0;padding:0;overflow-x:hidden}
-        nav{position:fixed;top:0;width:100%;background:rgba(26,26,26,0.7);backdrop-filter:blur(20px);z-index:1000;padding:1rem 2rem}
-        .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:6rem 4rem 4rem;max-width:1400px;margin:0 auto}
-        .loading{text-align:center;padding:2rem;color:#a0a0a0}
-    </style>
-    
-    <title>Pranav Kumar - Robotics Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <!-- Load non-critical CSS asynchronously -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    <title>Will You Be My Valentine? 💕</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Robotics Animated Background -->
-<!-- Enhanced Robotics Animated Background -->
-    <div class="robotics-background">
-        <div class="circuit-board">
-            <div class="node node-1"></div>
-            <div class="node node-2"></div>
-            <div class="node node-3"></div>
-            <div class="node node-4"></div>
-            <div class="connection connection-1"></div>
-            <div class="connection connection-2"></div>
-            <div class="connection connection-3"></div>
-        </div>
-        <div class="floating-icons">
-            <div class="icon-item icon-1">⚙</div>
-            <div class="icon-item icon-2">⚡</div>
-            <div class="icon-item icon-3">🤖</div>
-            <div class="icon-item icon-4">🔧</div>
-        </div>
-        <div class="grid-pattern"></div>
-        <!-- Blobs and particles will be created dynamically by JavaScript -->
-    </div>
-
-
-    <!-- Main Content -->
-    <div class="content-wrapper">
-        <!-- Navigation -->
-        <nav>
-            <a href="#home" class="logo">Pranav</a>
-            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#github">GitHub Stats</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-
-        <!-- Hero Section -->
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="pulse-dot"></span>
-                    Open to Opportunities
-                </div>
-                
-                <h1>
-                    Hi, I'm Pranav
-                    <span class="highlight">Robotics Engineer & AI Developer</span>
-                </h1>
-                
-                <p class="hero-subtitle">
-                    Creating sustainable automation solutions that scale. From bio-inspired robots to agentic AI systems, I build intelligent machines that leave a mark.
-                </p>
-                
-                <div class="hero-cta">
-                    <a href="#projects" class="cta-primary">
-                        <i class="fas fa-rocket"></i>
-                        View Projects
-                    </a>
-                    <a href="#contact" class="cta-secondary">
-                        <i class="fas fa-envelope"></i>
-                        Get in Touch
-                    </a>
-                </div>
-                
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="number">10+</span>
-                        <span class="label">Projects</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="number">5</span>
-                        <span class="label">Publications</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="number">5+</span>
-                        <span class="label">Years Experience</span>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <div id="mainContent">
+            <h1>💝 Hi Babyy! 💝</h1>
+            <p class="question">Will you be my Valentine? 🥺</p>
             
-            <div class="hero-visual">
-                <div class="hero-decoration decoration-1"></div>
-                <div class="hero-decoration decoration-2"></div>
-                
-                <div class="profile-card">
-                    <picture>
-                        <source srcset="assets/cover.webp" type="image/webp">
-                        <img src="assets/cover.jpg" alt="Pranav Kumar" class="profile-photo" loading="lazy" decoding="async">
-                    </picture>
-                    <h3>Pranav Vijaya Kumar</h3>
-                    <p class="role">MSc Robotics | AI Enthusiast</p>
-                    <p class="bio">Passionate about building robots that think, learn, and adapt.</p>
-                    
-                    <div class="social-links">
-                        <a href="https://github.com/pranavvkumar21" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:pranavvkumar21@gmail.com" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank" aria-label="GrabCAD">
-                            <i class="fas fa-cube"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p>I've always been fascinated by the idea of machines thinking, adapting, and solving problems just like we do. That curiosity pushed me from mechanical engineering into robotics, where I learned to blend hardware, software, and intelligence into something truly impactful.</p>
-                <p>From designing a microbial fuel cell that gave robots bio-inspired emotions to developing cross-domain localization systems tested on land, air, and sea, I've explored what it really means to make machines smarter and more resilient. Along the way, I've worked on quadrupeds that learn to walk, agentic AI systems that automate entire workflows, and vision-guided teleoperation that makes robots feel like an extension of the human hand.</p>
-                <p>Today, I'm focused on building robotics and AI systems that don't just function but leave a mark—solutions that scale, adapt, and drive sustainability. My journey has been about turning complex challenges into elegant automation, and I'm just getting started.</p>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <div id="projects-container" class="projects-grid">
-                <!-- Project cards will be populated here dynamically -->
-            </div>
-        </section>
-        <!-- Publications Section -->
-        <section id="publications">
-            <h2>Publications</h2>
-            <ul class="pub-list" id="pubList"></ul>
-        </section>
-
-
-        <!-- GitHub Stats Section -->
-        <section id="github">
-            <h2>GitHub Statistics</h2>
-            <div class="github-stats" id="githubStats">
-                <div class="loading">Loading GitHub statistics...</div>
-            </div>
-            <div class="github-readme-stats">
-                <img src="https://github-readme-stats.vercel.app/api?username=pranavvkumar21&show_icons=true&theme=radical&hide_border=true&bg_color=0d0d0d&title_color=00ffc6&icon_color=00ffc6&text_color=f5f5f5" alt="GitHub Stats" loading="lazy" decoding="async">
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pranavvkumar21&layout=compact&theme=radical&hide_border=true&bg_color=0d0d0d&title_color=00ffc6&text_color=f5f5f5" alt="Top Languages" loading="lazy" decoding="async">
-                <img src="https://github-readme-streak-stats.herokuapp.com/?user=pranavvkumar21&theme=radical&hide_border=true&background=0d0d0d&ring=00ffc6&fire=00ffc6&currStreakLabel=00ffc6" alt="GitHub Streak" loading="lazy" decoding="async">
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>Get In Touch</h2>
-            <div class="contact-links">
-                <div class="contact-item">
-                    <div class="icon"><i class="fas fa-envelope"></i></div>
-                    <h3>Email</h3>
-                    <a href="mailto:pranavvkumar21@gmail.com" target="_blank">pranavvkumar21@gmail.com</a>
-                    <a href="mailto:p.vijaya-kumar@exeter.ac.uk" target="_blank">p.vijaya-kumar@exeter.ac.uk</a>
-                </div>
-                <div class="contact-item">
-                    <div class="icon"><i class="fab fa-linkedin-in"></i></div>
-                    <h3>LinkedIn</h3>
-                    <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank">pranavvijayakumar216</a>
-                </div>
-                <div class="contact-item">
-                    <div class="icon"><i class="fab fa-github"></i></div>
-                    <h3>GitHub</h3>
-                    <a href="https://github.com/pranavvkumar21" target="_blank">pranavvkumar21</a>
-                </div>
-                <!-- <div class="contact-item">
-                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3>Location</h3>
-                    <p>16 Landscore Road, Exeter EX4 1EW, United Kingdom</p>
-                </div> -->
-                <div class="contact-item">
-                    <div class="icon"><i class="fab fa-whatsapp"></i></div>
-                    <h3>Phone</h3>
-                    <a href="tel:+447824074707">+44 7824 074707 (whatsapp)</a>
-                    <a href="tel:+919496968268">+91 9496 968268</a>
-                </div>
-                <!-- <div class="contact-item">
-                    <div class="icon"><i class="fas fa-coffee"></i></div>
-                    <h3>Buy Me a Coffee</h3>
-                    <a href="https://buymeacoffee.com/pranavvkumar" target="_blank">Support My Work</a>
-                </div> -->
-            </div>
-            
-            <div class="contact-form">
-                <form id="contact-form" action="https://formspree.io/f/xgvrnvba" method="POST">
-                    <div class="input-group">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="name" placeholder="Your Name" required />
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" placeholder="Your Email" required />
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-comment"></i>
-                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                    </div>
-                    <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission">
-                    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
-                </form>
-                <div id="form-status" style="display: none; margin-top: 15px;"></div>
+            <div class="button-container">
+                <button class="btn btn-yes" id="yesBtn">Yes! 💕</button>
+                <button class="btn btn-no" id="noBtn">No</button>
             </div>
 
-        </section>
+            <div class="guilt-message" id="guiltMessage"></div>
+            <div class="guilt-images" id="guiltImages"></div>
+        </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <p>&copy; 2024 Pranav Vijaya Kumar</p>
-                <div class="social">
-                    <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/pranavvkumar21" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank"><i class="fas fa-cube"></i></a>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Project Modal -->
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-header">
-                <h2 id="modalTitle"></h2>
-            </div>
-            <div class="modal-body">
-                <img id="modalImage" src="" alt="Project Image" class="modal-image" loading="lazy" decoding="async" style="content-visibility: auto; contain-intrinsic-size: 0 250px;">
-                <div class="modal-description">
-                    <p id="modalDescription"></p>
-                </div>
-                <div class="modal-links" id="modalLinks">
-                    <!-- Links will be populated dynamically -->
-                </div>
-            </div>
+        <div class="success-message" id="successMessage">
+            <h2>🎉 Yay! You said YES! 🎉</h2>
+            <p>I'm so happy! You've made my day! 💖✨</p>
+            <p class="success-subtext">Get ready for the best Valentine's Day ever! 🥰</p>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+

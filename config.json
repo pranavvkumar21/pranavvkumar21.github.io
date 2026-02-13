@@ -1,0 +1,36 @@
+{
+    "backgroundImage": "assets/theaskingout.png",
+    "successBackgroundImage": "assets/SheSaidYes.png",
+    "noBackgroundImages": [
+        "assets/theaskingout.png",
+        "assets/theaskingout.png",
+        "assets/theaskingout.png",
+        "assets/theaskingout.png",
+        "assets/theaskingout.png"
+    ],
+    "sadImages": [
+        "assets/shocked-cat1.gif",
+        "assets/sad-cat1.gif",
+        "assets/cat gun.gif",
+        "assets/compressed_cat.gif",
+        "assets/please_say_yes.gif"
+    ],
+    "noSounds": [
+        "assets/nosounds/thud.mp3",
+        "assets/nosounds/sad_hamster.mp3",
+        "assets/nosounds/german_cat.mp3",
+        "assets/nosounds/kitten_meowing.mp3",
+        "assets/nosounds/sad_meow.mp3"
+    ],
+    "yesSound": "assets/nosounds/othaiyadi_pathayila.mp3",
+    "guiltMessages": [
+        "Whattt!!??... 😢",
+        "But... but why? 🥺",
+        "SAY YES RIGHT NOW!! ",
+        "Press Yes or He gets it... ",
+        "Please say yes baby... 🥹",
+        "The universe is sad... 🌌💔",
+        "My heart can't take this... 😭",
+        "One more chance? 🥹"
+    ]
+}
