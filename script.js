@@ -135,7 +135,7 @@ const RobotScene = (() => {
 
         // Camera
         camera = new THREE.PerspectiveCamera(42, canvas.clientWidth / canvas.clientHeight, .1, 100);
-        camera.position.set(0, 1.5, 7);
+        camera.position.set(0, 1.5, 8.0);
         camera.lookAt(0, 1, 0);
 
         // Renderer
@@ -1012,12 +1012,7 @@ const SwipeNav = (() => {
                 return;
             }
 
-            // Vertical swipe: navigate between sections
-            if (absy > absx && absy > 70) {
-                updateCurrent();
-                if (dy < 0 && current < sections.length - 1) goTo(sections[current + 1]);  // swipe up → next
-                if (dy > 0 && current > 0)                   goTo(sections[current - 1]);  // swipe down → prev
-            }
+            // Vertical swipe: disabled to allow natural free-scroll on mobile
         }, { passive: true });
     };
 

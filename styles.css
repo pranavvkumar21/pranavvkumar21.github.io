@@ -656,6 +656,13 @@ section{padding:6rem 0;width:100%}
     .hero-right{order:-1}
     .about-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem}
     .aurora-card{max-width:300px}
+    /* Fade the 3D canvas out before it bleeds into text content below the card */
+    .hero::after{
+        content:'';
+        position:absolute;bottom:0;left:0;right:0;
+        height:55%;z-index:1;pointer-events:none;
+        background:linear-gradient(to bottom,transparent 0%,var(--bg) 90%);
+    }
 }
 @media(max-width:768px){
     section{padding:4rem 0}
