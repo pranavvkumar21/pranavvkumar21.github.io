@@ -1,285 +1,453 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Preload critical resources -->
+    <title>Pranav Kumar — Robotics Engineer</title>
+
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
-    <link rel="preload" href="assets/cover.jpg" as="image">
-    
-    <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="//api.github.com">
-    <link rel="dns-prefetch" href="//github-readme-stats.vercel.app">
-    <link rel="dns-prefetch" href="//github-readme-streak-stats.herokuapp.com">
-    
-    <!-- Preconnect for fonts -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Critical CSS inline -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <style>
-        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#0d0d0d;color:#f5f5f5;margin:0;padding:0;overflow-x:hidden}
-        nav{position:fixed;top:0;width:100%;background:rgba(26,26,26,0.7);backdrop-filter:blur(20px);z-index:1000;padding:1rem 2rem}
-        .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:6rem 4rem 4rem;max-width:1400px;margin:0 auto}
-        .loading{text-align:center;padding:2rem;color:#a0a0a0}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{overflow-x:hidden;scroll-behavior:smooth}
+        body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:none;transition:background .4s,color .4s}
+        :root{--bg:#070c14;--bg2:#0d1520;--surface:rgba(255,255,255,.03);--surface2:rgba(255,255,255,.06);--border:rgba(56,189,248,.12);--border2:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#7a91a8;--muted:#3d5166;--sky:#38bdf8;--sky-d:rgba(56,189,248,.15);--sky-g:rgba(56,189,248,.4);--mint:#6ee7b7;--amber:#f59e0b;--red:#f43f5e;--font-mono:'JetBrains Mono',monospace;--r:12px;--r-lg:20px;--ease:cubic-bezier(.16,1,.3,1);--spring:cubic-bezier(.34,1.56,.64,1)}
+        [data-theme="light"]{--bg:#f1f5f9;--bg2:#e8eef5;--surface:rgba(0,0,0,.025);--surface2:rgba(0,0,0,.05);--border:rgba(14,116,144,.18);--border2:rgba(0,0,0,.08);--text:#0f172a;--text2:#475569;--muted:#94a3b8;--sky:#0284c7;--sky-d:rgba(2,132,199,.1);--sky-g:rgba(2,132,199,.35)}
+        #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;transition:opacity .5s,visibility .5s}
+        #loader.out{opacity:0;visibility:hidden;pointer-events:none}
+        #lbar-wrap{width:200px;height:1px;background:rgba(255,255,255,.06)}
+        #lbar{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--mint));box-shadow:0 0 10px var(--sky-g);transition:width .07s linear}
+        #ltxt{font-family:var(--font-mono);font-size:.62rem;color:var(--sky);letter-spacing:.25em}
+        #heroCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
     </style>
-    
-    <title>Pranav Kumar - Robotics Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <!-- Load non-critical CSS asynchronously -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
 </head>
 <body>
-    <!-- Robotics Animated Background -->
-<!-- Enhanced Robotics Animated Background -->
-    <div class="robotics-background">
-        <div class="circuit-board">
-            <div class="node node-1"></div>
-            <div class="node node-2"></div>
-            <div class="node node-3"></div>
-            <div class="node node-4"></div>
-            <div class="connection connection-1"></div>
-            <div class="connection connection-2"></div>
-            <div class="connection connection-3"></div>
+
+<!-- LOADER -->
+<div id="loader">
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+        <polygon points="22,3 41,13 41,31 22,41 3,31 3,13"
+            stroke="#38bdf8" stroke-width="1.2" fill="none"
+            stroke-dasharray="110" stroke-dashoffset="110"
+            style="animation:ldraw 1s cubic-bezier(.16,1,.3,1) forwards"/>
+        <circle cx="22" cy="22" r="4.5" fill="#6ee7b7" opacity=".9">
+            <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+    </svg>
+    <div id="lbar-wrap"><div id="lbar"></div></div>
+    <div id="ltxt">BOOTING SYSTEMS_</div>
+</div>
+<style>@keyframes ldraw{to{stroke-dashoffset:0}}</style>
+
+<!-- CURSOR -->
+<div id="cursor" aria-hidden="true">
+    <div class="c-dot"></div>
+    <div class="c-ring"></div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-bar" aria-hidden="true"></div>
+
+<!-- THEME TOGGLE -->
+<button id="themeToggle" aria-label="Toggle theme">
+    <i class="fas fa-moon" id="themeIcon"></i>
+</button>
+
+<!-- NAV -->
+<nav id="nav">
+    <a href="#home" class="nav-logo">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="logo-hex-svg">
+            <polygon points="9,1 17,5 17,13 9,17 1,13 1,5" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        </svg>
+        PK
+    </a>
+    <div class="nav-links" id="navLinks">
+        <a href="#home"         class="nav-link" data-s="home">Home</a>
+        <a href="#about"        class="nav-link" data-s="about">About</a>
+        <a href="#projects"     class="nav-link" data-s="projects">Projects</a>
+        <a href="#timeline"     class="nav-link" data-s="timeline">Journey</a>
+        <a href="#publications" class="nav-link" data-s="publications">Papers</a>
+        <a href="#github"       class="nav-link" data-s="github">GitHub</a>
+        <a href="#contact"      class="nav-link" data-s="contact">Contact</a>
+    </div>
+    <div class="nav-right">
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section id="home" class="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+        <div class="hero-left">
+            <div class="magic-badge" data-aos="fade-up">
+                <span class="badge-ping"></span>
+                <span class="mono badge-txt">Open to Opportunities</span>
+            </div>
+
+            <h1 class="hero-h1" data-aos="fade-up" data-aos-d="80">
+                <span class="h1-name" id="heroName">Pranav Kumar</span>
+                <span class="h1-role">
+                    <span class="mono role-gt">_</span><span id="typedRole"></span><span class="blink">|</span>
+                </span>
+            </h1>
+
+            <p class="hero-desc" data-aos="fade-up" data-aos-d="160">
+                Building intelligent machines at the intersection of bio-inspired robotics,
+                autonomous systems &amp; agentic AI. From quadrupeds to drones — if it moves and thinks, I build it.
+            </p>
+
+            <div class="hero-cta" data-aos="fade-up" data-aos-d="220">
+                <a href="#projects" class="btn-shimmer magnetic">
+                    <span class="bs-inner"><i class="fas fa-rocket"></i> View Projects</span>
+                    <span class="bs-sweep"></span>
+                </a>
+                <a href="#contact" class="btn-ghost magnetic">
+                    <i class="fas fa-terminal"></i> Get in Touch
+                </a>
+            </div>
+
+            <div class="hero-stats" data-aos="fade-up" data-aos-d="280">
+                <div class="h-stat"><span class="hs-n mono" data-count="10">0</span><span class="hs-n mono">+</span><span class="hs-l">Projects</span></div>
+                <div class="h-stat-div"></div>
+                <div class="h-stat"><span class="hs-n mono" data-count="5">0</span><span class="hs-l">Publications</span></div>
+                <div class="h-stat-div"></div>
+                <div class="h-stat"><span class="hs-n mono" data-count="5">0</span><span class="hs-n mono">+</span><span class="hs-l">Years Exp</span></div>
+            </div>
         </div>
-        <div class="floating-icons">
-            <div class="icon-item icon-1">⚙</div>
-            <div class="icon-item icon-2">⚡</div>
-            <div class="icon-item icon-3">🤖</div>
-            <div class="icon-item icon-4">🔧</div>
+
+        <div class="hero-right" data-aos="fade-left" data-aos-d="100">
+            <!-- Aurora profile card -->
+            <div class="aurora-card">
+                <div class="aurora-bg">
+                    <div class="aurora au1"></div>
+                    <div class="aurora au2"></div>
+                    <div class="aurora au3"></div>
+                </div>
+                <div class="aurora-content">
+                    <div class="profile-wrap">
+                        <div class="profile-glow-ring"></div>
+                        <picture>
+                            <source srcset="assets/cover.webp" type="image/webp">
+                            <img src="assets/cover.jpg" alt="Pranav Kumar" loading="eager" decoding="async" class="profile-img">
+                        </picture>
+                        <div class="online-dot" title="Available for work"></div>
+                    </div>
+                    <h3 class="a-name">Pranav Vijaya Kumar</h3>
+                    <p class="a-title mono">MSc Robotics · Univ. of Exeter</p>
+
+                    <div class="tech-pills">
+                        <span>ROS2</span><span>PyTorch</span><span>C++</span><span>SLAM</span><span>OpenCV</span>
+                    </div>
+
+                    <div class="a-socials">
+                        <a href="https://github.com/pranavvkumar21" target="_blank" class="a-soc magnetic" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" class="a-soc magnetic" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="/cdn-cgi/l/email-protection#1d6d6f7c737c6b6b7668707c6f2f2c5d7a707c7471337e7270" class="a-soc magnetic" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank" class="a-soc magnetic" aria-label="GrabCAD"><i class="fas fa-cube"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="grid-pattern"></div>
-        <!-- Blobs and particles will be created dynamically by JavaScript -->
     </div>
 
+    <div class="scroll-hint">
+        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+        <span class="mono">scroll</span>
+    </div>
+</section>
 
-    <!-- Main Content -->
-    <div class="content-wrapper">
-        <!-- Navigation -->
-        <nav>
-            <a href="#home" class="logo">Pranav</a>
-            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#github">GitHub Stats</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+<!-- ══════════════════════════════
+     ABOUT
+══════════════════════════════ -->
+<section id="about" class="s-about">
+    <div class="s-inner">
+        <div class="s-head" data-aos="fade-up">
+            <span class="s-num mono">01.</span>
+            <h2 class="s-title">About Me</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-text" data-aos="fade-up" data-aos-d="60">
+                <p class="about-lead">I've always been fascinated by machines that <em>think, adapt, and solve</em> problems.</p>
+                <p>That curiosity pushed me from mechanical engineering into robotics — where hardware, software, and intelligence collide. I've built microbial fuel cells that give robots bio-inspired emotions, and cross-domain localization tested on land, air, and sea.</p>
+                <p>I've worked on quadrupeds that learn to walk, agentic AI workflows, and vision-guided teleoperation. Today I focus on systems that don't just function — they <em>leave a mark.</em></p>
+            </div>
 
-        <!-- Hero Section -->
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="pulse-dot"></span>
-                    Open to Opportunities
+            <div class="skill-board" data-aos="fade-up" data-aos-d="120">
+                <div class="sg">
+                    <span class="sg-lbl mono">&gt; robotics_</span>
+                    <div class="sg-tags">
+                        <span>ROS2</span><span>Gazebo</span><span>MoveIt</span>
+                        <span>SLAM</span><span>Legged</span><span>Teleoperation</span>
+                    </div>
                 </div>
-                
-                <h1>
-                    Hi, I'm Pranav
-                    <span class="highlight">Robotics Engineer & AI Developer</span>
-                </h1>
-                
-                <p class="hero-subtitle">
-                    Creating sustainable automation solutions that scale. From bio-inspired robots to agentic AI systems, I build intelligent machines that leave a mark.
-                </p>
-                
-                <div class="hero-cta">
-                    <a href="#projects" class="cta-primary">
-                        <i class="fas fa-rocket"></i>
-                        View Projects
+                <div class="sg">
+                    <span class="sg-lbl mono">&gt; ai_ml_</span>
+                    <div class="sg-tags">
+                        <span>PyTorch</span><span>RL</span><span>Transformers</span>
+                        <span>YOLO</span><span>OpenCV</span>
+                    </div>
+                </div>
+                <div class="sg">
+                    <span class="sg-lbl mono">&gt; systems_</span>
+                    <div class="sg-tags">
+                        <span>Python</span><span>C++</span><span>Docker</span>
+                        <span>Linux</span><span>Embedded</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════
+     PROJECTS
+══════════════════════════════ -->
+<section id="projects" class="s-projects">
+    <div class="s-inner">
+        <div class="s-head" data-aos="fade-up">
+            <span class="s-num mono">02.</span>
+            <h2 class="s-title">Featured Projects</h2>
+        </div>
+        <div id="projects-container" class="projects-grid">
+            <div class="ld-state mono"><span class="ld-dot"></span> Fetching projects...</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════
+     TIMELINE
+══════════════════════════════ -->
+<section id="timeline" class="s-timeline">
+    <div class="s-inner">
+        <div class="s-head" data-aos="fade-up">
+            <span class="s-num mono">03.</span>
+            <h2 class="s-title">Journey</h2>
+        </div>
+
+        <div class="timeline-wrap">
+            <!-- central spine -->
+            <div class="tl-spine" id="tlSpine"></div>
+
+            <div class="tl-item tl-left" data-aos="fade-right">
+                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
+                <div class="tl-card">
+                    <span class="tl-year mono">2024 – Present</span>
+                    <h3>MSc Robotics</h3>
+                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> University of Exeter, UK</p>
+                    <p class="tl-desc">Research in cross-domain localization, legged locomotion, and agentic AI systems. Thesis on bio-inspired robot autonomy.</p>
+                    <div class="tl-tags"><span>ROS2</span><span>PyTorch</span><span>SLAM</span></div>
+                </div>
+            </div>
+
+            <div class="tl-item tl-right" data-aos="fade-left">
+                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
+                <div class="tl-card">
+                    <span class="tl-year mono">2023</span>
+                    <h3>Agentic AI Systems Developer</h3>
+                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> Independent Research</p>
+                    <p class="tl-desc">Built end-to-end workflow automation using LLMs and robotic process integration. Deployed multi-agent pipelines for real-world tasks.</p>
+                    <div class="tl-tags"><span>LangChain</span><span>Python</span><span>Docker</span></div>
+                </div>
+            </div>
+
+            <div class="tl-item tl-left" data-aos="fade-right">
+                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
+                <div class="tl-card">
+                    <span class="tl-year mono">2022</span>
+                    <h3>Vision-Guided Teleoperation</h3>
+                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> Robotics Lab Project</p>
+                    <p class="tl-desc">Developed real-time visual feedback system for remote robot operation. Integrated depth cameras with inverse kinematics for precise manipulation.</p>
+                    <div class="tl-tags"><span>OpenCV</span><span>MoveIt</span><span>ROS</span></div>
+                </div>
+            </div>
+
+            <div class="tl-item tl-right" data-aos="fade-left">
+                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
+                <div class="tl-card">
+                    <span class="tl-year mono">2021</span>
+                    <h3>Quadruped Locomotion Research</h3>
+                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> University Project</p>
+                    <p class="tl-desc">Trained legged robots using reinforcement learning in simulation. Transferred policies to physical hardware with sim-to-real techniques.</p>
+                    <div class="tl-tags"><span>RL</span><span>Gazebo</span><span>PyBullet</span></div>
+                </div>
+            </div>
+
+            <div class="tl-item tl-left" data-aos="fade-right">
+                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
+                <div class="tl-card">
+                    <span class="tl-year mono">2019 – 2023</span>
+                    <h3>BE Mechanical Engineering</h3>
+                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> India</p>
+                    <p class="tl-desc">Foundation in mechanical design, embedded systems, and control theory. First robotics projects including bio-inspired microbial fuel cell robot.</p>
+                    <div class="tl-tags"><span>CAD</span><span>Embedded C</span><span>Arduino</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════
+     PUBLICATIONS
+══════════════════════════════ -->
+<section id="publications" class="s-pubs">
+    <div class="s-inner">
+        <div class="s-head" data-aos="fade-up">
+            <span class="s-num mono">04.</span>
+            <h2 class="s-title">Publications</h2>
+        </div>
+        <ul class="pub-list" id="pubList">
+            <div class="ld-state mono"><span class="ld-dot"></span> Loading...</div>
+        </ul>
+    </div>
+</section>
+
+<!-- ══════════════════════════════
+     GITHUB
+══════════════════════════════ -->
+<section id="github" class="s-github">
+    <div class="s-inner">
+        <div class="s-head" data-aos="fade-up">
+            <span class="s-num mono">05.</span>
+            <h2 class="s-title">GitHub Stats</h2>
+        </div>
+        <div id="githubStats" class="gh-grid">
+            <div class="ld-state mono"><span class="ld-dot"></span> Fetching data...</div>
+        </div>
+        <div class="gh-imgs" data-aos="fade-up">
+            <img src="https://github-readme-stats.vercel.app/api?username=pranavvkumar21&show_icons=true&theme=transparent&hide_border=true&title_color=38bdf8&icon_color=6ee7b7&text_color=94a3b8&bg_color=00000000" alt="Stats" loading="lazy" decoding="async">
+            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pranavvkumar21&layout=compact&theme=transparent&hide_border=true&title_color=38bdf8&text_color=94a3b8&bg_color=00000000" alt="Languages" loading="lazy" decoding="async">
+            <img src="https://github-readme-streak-stats.herokuapp.com/?user=pranavvkumar21&theme=transparent&hide_border=true&ring=38bdf8&fire=f59e0b&currStreakLabel=38bdf8&sideLabels=94a3b8&dates=64748b" alt="Streak" loading="lazy" decoding="async">
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════
+     CONTACT
+══════════════════════════════ -->
+<section id="contact" class="s-contact">
+    <div class="s-inner">
+        <div class="s-head" data-aos="fade-up">
+            <span class="s-num mono">06.</span>
+            <h2 class="s-title">Get In Touch</h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-left" data-aos="fade-up" data-aos-d="60">
+                <p class="contact-lead">Open to robotics research, AI engineering, and interesting collaborations.</p>
+                <div class="contact-links">
+                    <a href="/cdn-cgi/l/email-protection#2c5c5e4d424d5a5a4759414d5e1e1d6c4b414d4540024f4341" class="c-link magnetic">
+                        <div class="c-ico"><i class="fas fa-envelope"></i></div>
+                        <div class="c-info"><span class="mono c-lbl">email</span><span><span class="__cf_email__" data-cfemail="5d2d2f3c333c2b2b3628303c2f6f6c1d3a303c3431733e3230">[email&#160;protected]</span></span></div>
+                        <i class="fas fa-arrow-right c-arr"></i>
                     </a>
-                    <a href="#contact" class="cta-secondary">
-                        <i class="fas fa-envelope"></i>
-                        Get in Touch
+                    <a href="/cdn-cgi/l/email-protection#62124c140b08031b034f09170f031022071a071607104c03014c1709" class="c-link magnetic">
+                        <div class="c-ico"><i class="fas fa-university"></i></div>
+                        <div class="c-info"><span class="mono c-lbl">academic</span><span><span class="__cf_email__" data-cfemail="0b7b257d62616a726a26607e666a794b6e736e7f6e79256a68257e60">[email&#160;protected]</span></span></div>
+                        <i class="fas fa-arrow-right c-arr"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" class="c-link magnetic">
+                        <div class="c-ico"><i class="fab fa-linkedin"></i></div>
+                        <div class="c-info"><span class="mono c-lbl">linkedin</span><span>pranavvijayakumar216</span></div>
+                        <i class="fas fa-arrow-right c-arr"></i>
+                    </a>
+                    <a href="https://github.com/pranavvkumar21" target="_blank" class="c-link magnetic">
+                        <div class="c-ico"><i class="fab fa-github"></i></div>
+                        <div class="c-info"><span class="mono c-lbl">github</span><span>pranavvkumar21</span></div>
+                        <i class="fas fa-arrow-right c-arr"></i>
+                    </a>
+                    <a href="tel:+447824074707" class="c-link magnetic">
+                        <div class="c-ico"><i class="fab fa-whatsapp"></i></div>
+                        <div class="c-info"><span class="mono c-lbl">whatsapp</span><span>+44 7824 074707</span></div>
+                        <i class="fas fa-arrow-right c-arr"></i>
                     </a>
                 </div>
-                
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="number">10+</span>
-                        <span class="label">Projects</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="number">5</span>
-                        <span class="label">Publications</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="number">5+</span>
-                        <span class="label">Years Experience</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="hero-visual">
-                <div class="hero-decoration decoration-1"></div>
-                <div class="hero-decoration decoration-2"></div>
-                
-                <div class="profile-card">
-                    <picture>
-                        <source srcset="assets/cover.webp" type="image/webp">
-                        <img src="assets/cover.jpg" alt="Pranav Kumar" class="profile-photo" loading="lazy" decoding="async">
-                    </picture>
-                    <h3>Pranav Vijaya Kumar</h3>
-                    <p class="role">MSc Robotics | AI Enthusiast</p>
-                    <p class="bio">Passionate about building robots that think, learn, and adapt.</p>
-                    
-                    <div class="social-links">
-                        <a href="https://github.com/pranavvkumar21" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:pranavvkumar21@gmail.com" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank" aria-label="GrabCAD">
-                            <i class="fas fa-cube"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p>I've always been fascinated by the idea of machines thinking, adapting, and solving problems just like we do. That curiosity pushed me from mechanical engineering into robotics, where I learned to blend hardware, software, and intelligence into something truly impactful.</p>
-                <p>From designing a microbial fuel cell that gave robots bio-inspired emotions to developing cross-domain localization systems tested on land, air, and sea, I've explored what it really means to make machines smarter and more resilient. Along the way, I've worked on quadrupeds that learn to walk, agentic AI systems that automate entire workflows, and vision-guided teleoperation that makes robots feel like an extension of the human hand.</p>
-                <p>Today, I'm focused on building robotics and AI systems that don't just function but leave a mark—solutions that scale, adapt, and drive sustainability. My journey has been about turning complex challenges into elegant automation, and I'm just getting started.</p>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <div id="projects-container" class="projects-grid">
-                <!-- Project cards will be populated here dynamically -->
-            </div>
-        </section>
-        <!-- Publications Section -->
-        <section id="publications">
-            <h2>Publications</h2>
-            <ul class="pub-list" id="pubList"></ul>
-        </section>
-
-
-        <!-- GitHub Stats Section -->
-        <section id="github">
-            <h2>GitHub Statistics</h2>
-            <div class="github-stats" id="githubStats">
-                <div class="loading">Loading GitHub statistics...</div>
-            </div>
-            <div class="github-readme-stats">
-                <img src="https://github-readme-stats.vercel.app/api?username=pranavvkumar21&show_icons=true&theme=radical&hide_border=true&bg_color=0d0d0d&title_color=00ffc6&icon_color=00ffc6&text_color=f5f5f5" alt="GitHub Stats" loading="lazy" decoding="async">
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pranavvkumar21&layout=compact&theme=radical&hide_border=true&bg_color=0d0d0d&title_color=00ffc6&text_color=f5f5f5" alt="Top Languages" loading="lazy" decoding="async">
-                <img src="https://github-readme-streak-stats.herokuapp.com/?user=pranavvkumar21&theme=radical&hide_border=true&background=0d0d0d&ring=00ffc6&fire=00ffc6&currStreakLabel=00ffc6" alt="GitHub Streak" loading="lazy" decoding="async">
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>Get In Touch</h2>
-            <div class="contact-links">
-                <div class="contact-item">
-                    <div class="icon"><i class="fas fa-envelope"></i></div>
-                    <h3>Email</h3>
-                    <a href="mailto:pranavvkumar21@gmail.com" target="_blank">pranavvkumar21@gmail.com</a>
-                    <a href="mailto:p.vijaya-kumar@exeter.ac.uk" target="_blank">p.vijaya-kumar@exeter.ac.uk</a>
-                </div>
-                <div class="contact-item">
-                    <div class="icon"><i class="fab fa-linkedin-in"></i></div>
-                    <h3>LinkedIn</h3>
-                    <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank">pranavvijayakumar216</a>
-                </div>
-                <div class="contact-item">
-                    <div class="icon"><i class="fab fa-github"></i></div>
-                    <h3>GitHub</h3>
-                    <a href="https://github.com/pranavvkumar21" target="_blank">pranavvkumar21</a>
-                </div>
-                <!-- <div class="contact-item">
-                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3>Location</h3>
-                    <p>16 Landscore Road, Exeter EX4 1EW, United Kingdom</p>
-                </div> -->
-                <div class="contact-item">
-                    <div class="icon"><i class="fab fa-whatsapp"></i></div>
-                    <h3>Phone</h3>
-                    <a href="tel:+447824074707">+44 7824 074707 (whatsapp)</a>
-                    <a href="tel:+919496968268">+91 9496 968268</a>
-                </div>
-                <!-- <div class="contact-item">
-                    <div class="icon"><i class="fas fa-coffee"></i></div>
-                    <h3>Buy Me a Coffee</h3>
-                    <a href="https://buymeacoffee.com/pranavvkumar" target="_blank">Support My Work</a>
-                </div> -->
-            </div>
-            
-            <div class="contact-form">
-                <form id="contact-form" action="https://formspree.io/f/xgvrnvba" method="POST">
-                    <div class="input-group">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="name" placeholder="Your Name" required />
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" placeholder="Your Email" required />
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-comment"></i>
-                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                    </div>
-                    <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission">
-                    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
-                </form>
-                <div id="form-status" style="display: none; margin-top: 15px;"></div>
             </div>
 
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <p>&copy; 2024 Pranav Vijaya Kumar</p>
-                <div class="social">
-                    <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/pranavvkumar21" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank"><i class="fas fa-cube"></i></a>
+            <!-- Terminal Form -->
+            <div class="terminal-card" data-aos="fade-up" data-aos-d="140">
+                <div class="term-bar">
+                    <span class="term-dot dot-r"></span>
+                    <span class="term-dot dot-y"></span>
+                    <span class="term-dot dot-g"></span>
+                    <span class="mono term-title">message.sh</span>
                 </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Project Modal -->
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-header">
-                <h2 id="modalTitle"></h2>
-            </div>
-            <div class="modal-body">
-                <img id="modalImage" src="" alt="Project Image" class="modal-image" loading="lazy" decoding="async" style="content-visibility: auto; contain-intrinsic-size: 0 250px;">
-                <div class="modal-description">
-                    <p id="modalDescription"></p>
-                </div>
-                <div class="modal-links" id="modalLinks">
-                    <!-- Links will be populated dynamically -->
+                <div class="term-body">
+                    <form id="contact-form" action="https://formspree.io/f/xgvrnvba" method="POST">
+                        <div class="t-row">
+                            <span class="mono t-prompt"><span class="t-gt">$</span> name_</span>
+                            <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
+                        </div>
+                        <div class="t-row">
+                            <span class="mono t-prompt"><span class="t-gt">$</span> email_</span>
+                            <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+                        </div>
+                        <div class="t-row t-row-ta">
+                            <span class="mono t-prompt"><span class="t-gt">$</span> message_</span>
+                            <textarea name="message" rows="4" placeholder="What's on your mind?" required></textarea>
+                        </div>
+                        <input type="hidden" name="_subject" value="New Portfolio Contact">
+                        <button type="submit" class="btn-shimmer submit-btn magnetic" style="width:100%;margin-top:.75rem;justify-content:center">
+                            <span class="bs-inner"><i class="fas fa-paper-plane"></i> Send Message</span>
+                            <span class="bs-sweep"></span>
+                        </button>
+                    </form>
+                    <div id="form-status"></div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-    <script src="script.js"></script>
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="foot-inner">
+        <span class="mono">© 2024 Pranav Vijaya Kumar</span>
+        <div class="foot-soc">
+            <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/pranavvkumar21" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank"><i class="fas fa-cube"></i></a>
+        </div>
+        <span class="mono">built with <span style="color:var(--sky)">♥</span> &amp; caffeine</span>
+    </div>
+</footer>
+
+<!-- MODAL -->
+<div id="projectModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-bg"></div>
+    <div class="modal-box">
+        <button class="modal-x" aria-label="Close"><i class="fas fa-times"></i></button>
+        <div class="modal-hdr">
+            <h2 id="modalTitle"></h2>
+            <div id="modalTags"></div>
+        </div>
+        <div class="modal-bdy">
+            <img id="modalImage" src="" alt="" loading="lazy" decoding="async">
+         <p id="modalDescription"></p>
+            <div id="modalLinks"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script src="script.js" defer></script>
 </body>
 </html>

@@ -1,593 +1,1091 @@
-// Mobile menu toggle
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('nav ul');
+/* ══════════════════════════════════════════════════
+   PRANAV KUMAR — ROBOTICS PORTFOLIO
+   script.js v2 — Three.js + Anime.js + Magic UI
+══════════════════════════════════════════════════ */
+'use strict';
 
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+/* ────────────────────────────────────────
+   THEME MANAGER (light / dark)
+──────────────────────────────────────── */
+const ThemeManager = (() => {
+    const root = document.documentElement;
+    const btn  = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+    let dark = localStorage.getItem('theme') !== 'light';
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-    });
-});
-
-// Create Particle System with lazy loading
-function createParticles() {
-    const container = document.querySelector('.robotics-background');
-    const particleCount = window.innerWidth < 768 ? 20 : 40; // Fewer particles on mobile
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 15 + 's';
-        particle.style.animationDuration = (10 + Math.random() * 10) + 's';
-        container.appendChild(particle);
-    }
-}
-
-// Lazy load particles only when needed
-const createParticlesLazy = () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                createParticles();
-                observer.disconnect();
-            }
-        });
-    }, { rootMargin: '100px' });
-    
-    const background = document.querySelector('.robotics-background');
-    if (background) {
-        observer.observe(background);
-    }
-};
-
-// Create Morphing Blobs
-function createBlobs() {
-    const container = document.querySelector('.robotics-background');
-    
-    for (let i = 1; i <= 3; i++) {
-        const blob = document.createElement('div');
-        blob.className = `blob blob-${i}`;
-        container.appendChild(blob);
-    }
-}
-
-// Interactive Mouse Trail Effect (optimized for performance)
-document.addEventListener('mousemove', (e) => {
-    // Only on desktop and throttle more aggressively
-    if (window.innerWidth > 768 && Math.random() > 0.9) {
-        const glow = document.createElement('div');
-        glow.className = 'cursor-glow';
-        glow.style.left = e.pageX + 'px';
-        glow.style.top = e.pageY + 'px';
-        document.body.appendChild(glow);
-        
-        setTimeout(() => glow.remove(), 2000);
-    }
-}, { passive: true });
-
-// Utility function for debouncing
-const debounce = (func, wait) => {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
+    const apply = () => {
+        root.setAttribute('data-theme', dark ? 'dark' : 'light');
+        if (icon) { icon.className = dark ? 'fas fa-moon' : 'fas fa-sun'; }
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+        // Notify Three.js of theme change
+        document.dispatchEvent(new CustomEvent('themechange', { detail: { dark } }));
     };
-};
 
-// Enhanced Parallax Scrolling with performance optimizations
-const handleParallaxScroll = debounce(() => {
-    const scrolled = window.pageYOffset;
-    
-    // Grid moves slower for depth
-    const grid = document.querySelector('.grid-pattern');
-    if (grid) {
-        grid.style.transform = `translateY(${scrolled * 0.2}px)`;
-    }
-    
-    // Only animate visible elements
-    document.querySelectorAll('.node').forEach((node, i) => {
-        const rect = node.getBoundingClientRect();
-        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-            const speed = 0.15 + (i * 0.03);
-            node.style.transform = `translateY(${scrolled * speed}px) scale(1)`;
-        }
-    });
-    
-    // Icons float at different rates - only if visible
-    document.querySelectorAll('.icon-item').forEach((icon, i) => {
-        const rect = icon.getBoundingClientRect();
-        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-            const speed = 0.1 + (i * 0.02);
-            icon.style.transform = `translateY(${scrolled * speed}px)`;
-        }
-    });
-    
-    // Blobs move very subtly - only if visible
-    document.querySelectorAll('.blob').forEach((blob, i) => {
-        const rect = blob.getBoundingClientRect();
-        if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-            const speed = 0.05 + (i * 0.02);
-            blob.style.transform = `translateY(${scrolled * speed}px)`;
-        }
-    });
-}, 16); // 60fps
+    const toggle = () => { dark = !dark; apply(); };
+    const init   = () => { apply(); btn?.addEventListener('click', toggle); };
+    return { init, isDark: () => dark };
+})();
 
-window.addEventListener('scroll', handleParallaxScroll, { passive: true });
+/* ────────────────────────────────────────
+   LOADER
+──────────────────────────────────────── */
+const Loader = (() => {
+    const el   = document.getElementById('loader');
+    const bar  = document.getElementById('lbar');
+    const txt  = document.getElementById('ltxt');
+    const msgs = ['BOOTING SYSTEMS_','LOADING MODULES_','CALIBRATING_','READY_'];
+    let p = 0;
 
-// Lazy load GitHub stats only when section is visible
-const loadGitHubStatsLazy = () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                fetchGitHubStats();
-                observer.disconnect();
-            }
-        });
-    }, { rootMargin: '100px' });
-    
-    const githubSection = document.getElementById('github');
-    if (githubSection) {
-        observer.observe(githubSection);
-    }
-};
+    const tick = () => {
+        p += Math.random() * 22 + 6;
+        if (p > 100) p = 100;
+        bar.style.width = p + '%';
+        txt.textContent = msgs[Math.min(Math.floor(p / 34), msgs.length - 1)];
+        if (p < 100) setTimeout(tick, 60 + Math.random() * 70);
+        else setTimeout(() => { el.classList.add('out'); }, 420);
+    };
 
-// Fetch GitHub Statistics (unchanged but now lazy loaded)
-async function fetchGitHubStats() {
-    const username = 'pranavvkumar21';
-    const statsContainer = document.getElementById('githubStats');
-    
-    try {
-        // Fetch user data
-        const userResponse = await fetch(`https://api.github.com/users/${username}`);
-        const userData = await userResponse.json();
-        
-        // Fetch repositories
-        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
-        const reposData = await reposResponse.json();
-        
-        // Calculate statistics
-        const totalRepos = userData.public_repos;
-        const totalStars = reposData.reduce((acc, repo) => acc + repo.stargazers_count, 0);
-        const totalForks = reposData.reduce((acc, repo) => acc + repo.forks_count, 0);
-        const followers = userData.followers;
-        const following = userData.following;
-        
-        // Display stats with animation
-        statsContainer.innerHTML = `
-            <div class="stat-card" style="animation: fadeInUp 0.6s ease-out 0.1s both">
-                <div class="stat-icon">📚</div>
-                <div class="stat-info">
-                    <h3>${totalRepos}</h3>
-                    <p>Public Repositories</p>
-                </div>
-            </div>
-            <div class="stat-card" style="animation: fadeInUp 0.6s ease-out 0.2s both">
-                <div class="stat-icon">⭐</div>
-                <div class="stat-info">
-                    <h3>${totalStars}</h3>
-                    <p>Total Stars</p>
-                </div>
-            </div>
-            <div class="stat-card" style="animation: fadeInUp 0.6s ease-out 0.3s both">
-                <div class="stat-icon">🍴</div>
-                <div class="stat-info">
-                    <h3>${totalForks}</h3>
-                    <p>Total Forks</p>
-                </div>
-            </div>
-            <div class="stat-card" style="animation: fadeInUp 0.6s ease-out 0.4s both">
-                <div class="stat-icon">👥</div>
-                <div class="stat-info">
-                    <h3>${followers}</h3>
-                    <p>Followers</p>
-                </div>
-            </div>
-            <div class="stat-card" style="animation: fadeInUp 0.6s ease-out 0.5s both">
-                <div class="stat-icon">🔗</div>
-                <div class="stat-info">
-                    <h3>${following}</h3>
-                    <p>Following</p>
-                </div>
-            </div>
-            <div class="stat-card" style="animation: fadeInUp 0.6s ease-out 0.6s both">
-                <div class="stat-icon">📅</div>
-                <div class="stat-info">
-                    <h3>${new Date(userData.created_at).getFullYear()}</h3>
-                    <p>Member Since</p>
-                </div>
-            </div>
-        `;
-        
-        // Add fadeInUp animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-        
-    } catch (error) {
-        console.error('Error fetching GitHub stats:', error);
-        statsContainer.innerHTML = '<div class="loading">Unable to load GitHub statistics at this time.</div>';
-    }
-}
+    const start = () => setTimeout(tick, 180);
+    return { start };
+})();
 
-// Initialize everything when page loads with performance priorities
-window.addEventListener('load', () => {
-    // Critical functionality first
-    loadProjectsFromJSON();
-    
-    // Defer non-critical features
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-            createParticlesLazy();
-            createBlobs();
-            loadGitHubStatsLazy();
-        });
-    } else {
-        // Fallback for browsers without requestIdleCallback
-        setTimeout(() => {
-            createParticlesLazy();
-            createBlobs();
-            loadGitHubStatsLazy();
-        }, 100);
-    }
-});
+/* ────────────────────────────────────────
+   THREE.JS — ROBOT HERO SCENE (GLTFLoader)
+   ─────────────────────────────────────────
+   PUT YOUR ASSET AT:  assets/robot.glb
+   Free assets: sketchfab.com | quaternius.com
+   Formats supported: .glb / .gltf
+──────────────────────────────────────── */
+const RobotScene = (() => {
+    let renderer, scene, camera, robotMesh, mixer, gridHelper, frameId, clock;
+    const canvas = document.getElementById('heroCanvas');
+    const ASSET  = 'assets/robot.glb'; // ← set this to your file path
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+    if (!canvas || typeof THREE === 'undefined') return { init: () => {} };
+
+    const DARK_BG  = 0x070c14;
+    const LIGHT_BG = 0xf1f5f9;
+    const ACCENT   = 0x38bdf8;
+    let isDark = ThemeManager.isDark();
+
+    // Floating circuit nodes (always shown regardless of asset)
+    const buildNodes = () => {
+        const pts = new THREE.Group();
+        for (let i = 0; i < 22; i++) {
+            const geo = Math.random() > .5
+                ? new THREE.OctahedronGeometry(Math.random() * .045 + .02, 0)
+                : new THREE.BoxGeometry(.04, .04, .04);
+            const mat = new THREE.MeshStandardMaterial({
+                color: ACCENT, emissive: ACCENT, emissiveIntensity: .5,
+                roughness: .2, metalness: .8,
             });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(
+                (Math.random() - .5) * 5,
+                (Math.random() - .5) * 4,
+                (Math.random() - .5) * 2 - 1
+            );
+            mesh.userData.phase = Math.random() * Math.PI * 2;
+            mesh.userData.speed = .4 + Math.random() * .6;
+            pts.add(mesh);
         }
-    });
-});
+        return pts;
+    };
 
-// Simple form submission handler
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Add success animation
-    const button = this.querySelector('.submit-btn');
-    const originalText = button.innerHTML;
-    
-    button.innerHTML = '<i class="fas fa-check"></i> Sent!';
-    button.style.background = 'linear-gradient(135deg, #00ff88, #00cc6e)';
-    
-    setTimeout(() => {
-        alert('Thank you for your message! I will get back to you soon.');
-        this.reset();
-        button.innerHTML = originalText;
-        button.style.background = '';
-    }, 1500);
-});
-
-// Add intersection observer for scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+    const buildLines = (nodes) => {
+        const group = new THREE.Group();
+        const ch = nodes.children;
+        for (let i = 0; i < ch.length; i++) {
+            if (Math.random() > .45) continue;
+            const j = Math.floor(Math.random() * ch.length);
+            if (i === j) continue;
+            const pts = [ch[i].position.clone(), ch[j].position.clone()];
+            const geo = new THREE.BufferGeometry().setFromPoints(pts);
+            const mat = new THREE.LineBasicMaterial({ color: ACCENT, opacity: .12, transparent: true });
+            group.add(new THREE.Line(geo, mat));
         }
-    });
-}, observerOptions);
+        return group;
+    };
 
-// Observe all sections
-document.querySelectorAll('section').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
-    section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-    observer.observe(section);
-});
-async function loadProjectsFromJSON() {
-  const container = document.getElementById('projects-container');
-  container.innerHTML = '<p>Loading projects...</p>';
-
-  try {
-    const response = await fetch('projects.json');
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
-    const repos = await response.json();
-
-    container.innerHTML = '';
-
-    repos.forEach((repo, index) => {
-      const card = document.createElement('div');
-      card.className = 'project-card';
-      card.setAttribute('data-project-index', index);
-
-      let linksHtml = '';
-      if (repo.url && repo.url.trim() !== '') {
-        linksHtml = `
-          <a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
-            <i class="fab fa-github"></i> View on GitHub
-          </a>
-        `;
-      } else {
-        linksHtml = `<span class="project-link unavailable">Code not publicly available</span>`;
-      }
-
-      card.innerHTML = `
-        <h3>${repo.name}</h3>
-        <p>${repo.description || 'No description provided'}</p>
-        <div class="project-links">
-          ${linksHtml}
-        </div>
-      `;
-
-      // Add click event listener for modal
-      card.addEventListener('click', () => openProjectModal(repo));
-
-      container.appendChild(card);
-    });
-  } catch(error) {
-    container.innerHTML = `<p>Error loading projects: ${error.message}</p>`;
-  }
-}
-
-// Modal functionality
-function openProjectModal(project) {
-  const modal = document.getElementById('projectModal');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalImage = document.getElementById('modalImage');
-  const modalDescription = document.getElementById('modalDescription');
-  const modalLinks = document.getElementById('modalLinks');
-
-  // Set modal content
-  modalTitle.textContent = project.name;
-  modalImage.src = project.image || 'assets/cover.jpg';
-  modalImage.alt = project.name;
-  modalDescription.textContent = project.fullDescription || project.description;
-
-  // Set modal links
-  let linksHtml = '';
-  if (project.url && project.url.trim() !== '') {
-    linksHtml = `
-      <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link">
-        <i class="fab fa-github"></i> View on GitHub
-      </a>
-    `;
-  } else {
-    linksHtml = `<span class="project-link unavailable">Code not publicly available</span>`;
-  }
-  modalLinks.innerHTML = linksHtml;
-
-  // Show modal
-  modal.style.display = 'block';
-  document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
-
-function closeProjectModal() {
-  const modal = document.getElementById('projectModal');
-  modal.style.display = 'none';
-  document.body.style.overflow = 'auto'; // Re-enable background scrolling
-}
-
-// Initialize modal event listeners
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('projectModal');
-  const closeBtn = modal.querySelector('.close');
-
-  // Close modal when clicking the close button
-  closeBtn.addEventListener('click', closeProjectModal);
-
-  // Close modal when clicking outside the modal content
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeProjectModal();
-    }
-  });
-
-  // Close modal with Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'block') {
-      closeProjectModal();
-    }
-  });
-});
-
-window.addEventListener('DOMContentLoaded', loadProjectsFromJSON);
-
-// Load Publications from JSON
-async function loadPublications() {
-    const pubList = document.getElementById('pubList');
-    
-    try {
-        const response = await fetch('publications.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
+    const setupLights = () => {
+        scene.children.filter(c => c.isLight).forEach(l => scene.remove(l));
+        scene.add(new THREE.AmbientLight(0xffffff, isDark ? .35 : .8));
+        const dir = new THREE.DirectionalLight(0xffffff, isDark ? 1.4 : 2.0);
+        dir.position.set(4, 8, 4);
+        dir.castShadow = true;
+        dir.shadow.mapSize.set(1024, 1024);
+        scene.add(dir);
+        const rim = new THREE.PointLight(ACCENT, isDark ? 2.8 : 1.4, 14);
+        rim.position.set(-3, 3, 2);
+        scene.add(rim);
+        const fill = new THREE.PointLight(0x6ee7b7, isDark ? 1.1 : .6, 10);
+        fill.position.set(3, -1, 3);
+        scene.add(fill);
+        if (!isDark) {
+            scene.add(Object.assign(new THREE.DirectionalLight(0xfff0d0, .9), { position: new THREE.Vector3(-3, 6, -2) }));
         }
-        const data = await response.json();
-        
-        pubList.innerHTML = '';
-        data.publications.forEach(pub => {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="${pub.url}" target="_blank">${pub.title}</a>`;
-            pubList.appendChild(li);
-        });
-    } catch (error) {
-        console.error('Error loading publications:', error);
-        pubList.innerHTML = '<li>Error loading publications</li>';
-    }
-}
+    };
 
-// Call the function when DOM is loaded
-window.addEventListener('DOMContentLoaded', loadPublications);
-// Handle Contact Form Submission
-const contactForm = document.getElementById('contact-form');
-const formStatus = document.getElementById('form-status');
+    const init = () => {
+        clock = new THREE.Clock();
 
-if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const submitBtn = contactForm.querySelector('.submit-btn');
-        const originalText = submitBtn.innerHTML;
-        
-        // Show loading state
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        submitBtn.disabled = true;
-        
-        try {
-            const response = await fetch(contactForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
+        // Scene
+        scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(isDark ? DARK_BG : LIGHT_BG, .055);
+
+        // Camera
+        camera = new THREE.PerspectiveCamera(42, canvas.clientWidth / canvas.clientHeight, .1, 100);
+        camera.position.set(0, 1.5, 7);
+        camera.lookAt(0, 1, 0);
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = isDark ? 1.1 : 1.4;
+
+        setupLights();
+
+        // Grid floor
+        gridHelper = new THREE.GridHelper(14, 24,
+            isDark ? 0x0e2233 : 0xd0dce8,
+            isDark ? 0x0a1a28 : 0xdde8f0);
+        gridHelper.position.y = -1.5;
+        scene.add(gridHelper);
+
+        // Ambient nodes + lines
+        const nodes = buildNodes();
+        scene.add(nodes);
+        scene.add(buildLines(nodes));
+
+        // ── LOAD GLB ASSET ────────────────────────────────
+        // Requires GLTFLoader — loaded via CDN in index.html
+        if (typeof THREE.GLTFLoader !== 'undefined') {
+            const loader = new THREE.GLTFLoader();
+            loader.load(
+                ASSET,
+                (gltf) => {
+                    robotMesh = gltf.scene;
+
+                    // Auto-scale: fit model into a ~3-unit bounding box
+                    const box    = new THREE.Box3().setFromObject(robotMesh);
+                    const size   = box.getSize(new THREE.Vector3());
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const scale  = 3.0 / maxDim;
+                    robotMesh.scale.setScalar(scale);
+
+                    // Centre the model at origin then lift to grid
+                    const center = box.getCenter(new THREE.Vector3());
+                    robotMesh.position.set(
+                        -center.x * scale,
+                        -box.min.y * scale - 1.5,
+                        -center.z * scale + 0.2
+                    );
+
+                    // Enable shadows on every mesh
+                    robotMesh.traverse(child => {
+                        if (child.isMesh) {
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                        }
+                    });
+
+                    scene.add(robotMesh);
+
+                    // Wire up animations if the asset has any
+                    if (gltf.animations && gltf.animations.length > 0) {
+                        mixer = new THREE.AnimationMixer(robotMesh);
+                        gltf.animations.forEach(clip => {
+                            mixer.clipAction(clip).play();
+                        });
+                    }
+                },
+                // Progress callback
+                (xhr) => {
+                    if (xhr.lengthComputable) {
+                        const pct = Math.round(xhr.loaded / xhr.total * 100);
+                        console.log(`[RobotScene] Loading: ${pct}%`);
+                    }
+                },
+                // Error callback — logs clearly so you know what went wrong
+                (err) => {
+                    console.warn('[RobotScene] Could not load asset at:', ASSET);
+                    console.warn('[RobotScene] Error:', err);
+                    console.info('[RobotScene] Place your .glb file at', ASSET, '— nodes will animate in the meantime.');
                 }
+            );
+        } else {
+            console.warn('[RobotScene] THREE.GLTFLoader not found. Add the CDN script to index.html.');
+        }
+        // ─────────────────────────────────────────────────
+
+        // Theme change
+        document.addEventListener('themechange', (e) => {
+            isDark = e.detail.dark;
+            renderer.toneMappingExposure = isDark ? 1.1 : 1.4;
+            scene.fog.color.set(isDark ? DARK_BG : LIGHT_BG);
+            if (gridHelper) {
+                gridHelper.material[0].color.set(isDark ? 0x0e2233 : 0xd0dce8);
+                gridHelper.material[1].color.set(isDark ? 0x0a1a28 : 0xdde8f0);
+            }
+            setupLights();
+        });
+
+        // Mouse parallax
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', e => {
+            mouseX = (e.clientX / window.innerWidth - .5) * 2;
+            mouseY = (e.clientY / window.innerHeight - .5) * 2;
+        }, { passive: true });
+
+        // Resize
+        window.addEventListener('resize', () => {
+            const w = canvas.clientWidth, h = canvas.clientHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        }, { passive: true });
+
+        // Render loop
+        let t = 0;
+        const animate = () => {
+            frameId = requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+            t += .008;
+
+            // Advance GLTF animations
+            if (mixer) mixer.update(delta);
+
+            // Gentle robot rotation (works even before asset loads)
+            if (robotMesh) {
+                robotMesh.rotation.y = Math.sin(t * .3) * .5 + mouseX * .3;
+                robotMesh.rotation.x = mouseY * .06;
+            }
+
+            // Float circuit nodes
+            nodes.children.forEach(n => {
+                n.position.y += Math.sin(t * n.userData.speed + n.userData.phase) * .002;
+                n.rotation.x += .008;
+                n.rotation.z += .005;
             });
-            
-            if (response.ok) {
-                formStatus.style.display = 'block';
-                formStatus.style.color = '#4CAF50';
-                formStatus.innerHTML = '✓ Message sent successfully! I\'ll get back to you soon.';
-                contactForm.reset();
+
+            // Camera drift
+            camera.position.x += (mouseX * .55 - camera.position.x) * .03;
+            camera.position.y += (1.5 + mouseY * .25 - camera.position.y) * .03;
+            camera.lookAt(0, 1, 0);
+
+            renderer.render(scene, camera);
+        };
+        animate();
+
+        // Pause when hero off-screen
+        const heroEl = document.getElementById('home');
+        new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                if (!frameId) animate();
             } else {
-                throw new Error('Form submission failed');
+                cancelAnimationFrame(frameId);
+                frameId = null;
             }
-        } catch (error) {
-            formStatus.style.display = 'block';
-            formStatus.style.color = '#f44336';
-            formStatus.innerHTML = '✗ Oops! Something went wrong. Please try again.';
-        } finally {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            
-            // Hide status message after 5 seconds
-            setTimeout(() => {
-                formStatus.style.display = 'none';
-            }, 5000);
-        }
-    });
-}
+        }).observe(heroEl);
+    };
 
-// Theme Toggle Functionality
-class ThemeManager {
-    constructor() {
-        this.currentTheme = localStorage.getItem('theme') || 'dark';
-        this.toggleButton = null;
-        this.init();
-    }
+    return { init };
+})();
 
-    init() {
-        // Apply saved theme on page load
-        this.applyTheme(this.currentTheme);
-        
-        // Wait for DOM to be ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.setupToggle());
-        } else {
-            this.setupToggle();
-        }
-    }
+/* ────────────────────────────────────────
+   CURSOR
+──────────────────────────────────────── */
+const Cursor = (() => {
+    const cur  = document.getElementById('cursor');
+    const dot  = cur?.querySelector('.c-dot');
+    const ring = cur?.querySelector('.c-ring');
+    if (!cur || window.innerWidth < 768) return { init: () => {} };
 
-    setupToggle() {
-        // Create toggle button if it doesn't exist
-        if (!document.getElementById('themeToggle')) {
-            this.createToggleButton();
-        }
-        
-        this.toggleButton = document.getElementById('themeToggle');
-        if (this.toggleButton) {
-            this.toggleButton.addEventListener('click', () => this.toggleTheme());
-            this.updateToggleButton();
-        }
-    }
+    let rx = 0, ry = 0, tx = 0, ty = 0;
+    const lerp = (a, b, n) => a + (b - a) * n;
 
-    createToggleButton() {
-        const toggleButton = document.createElement('button');
-        toggleButton.id = 'themeToggle';
-        toggleButton.className = 'theme-toggle';
-        toggleButton.setAttribute('aria-label', 'Toggle theme');
-        
-        toggleButton.innerHTML = `
-            <span class="icon">🌙</span>
-            <span class="text">Dark</span>
-        `;
-        
-        document.body.insertBefore(toggleButton, document.body.firstChild);
-    }
+    const tick = () => {
+        rx = lerp(rx, tx, .13);
+        ry = lerp(ry, ty, .13);
+        ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+        requestAnimationFrame(tick);
+    };
 
-    applyTheme(theme) {
-        if (theme === 'light') {
-            document.documentElement.setAttribute('data-theme', 'light');
-        } else {
-            document.documentElement.removeAttribute('data-theme');
-        }
-        this.currentTheme = theme;
-        localStorage.setItem('theme', theme);
-    }
+    const init = () => {
+        document.addEventListener('mousemove', e => {
+            tx = e.clientX; ty = e.clientY;
+            dot.style.transform = `translate(${tx}px,${ty}px) translate(-50%,-50%)`;
+        }, { passive: true });
+        document.querySelectorAll('a,button,.project-card,.magnetic,input,textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cur-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hover'));
+        });
+        tick();
+    };
+    return { init };
+})();
 
-    toggleTheme() {
-        const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
-        this.applyTheme(newTheme);
-        this.updateToggleButton();
-        
-        // Add a subtle animation when switching themes
-        document.body.style.transition = 'all 0.3s ease';
-        setTimeout(() => {
-            document.body.style.transition = '';
-        }, 300);
-    }
+/* ────────────────────────────────────────
+   SCROLL PROGRESS
+──────────────────────────────────────── */
+const ScrollProgress = (() => {
+    const bar = document.getElementById('scroll-bar');
+    const update = () => {
+        const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+        bar.style.width = pct + '%';
+    };
+    return { init: () => window.addEventListener('scroll', update, { passive: true }) };
+})();
 
-    updateToggleButton() {
-        if (!this.toggleButton) return;
-        
-        const icon = this.toggleButton.querySelector('.icon');
-        const text = this.toggleButton.querySelector('.text');
-        
-        if (this.currentTheme === 'light') {
-            icon.textContent = '☀️';
-            text.textContent = 'Light';
-        } else {
-            icon.textContent = '🌙';
-            text.textContent = 'Dark';
-        }
-    }
-}
+/* ────────────────────────────────────────
+   NAV
+──────────────────────────────────────── */
+const Nav = (() => {
+    const nav  = document.getElementById('nav');
+    const hbg  = document.getElementById('hamburger');
+    const lnks = document.getElementById('navLinks');
 
-// Initialize theme manager
-new ThemeManager();
+    const init = () => {
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('stuck', window.scrollY > 20);
+        }, { passive: true });
 
-// Register Service Worker for caching
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-                console.log('Service Worker registered successfully:', registration.scope);
-            })
-            .catch((error) => {
-                console.log('Service Worker registration failed:', error);
+        hbg?.addEventListener('click', () => {
+            const open = hbg.classList.toggle('open');
+            lnks.classList.toggle('open', open);
+        });
+
+        lnks?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            hbg.classList.remove('open');
+            lnks.classList.remove('open');
+        }));
+
+        // Active section via IntersectionObserver
+        const sections = document.querySelectorAll('section[id]');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                const a = document.querySelector(`.nav-link[data-s="${e.target.id}"]`);
+                if (a) a.classList.add('active');
             });
-    });
-}
+        }, { threshold: .35 });
+        sections.forEach(s => io.observe(s));
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   TYPED ROLE
+──────────────────────────────────────── */
+const TypedRole = (() => {
+    const el    = document.getElementById('typedRole');
+    const roles = ['Robotics Engineer','AI Developer','ROS2 Specialist','Bio-Inspired Systems','Legged Locomotion'];
+    let ri = 0, ci = 0, del = false;
+
+    const tick = () => {
+        const r = roles[ri];
+        if (!del) {
+            el.textContent = r.slice(0, ++ci);
+            if (ci === r.length) { del = true; setTimeout(tick, 2000); return; }
+        } else {
+            el.textContent = r.slice(0, --ci);
+            if (ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+        }
+        setTimeout(tick, del ? 32 : 64);
+    };
+    return { init: () => { if (el) setTimeout(tick, 2200); } };
+})();
+
+/* ────────────────────────────────────────
+   SCROLL ANIMATIONS (Anime.js AOS)
+──────────────────────────────────────── */
+const AOS = (() => {
+    const done = new Set();
+
+    const run = (el) => {
+        if (done.has(el)) return;
+        done.add(el);
+        const type  = el.dataset.aos || 'fade-up';
+        const delay = parseInt(el.dataset.aosD || el.dataset.delay || 0);
+
+        if (typeof anime === 'undefined') {
+            el.style.transition = 'opacity .7s ease, transform .7s ease';
+            el.style.transitionDelay = delay + 'ms';
+            el.style.opacity = 1;
+            el.style.transform = 'none';
+            return;
+        }
+
+        const base = { targets: el, duration: 750, delay, easing: 'cubicBezier(.16,1,.3,1)', opacity: [0, 1] };
+        if (type === 'fade-up')    Object.assign(base, { translateY: [36, 0] });
+        if (type === 'fade-left')  Object.assign(base, { translateX: [44, 0] });
+        if (type === 'fade-right') Object.assign(base, { translateX: [-44, 0] });
+
+        anime(base);
+    };
+
+    const init = () => {
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) run(e.target); });
+        }, { threshold: .08, rootMargin: '0px 0px -36px 0px' });
+
+        document.querySelectorAll('[data-aos]').forEach(el => {
+            el.style.opacity = 0;
+            io.observe(el);
+        });
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   COUNTER ANIMATION
+──────────────────────────────────────── */
+const Counters = (() => {
+    const init = () => {
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el = e.target;
+                const target = parseInt(el.dataset.count);
+                io.unobserve(el);
+                if (typeof anime !== 'undefined') {
+                    const obj = { v: 0 };
+                    anime({ targets: obj, v: target, duration: 1600, delay: 600, easing: 'easeOutExpo',
+                        update: () => { el.textContent = Math.round(obj.v); } });
+                } else {
+                    let v = 0; const step = target / 40;
+                    const t = setInterval(() => {
+                        v += step; el.textContent = Math.min(Math.round(v), target);
+                        if (v >= target) clearInterval(t);
+                    }, 40);
+                }
+            });
+        }, { threshold: .5 });
+        document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   MAGNETIC EFFECT
+──────────────────────────────────────── */
+const Magnetic = (() => {
+    const init = () => {
+        if (window.innerWidth < 768) return;
+        document.querySelectorAll('.magnetic').forEach(el => {
+            el.addEventListener('mousemove', e => {
+                const r = el.getBoundingClientRect();
+                const dx = (e.clientX - r.left - r.width / 2) * .22;
+                const dy = (e.clientY - r.top - r.height / 2) * .22;
+                el.style.transform = `translate(${dx}px,${dy}px)`;
+            });
+            el.addEventListener('mouseleave', () => el.style.transform = '');
+        });
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   HERO ENTRANCE
+──────────────────────────────────────── */
+const HeroEntrance = (() => {
+    const init = () => {
+        if (typeof anime === 'undefined') return;
+        anime.timeline({ easing: 'cubicBezier(.16,1,.3,1)' })
+            .add({ targets: '.magic-badge',  opacity: [0,1], translateY: [16,0], duration: 550 })
+            .add({ targets: '.hero-h1',      opacity: [0,1], translateY: [28,0], duration: 700 }, '-=300')
+            .add({ targets: '.hero-desc',    opacity: [0,1], translateY: [20,0], duration: 550 }, '-=400')
+            .add({ targets: '.hero-cta',     opacity: [0,1], translateY: [20,0], duration: 500 }, '-=350')
+            .add({ targets: '.hero-stats',   opacity: [0,1], translateY: [18,0], duration: 500 }, '-=300')
+            .add({ targets: '.hero-right',   opacity: [0,1], translateX: [40,0], duration: 700 }, '-=700');
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   PROJECTS
+──────────────────────────────────────── */
+const Projects = (() => {
+    const container = document.getElementById('projects-container');
+    const modal     = document.getElementById('projectModal');
+
+    const openModal = (p) => {
+        document.getElementById('modalTitle').textContent = p.name;
+        document.getElementById('modalDescription').textContent = p.fullDescription || p.description || '';
+        const img = document.getElementById('modalImage');
+        img.src = p.image || 'assets/cover.jpg';
+        img.alt = p.name;
+        document.getElementById('modalTags').innerHTML = (p.tags||[]).map(t=>`<span class="mtag">${t}</span>`).join('');
+        document.getElementById('modalLinks').innerHTML = p.url?.trim()
+            ? `<a href="${p.url}" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>`
+            : `<span class="project-link unavailable">Code not publicly available</span>`;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    };
+
+    const render = (repos) => {
+        container.innerHTML = '';
+        repos.forEach((r) => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.style.opacity = 0;
+            card.innerHTML = `
+                <div class="proj-corner"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                <h3>${r.name}</h3>
+                <p>${r.description || 'No description available.'}</p>
+                <div class="project-links">
+                    ${r.url?.trim()
+                        ? `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()"><i class="fab fa-github"></i> GitHub</a>`
+                        : `<span class="project-link unavailable">Private</span>`}
+                </div>`;
+            card.addEventListener('click', () => openModal(r));
+            container.appendChild(card);
+        });
+
+        // Stagger animate on scroll
+        const io = new IntersectionObserver(entries => {
+            if (!entries[0].isIntersecting) return;
+            if (typeof anime !== 'undefined') {
+                anime({ targets: '.project-card', opacity: [0,1], translateY: [28,0],
+                    delay: anime.stagger(70, { start: 100 }), duration: 650, easing: 'cubicBezier(.16,1,.3,1)' });
+            } else {
+                document.querySelectorAll('.project-card').forEach((c,i) => {
+                    setTimeout(() => { c.style.transition='opacity .6s ease,transform .6s ease';c.style.opacity=1;c.style.transform='none'; }, i*70);
+                });
+            }
+            io.disconnect();
+        }, { threshold: .05 });
+        io.observe(container);
+    };
+
+    const load = async () => {
+        try {
+            const res = await fetch('projects.json');
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            render(await res.json());
+        } catch (e) {
+            container.innerHTML = `<p class="ld-state mono">Error loading projects: ${e.message}</p>`;
+        }
+    };
+
+    const init = () => {
+        load();
+        modal?.querySelector('.modal-x')?.addEventListener('click', closeModal);
+        modal?.querySelector('.modal-bg')?.addEventListener('click', closeModal);
+        document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   PUBLICATIONS
+──────────────────────────────────────── */
+const Publications = (() => {
+    const init = async () => {
+        const list = document.getElementById('pubList');
+        if (!list) return;
+        try {
+            const res = await fetch('publications.json');
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            list.innerHTML = data.publications.map(p =>
+                `<li><a href="${p.url}" target="_blank" rel="noopener noreferrer">${p.title}</a></li>`
+            ).join('');
+
+            const io = new IntersectionObserver(entries => {
+                if (!entries[0].isIntersecting) return;
+                if (typeof anime !== 'undefined')
+                    anime({ targets: '#pubList li', opacity: [0,1], translateX: [-16,0],
+                        delay: anime.stagger(90, { start: 80 }), duration: 550, easing: 'cubicBezier(.16,1,.3,1)' });
+                io.disconnect();
+            }, { threshold: .1 });
+            io.observe(list);
+        } catch {
+            list.innerHTML = '<li class="ld-state mono">Error loading publications.</li>';
+        }
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   GITHUB STATS
+──────────────────────────────────────── */
+const GitHubStats = (() => {
+    const load = async () => {
+        const container = document.getElementById('githubStats');
+        if (!container) return;
+        try {
+            const [uRes, rRes] = await Promise.all([
+                fetch('https://api.github.com/users/pranavvkumar21'),
+                fetch('https://api.github.com/users/pranavvkumar21/repos?per_page=100'),
+            ]);
+            if (!uRes.ok) throw new Error('API error');
+            const user  = await uRes.json();
+            const repos = await rRes.json();
+            const stars = repos.reduce((a,r) => a + r.stargazers_count, 0);
+            const forks = repos.reduce((a,r) => a + r.forks_count, 0);
+
+            const items = [
+                { icon:'📚', val: user.public_repos,  label: 'Repositories' },
+                { icon:'⭐', val: stars,               label: 'Total Stars' },
+                { icon:'🍴', val: forks,               label: 'Total Forks' },
+                { icon:'👥', val: user.followers,      label: 'Followers' },
+                { icon:'🔗', val: user.following,      label: 'Following' },
+                { icon:'📅', val: new Date(user.created_at).getFullYear(), label: 'Member Since' },
+            ];
+
+            container.innerHTML = items.map(i => `
+                <div class="gh-stat-card">
+                    <div class="gh-icon">${i.icon}</div>
+                    <div><h3 class="mono">${i.val}</h3><p>${i.label}</p></div>
+                </div>`).join('');
+
+            if (typeof anime !== 'undefined')
+                anime({ targets: '.gh-stat-card', opacity: [0,1], translateY: [18,0],
+                    delay: anime.stagger(70, { start: 80 }), duration: 600, easing: 'cubicBezier(.16,1,.3,1)' });
+        } catch {
+            container.innerHTML = '<div class="ld-state mono">Unable to load stats.</div>';
+        }
+    };
+
+    const init = () => {
+        const io = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) { load(); io.disconnect(); }
+        }, { rootMargin: '200px' });
+        const s = document.getElementById('github');
+        if (s) io.observe(s);
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   CONTACT FORM
+──────────────────────────────────────── */
+const ContactForm = (() => {
+    const init = () => {
+        const form   = document.getElementById('contact-form');
+        const status = document.getElementById('form-status');
+        if (!form) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('.submit-btn');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<span class="bs-inner"><i class="fas fa-spinner fa-spin"></i> Sending...</span>';
+            btn.disabled = true;
+            try {
+                const res = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{ Accept:'application/json' } });
+                if (res.ok) {
+                    form.reset();
+                    status.textContent = '✓ Message sent! I\'ll get back to you soon.';
+                    status.className = 'ok';
+                } else throw new Error();
+            } catch {
+                status.textContent = '✗ Something went wrong. Please try again.';
+                status.className = 'err';
+            } finally {
+                btn.innerHTML = orig; btn.disabled = false;
+                setTimeout(() => { status.textContent=''; status.className=''; }, 5000);
+            }
+        });
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   SMOOTH SCROLL
+──────────────────────────────────────── */
+const SmoothScroll = (() => {
+    const init = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   MAGIC UI: SPOTLIGHT CARD GLOW
+──────────────────────────────────────── */
+const SpotlightCards = (() => {
+    const init = () => {
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r  = card.getBoundingClientRect();
+                const x  = ((e.clientX - r.left) / r.width)  * 100;
+                const y  = ((e.clientY - r.top)  / r.height) * 100;
+                card.style.setProperty('--mx', x + '%');
+                card.style.setProperty('--my', y + '%');
+                card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(56,189,248,.07) 0%, transparent 60%), var(--surface)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.background = '';
+            });
+        });
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   MAGIC UI: TEXT REVEAL (char-by-char)
+──────────────────────────────────────── */
+const TextReveal = (() => {
+    const init = () => {
+        const targets = document.querySelectorAll('.s-title');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el   = e.target;
+                const text = el.textContent.trim();
+                el.innerHTML = text.split('').map((c, i) =>
+                    `<span style="display:inline-block;opacity:0;transform:translateY(8px);animation:charReveal .5s ${.03 * i}s forwards">${c === ' ' ? '&nbsp;' : c}</span>`
+                ).join('');
+                io.unobserve(el);
+            });
+        }, { threshold: .5 });
+        targets.forEach(t => io.observe(t));
+    };
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   PAGE TRANSITION
+──────────────────────────────────────── */
+const PageTransition = (() => {
+    // Inject overlay DOM
+    const overlay = document.createElement('div');
+    overlay.id = 'page-transition';
+    overlay.innerHTML = `
+        <div class="pt-panel"></div>
+        <div class="pt-logo">
+            <svg class="pt-hex" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <polygon points="10,2 18,6 18,14 10,18 2,14 2,6" stroke="#38bdf8" stroke-width="1.2" fill="none"/>
+            </svg>
+            PK_
+        </div>`;
+    document.body.appendChild(overlay);
+
+    const panel = overlay.querySelector('.pt-panel');
+    const logo  = overlay.querySelector('.pt-logo');
+
+    // Intercept nav link clicks for same-page anchors — animate scroll reveal
+    const revealSection = (targetId) => {
+        if (typeof anime === 'undefined') return;
+        // Wipe in
+        anime.timeline({ easing: 'cubicBezier(.76,0,.24,1)' })
+            .add({ targets: panel, scaleX: [0, 1], transformOrigin: ['0% 50%', '0% 50%'], duration: 380 })
+            .add({ targets: logo,  opacity: [0, 1], duration: 200 }, '-=100')
+            .add({ targets: logo,  opacity: [1, 0], duration: 150 }, '+=180')
+            .add({
+                targets: panel,
+                scaleX: [1, 0],
+                transformOrigin: ['100% 50%', '100% 50%'],
+                duration: 380,
+                begin: () => {
+                    const el = document.getElementById(targetId);
+                    if (el) el.scrollIntoView({ behavior: 'instant', block: 'start' });
+                }
+            });
+    };
+
+    const init = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href');
+                const id   = href.replace('#', '');
+                const el   = document.getElementById(id);
+                if (!el) return;
+                e.preventDefault();
+                // Close mobile nav
+                document.getElementById('hamburger')?.classList.remove('open');
+                document.getElementById('navLinks')?.classList.remove('open');
+                revealSection(id);
+            });
+        });
+    };
+
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   CURSOR TRAIL + CLICK RIPPLE
+──────────────────────────────────────── */
+const CursorFX = (() => {
+    const MAX_TRAIL  = 12;
+    const trail      = [];
+    let   mx = 0, my = 0;
+    let   frameId;
+
+    const mkDot = (i) => {
+        const d = document.createElement('div');
+        d.className = 'cursor-trail';
+        const size = 6 - i * 0.35;
+        d.style.cssText = `width:${size}px;height:${size}px;opacity:0;position:fixed;pointer-events:none;z-index:9990;border-radius:50%;background:var(--sky);transform:translate(-50%,-50%);will-change:transform,opacity`;
+        document.body.appendChild(d);
+        return { el: d, x: 0, y: 0 };
+    };
+
+    const spawnRipple = (x, y) => {
+        const r = document.createElement('div');
+        r.className = 'click-ripple';
+        r.style.cssText = `left:${x}px;top:${y}px;width:10px;height:10px;position:fixed;pointer-events:none;z-index:9989;border-radius:50%;border:1.5px solid var(--sky);transform:translate(-50%,-50%) scale(0);will-change:transform,opacity`;
+        document.body.appendChild(r);
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: r,
+                scale:   [0, 4.5],
+                opacity: [0.8, 0],
+                duration: 650,
+                easing:  'cubicBezier(.16,1,.3,1)',
+                complete: () => r.remove()
+            });
+        } else {
+            setTimeout(() => r.remove(), 700);
+        }
+    };
+
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    const tick = () => {
+        trail.forEach((dot, i) => {
+            const prev  = i === 0 ? { x: mx, y: my } : trail[i - 1];
+            const speed = 0.28 - i * 0.018;
+            dot.x = lerp(dot.x, prev.x, speed);
+            dot.y = lerp(dot.y, prev.y, speed);
+            const opacity = (1 - i / MAX_TRAIL) * 0.55;
+            dot.el.style.opacity  = opacity;
+            dot.el.style.left     = dot.x + 'px';
+            dot.el.style.top      = dot.y + 'px';
+        });
+        frameId = requestAnimationFrame(tick);
+    };
+
+    const init = () => {
+        if (window.innerWidth < 768) return;
+
+        for (let i = 0; i < MAX_TRAIL; i++) trail.push(mkDot(i));
+
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+        document.addEventListener('click', e => spawnRipple(e.clientX, e.clientY));
+        tick();
+    };
+
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   INTERACTIVE TIMELINE
+──────────────────────────────────────── */
+const Timeline = (() => {
+    const init = () => {
+        const items = document.querySelectorAll('.tl-item');
+        if (!items.length) return;
+
+        // Animate spine fill on scroll
+        const spine = document.getElementById('tlSpine');
+        const wrap  = document.querySelector('.timeline-wrap');
+
+        const updateSpine = () => {
+            if (!spine || !wrap) return;
+            const rect   = wrap.getBoundingClientRect();
+            const vh     = window.innerHeight;
+            const pct    = Math.max(0, Math.min(1, (vh - rect.top) / (rect.height + vh)));
+            spine.style.setProperty('--fill', (pct * 100) + '%');
+        };
+        window.addEventListener('scroll', updateSpine, { passive: true });
+
+        // Animate items in on scroll
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el  = e.target;
+                const dir = el.classList.contains('tl-left') ? -40 : 40;
+                if (typeof anime !== 'undefined') {
+                    anime({
+                        targets: el,
+                        opacity: [0, 1],
+                        translateX: [dir, 0],
+                        duration: 680,
+                        easing: 'cubicBezier(.16,1,.3,1)'
+                    });
+                    // Stagger the tags inside
+                    anime({
+                        targets: el.querySelectorAll('.tl-tags span'),
+                        opacity: [0, 1],
+                        translateY: [8, 0],
+                        delay: anime.stagger(60, { start: 300 }),
+                        duration: 400,
+                        easing: 'cubicBezier(.16,1,.3,1)'
+                    });
+                } else {
+                    el.style.opacity = 1;
+                    el.style.transform = 'none';
+                }
+                io.unobserve(el);
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        items.forEach(el => {
+            el.style.opacity = 0;
+            io.observe(el);
+        });
+    };
+
+    return { init };
+})();
+
+/* ────────────────────────────────────────
+   MOBILE SWIPE GESTURES
+──────────────────────────────────────── */
+const SwipeNav = (() => {
+    const sections = ['home','about','projects','timeline','publications','github','contact'];
+    let startX = 0, startY = 0, startTime = 0;
+    let current = 0;
+    let locked  = false;
+
+    const goTo = (id) => {
+        if (locked) return;
+        locked = true;
+        const el = document.getElementById(id);
+        if (!el) { locked = false; return; }
+
+        if (typeof anime !== 'undefined') {
+            // Flash the nav link
+            const link = document.querySelector(`.nav-link[data-s="${id}"]`);
+            if (link) {
+                anime({ targets: link, color: ['var(--sky)', 'var(--text2)'], duration: 800, easing: 'easeOutExpo' });
+            }
+        }
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => { locked = false; }, 900);
+    };
+
+    const updateCurrent = () => {
+        sections.forEach((id, i) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.4 && rect.bottom > 0) current = i;
+        });
+    };
+
+    // Touch swipe — horizontal swipe opens/closes mobile nav, vertical navigates sections
+    const initTouch = () => {
+        document.addEventListener('touchstart', e => {
+            startX    = e.touches[0].clientX;
+            startY    = e.touches[0].clientY;
+            startTime = Date.now();
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            const dx   = e.changedTouches[0].clientX - startX;
+            const dy   = e.changedTouches[0].clientY - startY;
+            const dt   = Date.now() - startTime;
+            const absx = Math.abs(dx), absy = Math.abs(dy);
+
+            if (dt > 400) return; // too slow
+
+            // Horizontal: swipe right from left edge → open nav; swipe left → close nav
+            if (absx > absy && absx > 55) {
+                const nav = document.getElementById('navLinks');
+                const hbg = document.getElementById('hamburger');
+                if (!nav || !hbg) return;
+                if (dx > 0 && startX < 40) {
+                    nav.classList.add('open'); hbg.classList.add('open');
+                } else if (dx < 0 && nav.classList.contains('open')) {
+                    nav.classList.remove('open'); hbg.classList.remove('open');
+                }
+                return;
+            }
+
+            // Vertical swipe: navigate between sections
+            if (absy > absx && absy > 70) {
+                updateCurrent();
+                if (dy < 0 && current < sections.length - 1) goTo(sections[current + 1]);  // swipe up → next
+                if (dy > 0 && current > 0)                   goTo(sections[current - 1]);  // swipe down → prev
+            }
+        }, { passive: true });
+    };
+
+    // Keyboard arrow navigation (bonus)
+    const initKeyboard = () => {
+        document.addEventListener('keydown', e => {
+            if (['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)) return;
+            updateCurrent();
+            if ((e.key === 'ArrowDown' || e.key === 'PageDown') && current < sections.length - 1) {
+                e.preventDefault();
+                goTo(sections[current + 1]);
+            }
+            if ((e.key === 'ArrowUp' || e.key === 'PageUp') && current > 0) {
+                e.preventDefault();
+                goTo(sections[current - 1]);
+            }
+        });
+    };
+
+    const init = () => {
+        initTouch();
+        initKeyboard();
+    };
+
+    return { init };
+})();
+
+
+const styleTag = document.createElement('style');
+styleTag.textContent = `@keyframes charReveal{to{opacity:1;transform:translateY(0)}}`;
+document.head.appendChild(styleTag);
+
+/* ────────────────────────────────────────
+   INIT
+──────────────────────────────────────── */
+const boot = () => {
+    ThemeManager.init();
+    ScrollProgress.init();
+    Nav.init();
+    SmoothScroll.init();
+    PageTransition.init();
+    AOS.init();
+    Counters.init();
+    TypedRole.init();
+    Timeline.init();
+    Projects.init();
+    Publications.init();
+    GitHubStats.init();
+    ContactForm.init();
+    TextReveal.init();
+    SwipeNav.init();
+
+    // Delay heavier stuff
+    requestIdleCallback ? requestIdleCallback(() => {
+        Cursor.init();
+        Magnetic.init();
+        SpotlightCards.init();
+        CursorFX.init();
+    }) : setTimeout(() => { Cursor.init(); Magnetic.init(); SpotlightCards.init(); CursorFX.init(); }, 200);
+
+    // Hero runs after loader fades
+    setTimeout(HeroEntrance.init, 150);
+
+    // Three.js after fonts settle
+    setTimeout(RobotScene.init, 300);
+};
+
+Loader.start();
+document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', boot)
+    : boot();
