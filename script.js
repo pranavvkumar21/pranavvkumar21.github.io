@@ -534,38 +534,96 @@ const Projects = (() => {
     };
 
     const render = (repos) => {
-        container.innerHTML = '';
-        repos.forEach((r) => {
+        container.className = 'proj-showcase-wrap';
+        container.innerHTML = `
+            <div class="proj-track" id="projTrack"></div>
+            <div class="proj-nav">
+                <button class="proj-arrow" id="projPrev" aria-label="Previous"><i class="fas fa-arrow-left"></i></button>
+                <div class="proj-dots" id="projDots"></div>
+                <button class="proj-arrow" id="projNext" aria-label="Next"><i class="fas fa-arrow-right"></i></button>
+            </div>`;
+
+        const track = document.getElementById('projTrack');
+        const dots  = document.getElementById('projDots');
+
+        repos.forEach((r, idx) => {
+            const isVideo = /\.(mp4|webm)$/i.test(r.image || '');
+            const src     = r.image || 'assets/cover.webp';
+            const mediaEl = isVideo
+                ? `<video class="proj-thumb" src="${src}" muted loop playsinline preload="none"></video>`
+                : `<img class="proj-thumb" src="${src}" alt="${r.name}" loading="lazy" decoding="async">`;
+
             const card = document.createElement('div');
-            card.className = 'project-card';
-            card.style.opacity = 0;
+            card.className = 'proj-slide';
             card.innerHTML = `
-                <div class="proj-corner"><i class="fas fa-arrow-up-right-from-square"></i></div>
-                <h3>${r.name}</h3>
-                <p>${r.description || 'No description available.'}</p>
-                <div class="project-links">
-                    ${r.url?.trim()
-                        ? `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()"><i class="fab fa-github"></i> GitHub</a>`
-                        : `<span class="project-link unavailable">Private</span>`}
+                <div class="proj-media">
+                    ${mediaEl}
+                    <div class="proj-media-overlay"></div>
+                    <span class="proj-index mono">0${idx + 1}</span>
+                </div>
+                <div class="proj-info">
+                    <h3 class="proj-name">${r.name}</h3>
+                    <p class="proj-desc">${r.description || ''}</p>
+                    <div class="proj-cta">
+                        ${r.url?.trim()
+                            ? `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()"><i class="fab fa-github"></i> Code</a>`
+                            : `<span class="project-link unavailable"><i class="fas fa-lock"></i> Private</span>`}
+                        <button class="project-link proj-detail-btn"><i class="fas fa-expand-alt"></i> Details</button>
+                    </div>
                 </div>`;
+
+            if (isVideo) {
+                const vid = card.querySelector('video');
+                card.addEventListener('mouseenter', () => vid.play());
+                card.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
+            }
+
+            card.querySelector('.proj-detail-btn')?.addEventListener('click', e => { e.stopPropagation(); openModal(r); });
             card.addEventListener('click', () => openModal(r));
-            container.appendChild(card);
+            track.appendChild(card);
+
+            const dot = document.createElement('button');
+            dot.className = 'proj-dot';
+            dot.setAttribute('aria-label', `Project ${idx + 1}`);
+            dots.appendChild(dot);
         });
 
-        // Stagger animate on scroll
+        const allCards = Array.from(track.querySelectorAll('.proj-slide'));
+        const allDots  = Array.from(dots.querySelectorAll('.proj-dot'));
+
+        const snapTo = (idx) => {
+            const c = allCards[idx];
+            if (c) track.scrollTo({ left: c.offsetLeft, behavior: 'smooth' });
+        };
+
+        const updateDots = () => {
+            const tr = track.getBoundingClientRect();
+            allCards.forEach((c, i) => {
+                const cr = c.getBoundingClientRect();
+                allDots[i]?.classList.toggle('active', cr.left >= tr.left - 10 && cr.left < tr.right - 80);
+            });
+        };
+
+        allDots.forEach((d, i) => d.addEventListener('click', () => snapTo(i)));
+        track.addEventListener('scroll', updateDots, { passive: true });
+        document.getElementById('projPrev')?.addEventListener('click', () => track.scrollBy({ left: -370, behavior: 'smooth' }));
+        document.getElementById('projNext')?.addEventListener('click', () => track.scrollBy({ left:  370, behavior: 'smooth' }));
+
         const io = new IntersectionObserver(entries => {
             if (!entries[0].isIntersecting) return;
             if (typeof anime !== 'undefined') {
-                anime({ targets: '.project-card', opacity: [0,1], translateY: [28,0],
-                    delay: anime.stagger(70, { start: 100 }), duration: 650, easing: 'cubicBezier(.16,1,.3,1)' });
+                anime({ targets: '.proj-slide', opacity: [0, 1], translateX: [40, 0],
+                    delay: anime.stagger(80, { start: 100 }), duration: 700, easing: 'cubicBezier(.16,1,.3,1)' });
             } else {
-                document.querySelectorAll('.project-card').forEach((c,i) => {
-                    setTimeout(() => { c.style.transition='opacity .6s ease,transform .6s ease';c.style.opacity=1;c.style.transform='none'; }, i*70);
-                });
+                allCards.forEach((c, i) => setTimeout(() => {
+                    c.style.transition = 'opacity .6s,transform .6s';
+                    c.style.opacity = 1; c.style.transform = 'none';
+                }, i * 80));
             }
+            updateDots();
             io.disconnect();
-        }, { threshold: .05 });
-        io.observe(container);
+        }, { threshold: 0.05 });
+        io.observe(track);
     };
 
     const load = async () => {
@@ -645,7 +703,7 @@ const GitHubStats = (() => {
             ];
 
             container.innerHTML = items.map(i => `
-                <div class="gh-stat-card">
+                <div class="gh-stat-card" style="opacity:0;transform:translateY(18px)">
                     <div class="gh-icon">${i.icon}</div>
                     <div><h3 class="mono">${i.val}</h3><p>${i.label}</p></div>
                 </div>`).join('');
@@ -1041,6 +1099,124 @@ const SwipeNav = (() => {
 })();
 
 
+/* ────────────────────────────────────────
+   ANIMATED GRID PATTERN (MagicUI-style)
+   numSquares=30, maxOpacity=0.1,
+   duration=3s, repeatDelay=1s,
+   radial-gradient mask + skewY(12deg)
+──────────────────────────────────────── */
+const AnimatedGridPattern = (() => {
+    const TARGETS     = ['about', 'projects', 'timeline', 'publications', 'github'];
+    const CELL        = 60;          // px per grid cell
+    const NUM_SQUARES = 30;          // concurrent animated squares
+    const MAX_OPACITY = 0.10;        // maxOpacity
+    const DURATION    = 3000;        // ms fade-in + fade-out cycle
+    const REPEAT_DEL  = 1000;        // ms pause before respawn
+
+    class GridCanvas {
+        constructor(container) {
+            this.container = container;
+            this.canvas    = document.createElement('canvas');
+            this.ctx       = this.canvas.getContext('2d');
+            this.animating = [];
+            this.cols      = 0;
+            this.rows      = 0;
+
+            this.canvas.className = 'agp-canvas';
+            container.classList.add('section-grid');
+            container.insertBefore(this.canvas, container.firstChild);
+
+            this.resize();
+            this._roHandler = () => this.resize();
+            const ro = new ResizeObserver(this._roHandler);
+            ro.observe(container);
+
+            // Stagger initial spawns
+            for (let i = 0; i < NUM_SQUARES; i++) {
+                setTimeout(() => this._spawnSquare(), i * ((DURATION + REPEAT_DEL) / NUM_SQUARES));
+            }
+            this._loop();
+        }
+
+        resize() {
+            const rect  = this.container.getBoundingClientRect();
+            const w     = rect.width  * 1.2;       // extra for skew bleed
+            const h     = rect.height * 2.0;
+            this.canvas.width  = Math.round(w);
+            this.canvas.height = Math.round(h);
+            this.cols = Math.ceil(w / CELL) + 1;
+            this.rows = Math.ceil(h / CELL) + 1;
+        }
+
+        _accent() {
+            return document.documentElement.getAttribute('data-theme') === 'light'
+                ? 'rgba(2,132,199,'     // light theme sky
+                : 'rgba(56,189,248,';   // dark theme sky
+        }
+
+        _spawnSquare() {
+            if (!this.cols || !this.rows) return;
+            const sq = {
+                col  : Math.floor(Math.random() * this.cols),
+                row  : Math.floor(Math.random() * this.rows),
+                start: performance.now()
+            };
+            this.animating.push(sq);
+            // Respawn after full cycle
+            setTimeout(() => {
+                const idx = this.animating.indexOf(sq);
+                if (idx !== -1) this.animating.splice(idx, 1);
+                this._spawnSquare();
+            }, DURATION + REPEAT_DEL);
+        }
+
+        _draw(now) {
+            const { ctx, canvas } = this;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const a = this._accent();
+
+            // Grid lines (very faint)
+            ctx.strokeStyle = a + '0.045)';
+            ctx.lineWidth   = 1;
+            ctx.beginPath();
+            for (let c = 0; c <= this.cols; c++) {
+                ctx.moveTo(c * CELL, 0);
+                ctx.lineTo(c * CELL, canvas.height);
+            }
+            for (let r = 0; r <= this.rows; r++) {
+                ctx.moveTo(0, r * CELL);
+                ctx.lineTo(canvas.width, r * CELL);
+            }
+            ctx.stroke();
+
+            // Animated squares — ease-in-out over DURATION
+            const half = DURATION / 2;
+            for (const sq of this.animating) {
+                const e  = now - sq.start;
+                let   t  = e < half ? e / half : 1 - (e - half) / half;
+                t = Math.max(0, Math.min(1, t));            // clamp
+                t = t * t * (3 - 2 * t);                    // smoothstep
+                ctx.fillStyle = a + (t * MAX_OPACITY) + ')';
+                ctx.fillRect(sq.col * CELL, sq.row * CELL, CELL, CELL);
+            }
+        }
+
+        _loop() {
+            const tick = (now) => { this._draw(now); requestAnimationFrame(tick); };
+            requestAnimationFrame(tick);
+        }
+    }
+
+    const init = () => {
+        TARGETS.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) new GridCanvas(el);
+        });
+    };
+
+    return { init };
+})();
+
 const styleTag = document.createElement('style');
 styleTag.textContent = `@keyframes charReveal{to{opacity:1;transform:translateY(0)}}`;
 document.head.appendChild(styleTag);
@@ -1078,6 +1254,9 @@ const boot = () => {
 
     // Three.js after fonts settle
     setTimeout(RobotScene.init, 300);
+
+    // Animated grid pattern sections (MagicUI-style)
+    AnimatedGridPattern.init();
 };
 
 Loader.start();
