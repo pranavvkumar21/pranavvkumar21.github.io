@@ -64,7 +64,7 @@ const RobotScene = (() => {
     if (!canvas || typeof THREE === 'undefined') return { init: () => {} };
 
     const DARK_BG  = 0x070c14;
-    const LIGHT_BG = 0xf1f5f9;
+    const LIGHT_BG = 0xdde4f0;
     const ACCENT   = 0x38bdf8;
     let isDark = ThemeManager.isDark();
 
@@ -142,6 +142,7 @@ const RobotScene = (() => {
         renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setClearColor(isDark ? DARK_BG : LIGHT_BG, 1);
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -225,6 +226,7 @@ const RobotScene = (() => {
         // Theme change
         document.addEventListener('themechange', (e) => {
             isDark = e.detail.dark;
+            renderer.setClearColor(isDark ? DARK_BG : LIGHT_BG, 1);
             renderer.toneMappingExposure = isDark ? 1.1 : 1.4;
             scene.fog.color.set(isDark ? DARK_BG : LIGHT_BG);
             if (gridHelper) {
@@ -547,11 +549,18 @@ const Projects = (() => {
         const dots  = document.getElementById('projDots');
 
         repos.forEach((r, idx) => {
-            const isVideo = /\.(mp4|webm)$/i.test(r.image || '');
-            const src     = r.image || 'assets/cover.webp';
-            const mediaEl = isVideo
-                ? `<video class="proj-thumb" src="${src}" muted loop playsinline preload="none"></video>`
-                : `<img class="proj-thumb" src="${src}" alt="${r.name}" loading="lazy" decoding="async">`;
+            const isVideo   = /\.(mp4|webm)$/i.test(r.image || '');
+            const hasImage  = !!(r.image && r.image.trim());
+            let mediaEl;
+
+            if (!hasImage) {
+                // Animated canvas placeholder — built below after card is inserted
+                mediaEl = `<canvas class="proj-placeholder" aria-label="${r.name} placeholder"></canvas>`;
+            } else if (isVideo) {
+                mediaEl = `<video class="proj-thumb" src="${r.image}" muted loop playsinline preload="none"></video>`;
+            } else {
+                mediaEl = `<img class="proj-thumb" src="${r.image}" alt="${r.name}" loading="lazy" decoding="async">`;
+            }
 
             const card = document.createElement('div');
             card.className = 'proj-slide';
@@ -576,6 +585,11 @@ const Projects = (() => {
                 const vid = card.querySelector('video');
                 card.addEventListener('mouseenter', () => vid.play());
                 card.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
+            }
+
+            if (!hasImage) {
+                const cv = card.querySelector('.proj-placeholder');
+                if (cv) _animatePlaceholder(cv, r.name);
             }
 
             card.querySelector('.proj-detail-btn')?.addEventListener('click', e => { e.stopPropagation(); openModal(r); });
@@ -625,6 +639,137 @@ const Projects = (() => {
         }, { threshold: 0.05 });
         io.observe(track);
     };
+
+    // ── Animated canvas placeholder ────────────────────────────────────────
+    const _animatePlaceholder = (cv, name) => {
+        const W = cv.offsetWidth  || 340;
+        const H = cv.offsetHeight || 210;
+        cv.width  = W;
+        cv.height = H;
+        const ctx = cv.getContext('2d');
+
+        // Project initials (up to 2 words)
+        const initials = name.split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+
+        const count = 28;
+        const pts = Array.from({ length: count }, () => ({
+            x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - .5) * .38, vy: (Math.random() - .5) * .38,
+            r: Math.random() * 2.2 + 1, phase: Math.random() * Math.PI * 2
+        }));
+
+        // Read theme each frame so toggling updates live
+        const sky  = () => document.documentElement.getAttribute('data-theme') === 'light'
+            ? 'rgba(3,105,161,' : 'rgba(56,189,248,';
+        const bg   = () => document.documentElement.getAttribute('data-theme') === 'light'
+            ? '#d0d8ec' : '#070c14';
+
+        let t = 0, raf = null;
+
+        const draw = () => {
+            t += .014;
+            ctx.fillStyle = bg();
+            ctx.fillRect(0, 0, W, H);
+
+            // Subtle grid
+            ctx.strokeStyle = sky() + '.05)';
+            ctx.lineWidth = .5;
+            const gs = 32;
+            ctx.beginPath();
+            for (let x = 0; x <= W; x += gs) { ctx.moveTo(x, 0); ctx.lineTo(x, H); }
+            for (let y = 0; y <= H; y += gs) { ctx.moveTo(0, y); ctx.lineTo(W, y); }
+            ctx.stroke();
+
+            // Move + wrap particles
+            for (const p of pts) {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > W) p.vx *= -1;
+                if (p.y < 0 || p.y > H) p.vy *= -1;
+            }
+
+            // Connecting lines
+            for (let i = 0; i < pts.length; i++) {
+                for (let j = i + 1; j < pts.length; j++) {
+                    const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+                    const d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < 90) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = sky() + (1 - d / 90) * .26 + ')';
+                        ctx.lineWidth = .8;
+                        ctx.moveTo(pts[i].x, pts[i].y);
+                        ctx.lineTo(pts[j].x, pts[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Particle dots
+            for (const p of pts) {
+                const pulse = .55 + .45 * Math.sin(t * 1.6 + p.phase);
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r * pulse, 0, Math.PI * 2);
+                ctx.fillStyle = sky() + (.4 + .3 * pulse) + ')';
+                ctx.fill();
+            }
+
+            // Central radial glow
+            const cx = W / 2, cy = H / 2;
+            const gl = ctx.createRadialGradient(cx, cy, 0, cx, cy, 68);
+            gl.addColorStop(0, sky() + '.12)');
+            gl.addColorStop(1, sky() + '0)');
+            ctx.fillStyle = gl;
+            ctx.fillRect(cx - 68, cy - 68, 136, 136);
+
+            // Spinning hex ring
+            const hr = 32, hs = t * .4;
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(hs);
+            ctx.beginPath();
+            for (let k = 0; k < 6; k++) {
+                const a = (Math.PI / 3) * k;
+                k === 0 ? ctx.moveTo(Math.cos(a) * hr, Math.sin(a) * hr)
+                        : ctx.lineTo(Math.cos(a) * hr, Math.sin(a) * hr);
+            }
+            ctx.closePath();
+            ctx.strokeStyle = sky() + '.5)';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            ctx.restore();
+
+            // Initials
+            ctx.save();
+            ctx.font = 'bold 15px "JetBrains Mono", monospace';
+            ctx.fillStyle  = sky() + '1)';
+            ctx.textAlign  = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = sky() + '.8)';
+            ctx.shadowBlur  = 10;
+            ctx.fillText(initials, cx, cy);
+            ctx.restore();
+
+            // Corner accents (mint)
+            const ca = 14;
+            ctx.strokeStyle = 'rgba(110,231,183,.5)';
+            ctx.lineWidth   = 1.4;
+            [[0,0,1,0,1],[W,0,-1,0,1],[0,H,1,0,-1],[W,H,-1,0,-1]].forEach(([ox,oy,hd,,vd]) => {
+                ctx.beginPath();
+                ctx.moveTo(ox + hd * ca, oy); ctx.lineTo(ox, oy); ctx.lineTo(ox, oy + vd * ca);
+                ctx.stroke();
+            });
+
+            raf = requestAnimationFrame(draw);
+        };
+
+        // Pause off-screen
+        const obs = new IntersectionObserver(([e]) => {
+            if (e.isIntersecting) { if (!raf) draw(); }
+            else { cancelAnimationFrame(raf); raf = null; }
+        });
+        obs.observe(cv);
+        draw();
+    };
+    // ──────────────────────────────────────────────────────────────────────
 
     const load = async () => {
         try {
@@ -690,8 +835,9 @@ const GitHubStats = (() => {
             if (!uRes.ok) throw new Error('API error');
             const user  = await uRes.json();
             const repos = await rRes.json();
-            const stars = repos.reduce((a,r) => a + r.stargazers_count, 0);
-            const forks = repos.reduce((a,r) => a + r.forks_count, 0);
+            const repoList = Array.isArray(repos) ? repos : [];
+            const stars = repoList.reduce((a,r) => a + (r.stargazers_count || 0), 0);
+            const forks = repoList.reduce((a,r) => a + (r.forks_count || 0), 0);
 
             const items = [
                 { icon:'📚', val: user.public_repos,  label: 'Repositories' },
@@ -703,14 +849,45 @@ const GitHubStats = (() => {
             ];
 
             container.innerHTML = items.map(i => `
-                <div class="gh-stat-card" style="opacity:0;transform:translateY(18px)">
+                <div class="gh-stat-card">
                     <div class="gh-icon">${i.icon}</div>
                     <div><h3 class="mono">${i.val}</h3><p>${i.label}</p></div>
                 </div>`).join('');
 
-            if (typeof anime !== 'undefined')
+            if (typeof anime !== 'undefined') {
                 anime({ targets: '.gh-stat-card', opacity: [0,1], translateY: [18,0],
                     delay: anime.stagger(70, { start: 80 }), duration: 600, easing: 'cubicBezier(.16,1,.3,1)' });
+            } else {
+                document.querySelectorAll('.gh-stat-card').forEach((el, i) => {
+                    el.style.animationDelay = (80 + i * 70) + 'ms';
+                    el.classList.add('reveal');
+                });
+            }
+
+            // Language breakdown from repos
+            const langs = {};
+            repoList.forEach(r => { if (r.language) langs[r.language] = (langs[r.language] || 0) + 1; });
+            const langTotal = Object.values(langs).reduce((a, b) => a + b, 0);
+            const sorted = Object.entries(langs).sort((a, b) => b[1] - a[1]).slice(0, 8);
+            const LANG_COLORS = {
+                Python:'#3572A5','C++':'#f34b7d',JavaScript:'#f1e05a',
+                TypeScript:'#3178c6',C:'#555555',Shell:'#89e051',
+                CMake:'#DA3434',MATLAB:'#e16737',Jupyter:'#DA5B0B',
+                HTML:'#e34c26',CSS:'#563d7c',Rust:'#dea584',Go:'#00ADD8'
+            };
+            const langsEl = document.getElementById('ghLangs');
+            if (langsEl && langTotal > 0) {
+                langsEl.innerHTML =
+                    '<div class="gh-lang-title mono">Top Languages</div>' +
+                    '<div class="gh-lang-bar">' +
+                    sorted.map(([l, n]) =>
+                        `<span style="width:${(n/langTotal*100).toFixed(1)}%;background:${LANG_COLORS[l]||'#64748b'}" title="${l}: ${(n/langTotal*100).toFixed(1)}%"></span>`
+                    ).join('') +
+                    '</div><div class="gh-lang-legend">' +
+                    sorted.map(([l, n]) =>
+                        `<span class="gh-lang-item"><i style="background:${LANG_COLORS[l]||'#64748b'}"></i>${l}<em>${(n/langTotal*100).toFixed(0)}%</em></span>`
+                    ).join('') + '</div>';
+            }
         } catch {
             container.innerHTML = '<div class="ld-state mono">Unable to load stats.</div>';
         }

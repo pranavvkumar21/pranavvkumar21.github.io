@@ -9,7 +9,7 @@
     "name": "Progeny Task79 - Modular Position Fusion System",
     "description": "A sensor-agnostic and platform-agnostic ROS package for position data fusion, designed to combine inputs from multiple sensors for robust, accurate estimation. Ideal for robotics and multi-sensor navigation platforms.",
     "fullDescription": "This comprehensive ROS package addresses the critical challenge of sensor fusion in modern robotics. Progeny Task79 provides a unified framework that seamlessly integrates data from LIDAR, cameras, IMUs, GPS, and other positioning sensors. The system features adaptive weighting algorithms that automatically adjust based on sensor reliability and environmental conditions. Key innovations include real-time outlier detection, multi-threaded processing for low latency, and configurable fusion strategies. The package supports both indoor and outdoor navigation scenarios, making it perfect for autonomous vehicles, drones, and mobile robots. Built with modularity in mind, it can be easily extended to support new sensor types and fusion algorithms.",
-    "image": "assets/cover.webp",
+    "image": "assets/mpf.png",
     "url": ""
   },
   {
@@ -23,14 +23,14 @@
     "name": "SAGE - Smart Access & Governance Engine",
     "description": "A LangChain + LLM framework with PostgreSQL backend for automating role mining and access management workflows, reducing manual review time by over 50%. Features a FastAPI-based IAM chatbot supporting database queries, automated reporting, and admin actions such as password resets and access provisioning.",
     "fullDescription": "SAGE revolutionizes enterprise access management by combining large language models with traditional IAM systems. The platform automatically analyzes user behavior patterns, role relationships, and access histories to intelligently mine and suggest role definitions. The LangChain framework enables natural language queries for complex access investigations, while the PostgreSQL backend ensures enterprise-grade security and scalability. The FastAPI chatbot interface allows administrators to perform routine tasks through conversational commands, from generating compliance reports to provisioning new user access. Machine learning algorithms continuously learn from admin decisions to improve role suggestions and detect access anomalies. The system integrates with popular enterprise directories and supports multi-tenant configurations for large organizations.",
-    "image": "assets/cover.webp",
+    "image": "",
     "url": ""
   },
   {
     "name": "AI LinkedIn Job Application Bot",
     "description": "Automates LinkedIn Easy Apply end-to-end: locates jobs, answers application questions using AI over your PDFs and notes, and logs everything in DuckDB. Focuses on reliability, concise responses, and seamless extensibility.",
     "fullDescription": "This intelligent automation system transforms the job application process by combining web scraping, natural language processing, and database management. The bot navigates LinkedIn's interface to identify relevant job opportunities based on customizable criteria. When applying, it uses advanced AI to parse application questions and generate contextually appropriate responses by analyzing your resume, cover letter templates, and personal notes stored as PDFs. The DuckDB integration provides powerful analytics on application patterns, response rates, and job market trends. Features include smart duplicate detection, customizable response templates, rate limiting to avoid detection, and comprehensive logging for application tracking. The extensible architecture allows easy integration with other job boards and recruitment platforms.",
-    "image": "assets/cover.webp",
+    "image": "",
     "url": "https://github.com/pranavvkumar21/the_last_application"
   },
   {
@@ -51,7 +51,7 @@
     "name": "Soft SCARA Robot with Pneumatic Soft Gripper",
     "description": "An innovative soft robotics system featuring a SCARA robot equipped with a pneumatic soft gripper and YOLO CNN computer vision for automated egg palletisation. Combines soft robotics principles with advanced machine learning for delicate object handling.",
     "fullDescription": "This cutting-edge robotics project integrates soft robotics technology with computer vision to create an automated egg palletisation system. The SCARA (Selective Compliance Assembly Robot Arm) configuration provides precise positioning while the pneumatic soft gripper ensures gentle handling of fragile objects like eggs. The system leverages YOLO (You Only Look Once) convolutional neural networks for real-time object detection and classification, enabling accurate identification and positioning of eggs for optimal palletisation patterns. The soft gripper, made from compliant materials and actuated by pneumatic pressure, adapts to the egg's shape without applying excessive force that could cause breakage. Advanced control algorithms coordinate the robot's movements with the vision system's feedback to achieve consistent and reliable palletisation. The project demonstrates the potential of combining traditional industrial robotics with bio-inspired soft robotics and modern AI techniques to solve complex automation challenges in food processing industries. Key innovations include force-sensitive gripping, adaptive motion planning, and robust computer vision algorithms optimized for varying lighting conditions and egg orientations.",
-    "image": "assets/cover.webp",
+    "image": "assets/soft_gripper.png",
     "url": ""
   }
 ]
