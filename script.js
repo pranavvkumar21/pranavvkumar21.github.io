@@ -1284,8 +1284,8 @@ const SwipeNav = (() => {
 ──────────────────────────────────────── */
 const AnimatedGridPattern = (() => {
     const TARGETS     = ['about', 'projects', 'timeline', 'publications', 'github'];
-    const CELL        = 60;          // px per grid cell
-    const NUM_SQUARES = 30;          // concurrent animated squares
+    const CELL        = 100;          // px per grid cell
+    const NUM_SQUARES = 50;          // concurrent animated squares
     const MAX_OPACITY = 0.10;        // maxOpacity
     const DURATION    = 3000;        // ms fade-in + fade-out cycle
     const REPEAT_DEL  = 1000;        // ms pause before respawn
