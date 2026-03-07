@@ -1,0 +1,1149 @@
+/* ============================================================
+   SAFEPOS — Custom Reveal.js Theme
+   Fonts: Bebas Neue · IBM Plex Mono · IBM Plex Sans
+   CSS is referenced from assets/styles.css — image paths
+   are relative to this file, so assets/images/ = images/
+============================================================ */
+
+:root {
+  --bg: #EDEBE7;
+  --black: #111111;
+  --red: #C1121F;
+  --grey: #888580;
+  --light-grey: #D4D1CC;
+  --white: #F9F7F4;
+  --anim-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ── Reveal.js reset / base ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { background: #141414; font-family: 'IBM Plex Sans', sans-serif; }
+.reveal, .reveal .slides { font-family: 'IBM Plex Sans', sans-serif; }
+.reveal .slides section { padding: 0; text-align: left; height: 100%; top: 0 !important; }
+
+/* ── SLIDE BASE ── */
+.slide {
+  width: 100%; height: 100%; background: var(--bg);
+  position: relative; overflow: hidden; display: flex;
+}
+
+/* ── SLIDE LABEL ── */
+.slide-label {
+  position: absolute; bottom: 8px; right: 12px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 8px;
+  color: rgba(0,0,0,0.2); letter-spacing: 0.15em; text-transform: uppercase;
+  z-index: 10; pointer-events: none;
+}
+.slide-label.light { color: rgba(255,255,255,0.18); }
+
+/* ── IMAGE PLACEHOLDER SYSTEM ── */
+.img-placeholder {
+  background: #1e1e1e; border: 1px dashed #333;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; position: relative; overflow: hidden;
+}
+.img-placeholder::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,0.015) 20px,rgba(255,255,255,0.015) 21px);
+}
+.img-placeholder .ph-icon { font-size: 28px; opacity: 0.3; }
+.img-placeholder .ph-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #444;
+  letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.5; padding: 0 12px;
+}
+.img-placeholder.light { background: #d8d5d0; border-color: #bbb; }
+.img-placeholder.light .ph-label { color: #888; }
+.img-placeholder.light::before {
+  background: repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(0,0,0,0.03) 20px,rgba(0,0,0,0.03) 21px);
+}
+
+/* ── SHARED TYPOGRAPHY ── */
+.slide-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey);
+}
+.slide-tag.red { color: var(--red); }
+.slide-tag.white { color: rgba(255,255,255,0.4); }
+
+h2.display {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px, 4.2vw, 56px);
+  line-height: 0.92; letter-spacing: 0.01em; color: var(--black);
+}
+h2.display.white { color: #fff; }
+
+/* ── RED ACCENT BAR ── */
+.red-bar-left { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red); }
+
+/* ── Shared inner layout ── */
+.slide-inner { position: absolute; inset: 32px 36px; display: flex; flex-direction: column; gap: 10px; }
+#s8.slide .slide-inner { inset: 28px 36px; gap: 6px; }
+.slide-header { display: flex; justify-content: space-between; align-items: baseline; flex-shrink: 0; }
+
+/* ============================================================
+   SLIDE 1 — THE HOOK
+============================================================ */
+#s1 { background: var(--black); flex-direction: column; }
+
+/* Background image — path relative to CSS file location (assets/) */
+#s1 .port-bg {
+  position: absolute; inset: 0;
+  background-image: url('../assets/images/background.jpg');
+  background-size: cover; background-position: center;
+  opacity: 0.38; filter: grayscale(30%) contrast(1.1); z-index: 0;
+}
+
+#s1 .port-bg-fallback {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 40%, #0d1117 100%); z-index: 0;
+}
+#s1 .port-bg-fallback::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px),
+    repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,0.012) 60px,rgba(255,255,255,0.012) 61px);
+}
+
+/* Scan-line atmosphere */
+#s1::after {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);
+  pointer-events: none; z-index: 1;
+}
+
+/* #s1 .dark-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.15) 100%); z-index: 1; */
+/* } */
+
+#s1 .content {
+  position: relative; z-index: 2; display: flex; flex-direction: column;
+  justify-content: space-between; height: 100%; padding: 36px 52px;
+}
+#s1 .title-kicker {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  color: var(--red); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+}
+#s1 .question {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7.2vw, 86px);
+  line-height: 0.86; color: #fff; max-width: 72%;
+}
+#s1 .question em { color: var(--red); font-style: normal; }
+#s1 .constraints { display: flex; gap: 0; margin-top: 22px; }
+#s1 .constraint-pill {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: rgba(255,255,255,0.75);
+  padding: 5px 14px; border: 1px solid rgba(255,255,255,0.2); border-right: none;
+}
+#s1 .constraint-pill:first-child { border-left: 3px solid var(--red); }
+#s1 .constraint-pill:last-child { border-right: 1px solid rgba(255,255,255,0.2); }
+#s1 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+#s1 .name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.06em; color: #fff; }
+#s1 .title-sub {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: rgba(255,255,255,0.4); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px;
+}
+#s1 .env-panel { border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+#s1 .env-item { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; text-transform: uppercase; }
+#s1 .env-item::before { content: '— '; color: var(--red); opacity: 0.7; }
+
+/* ============================================================
+   SLIDE 2 — DIRECT ALIGNMENT
+============================================================ */
+#s2 .slide-header { border-bottom: 2px solid var(--red); padding-bottom: 8px; }
+#s2 .brief-table {
+  flex: 1; display: flex; flex-direction: column; margin-top: 6px; min-height: 0; overflow: hidden;
+}
+#s2 .brief-header {
+  display: flex; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; margin-bottom: 0;
+}
+#s2 .brief-hcell {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  color: #444; text-transform: uppercase; letter-spacing: 0.1em;
+}
+#s2 .brief-hcell:first-child { width: 28%; padding-left: 6px; }
+#s2 .brief-hcell:last-child { flex: 1; padding-left: 20px; }
+#s2 .brief-row {
+  display: flex; border-bottom: 1px solid #1e1e1e; background: #111111;
+  flex: 1; min-height: 0;
+}
+#s2 .brief-row:nth-child(even) { background: #0d0d0d; }
+#s2 .brief-row.dim { opacity: 0.55; }
+#s2 .brief-req {
+  width: 28%; flex-shrink: 0;
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #ffffff;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.3;
+  padding: 6px 12px; border-left: 3px solid #8a1a1a;
+  display: flex; align-items: center;
+}
+#s2 .brief-row.strong .brief-req { border-left: 4px solid #e63030; }
+#s2 .brief-ev {
+  flex: 1; padding: 6px 14px;
+  font-family: 'IBM Plex Sans', sans-serif; font-size: 11px;
+  font-weight: 300; color: #aaaaaa; line-height: 1.4;
+  display: flex; align-items: center;
+}
+#s2 .brief-foot {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #555;
+  text-align: center; margin-top: 8px; letter-spacing: 0.01em; flex-shrink: 0;
+}
+
+/* ============================================================
+   SLIDE 3 — PROGENY TASK 79
+============================================================ */
+#s3 .left-dark {
+  width: 38%; background: var(--black); padding: 36px 32px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+#s3 .proj-id { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--red); letter-spacing: 0.15em; text-transform: uppercase; }
+#s3 .proj-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4.5vw, 56px); line-height: 0.88; color: #fff; }
+#s3 .partner-list { display: flex; flex-direction: column; gap: 6px; }
+#s3 .partner {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #666;
+  padding: 6px 0; border-bottom: 1px solid #222; display: flex; justify-content: space-between;
+}
+#s3 .partner span { color: #999; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; }
+#s3 .supervisor { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #444; line-height: 1.6; }
+#s3 .supervisor em { color: var(--red); font-style: normal; }
+#s3 .right-panel { flex: 1; display: flex; flex-direction: column; padding: 32px 36px; gap: 12px; }
+#s3 .arch-img-slot { flex: 1.4; min-height: 0; overflow: hidden; }
+#s3 .arch-img-slot img { width: 100%; height: 100%; object-fit: contain; display: block; border-top: 1px solid var(--light-grey); border-bottom: 1px solid var(--light-grey); border-left: none; border-right: none; background: transparent; padding: 10px 0; }
+#s3 .insight-row { display: flex; gap: 16px; align-items: flex-start; }
+#s3 .insight-row + .insight-row { margin-top: 10px; }
+#s3 .ins-num { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--red); letter-spacing: 0.1em; min-width: 20px; margin-top: 2px; }
+#s3 .ins-text { font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; line-height: 1.45; color: var(--black); font-weight: 300; }
+#s3 .ins-text strong { font-weight: 500; }
+#s3 .key-rule { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--black); background: var(--light-grey); padding: 8px 12px; letter-spacing: 0.02em; }
+
+/* ============================================================
+   SLIDE 4 — DIFFUSION TRAJECTORY MODEL
+============================================================ */
+#s4 .content-row { display: flex; gap: 28px; flex: 1; margin-top: 12px; min-height: 0; }
+#s4 .left-col { flex: 1; display: flex; flex-direction: column; gap: 8px; min-height: 0; overflow: hidden; }
+#s4 .arch-box-wrap { flex: 1; min-height: 0; border: 1px solid var(--light-grey); padding: 0; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+#s4 .arch-box-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.abox { border: 1px solid var(--light-grey); padding: 5px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.05em; text-align: center; color: var(--grey); }
+.abox.backbone { background: var(--black); color: var(--white); font-size: 10px; letter-spacing: 0.1em; padding: 8px; border-color: var(--black); }
+.abox.failed { border: 1px dashed var(--red); color: var(--red); text-decoration: line-through; opacity: 0.7; }
+.abox.on { border-color: var(--black); color: var(--black); }
+.arch-row-flex { display: flex; gap: 5px; justify-content: center; align-items: center; }
+.arch-arrow { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--grey); text-align: center; }
+#s4 .right-col { width: 42%; display: flex; flex-direction: column; gap: 9px; }
+#s4 .callout { padding: 11px 14px; border-left: 2px solid var(--light-grey); flex: 1; }
+#s4 .callout.hi { border-left: 3px solid var(--red); background: rgba(193,18,31,0.03); }
+#s4 .ct-title { font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--grey); margin-bottom: 3px; }
+#s4 .ct-body { font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; line-height: 1.45; font-weight: 300; color: var(--black); }
+#s4 .key-line { font-family: 'IBM Plex Mono', monospace; font-size: 10px; border-top: 2px solid var(--black); padding-top: 9px; letter-spacing: 0.02em; color: var(--black); line-height: 1.4; }
+#s4 .key-line span { color: var(--red); }
+#s4 .s4-status-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 8px;
+  color: var(--white); background: var(--black); padding: 4px 10px;
+  letter-spacing: 0.1em; text-transform: uppercase; align-self: flex-start;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   SLIDE 5 — CLOUD GCS
+============================================================ */
+#s5 .content-row { display: flex; gap: 20px; flex: 1; margin-top: 10px; min-height: 0; }
+
+/* Left stack: Capabilities + Architecture Diagram */
+#s5 .left-stack {
+  flex: 1;
+  display: flex; flex-direction: column; 
+  gap: 8px; 
+  min-height: 0;
+}
+
+/* Capabilities List */
+#s5 .caps-col { width: 100%; display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+
+/* Caps styling */
+#s5 .cap {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 12px; border: 1px solid var(--light-grey);
+  font-family: 'IBM Plex Mono', monospace; font-size: 9.5px;
+  min-height: 28px;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+#s5 .cap:hover { border-color: var(--black); background: rgba(17,17,17,0.04); }
+#s5 .cap.hi { border-color: var(--black); background: #fdfdfd; }
+#s5 .cap-name { color: var(--black); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%; }
+#s5 .cap-tag { font-size: 8px; color: var(--grey); letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0; }
+#s5 .cap.hi .cap-tag { color: var(--red); }
+
+#s5 .cap.list { display: flex; flex-flow: row wrap; gap: 4px 0; height: auto; padding: 10px 14px; justify-content: flex-start; align-items: flex-start; }
+#s5 .cap.list span { 
+    color: #555; position: relative; margin-right: 14px; 
+    font-size: 9.5px; opacity: 0.8;
+}
+#s5 .cap.list span::after { content: '·'; color: var(--red); position: absolute; right: -9px; top: 0; }
+#s5 .cap.list span:last-child { margin-right: 0; }
+#s5 .cap.list span:last-child::after { content: none; }
+
+/* Architecture Diagram (Bottom Left) */
+#s5 .gcs-arch-slot {
+  flex: 1; /* Takes remaining height in left stack */
+  min-height: 0;
+  border-top: 1px solid var(--light-grey);
+  border-bottom: 1px solid var(--light-grey);
+  border-left: none;
+  border-right: none;
+  background: transparent;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#s5 .gcs-arch-slot img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 10px 0;
+}
+
+/* Right Image Slot (UI Screenshot — portrait phone 410×912) */
+#s5 .right-img-slot {
+  /* Reduced width for a single mobile screen */
+  flex: 0 0 200px;
+  align-self: stretch;
+  min-height: 0;
+  display: flex;
+  gap: 10px;
+  background: transparent;
+}
+#s5 .right-img-slot img {
+  width: 100%; 
+  height: 100%;
+  object-fit: cover; 
+  object-position: center top;
+  display: block;
+  border: 1px solid var(--light-grey);
+  background: #000;
+}
+
+/* ============================================================
+   SLIDE 6 — MULTI-AGENT RL COORDINATION
+   Layout: left dark panel (title + specs + closing) | right image
+============================================================ */
+#s6 { flex-direction: row; }
+#s6 .s6-left {
+  width: 40%; background: var(--black); padding: 32px 28px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+}
+#s6 .s6-caption {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.35);
+  border-top: 1px solid #222; padding-top: 9px; letter-spacing: 0.03em; line-height: 1.5;
+}
+#s6 .spec-list { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+#s6 .spec-item { display: flex; flex-direction: column; gap: 3px; padding-bottom: 10px; border-bottom: 1px solid #1e1e1e; }
+#s6 .spec-item:last-child { border-bottom: none; padding-bottom: 0; }
+#s6 .spec-label { font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: var(--red); text-transform: uppercase; letter-spacing: 0.1em; }
+#s6 .spec-val { font-family: 'IBM Plex Sans', sans-serif; font-size: 10.5px; color: #999; font-weight: 300; line-height: 1.4; }
+#s6 .cml { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--white); border-top: 1px solid #2a2a2a; padding-top: 10px; line-height: 1.5; }
+#s6 .cml span { color: var(--red); }
+#s6 .s6-right { flex: 1; overflow: hidden; }
+#s6 .s6-right img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ============================================================
+   SLIDE 7 — THE STACK
+============================================================ */
+#s7 .stack-visual { flex: 1; margin-top: 14px; display: flex; flex-direction: column; gap: 3px; }
+#s7 .layer {
+  flex: 1; border: 1px solid var(--light-grey); display: flex; align-items: center;
+  padding: 0 20px; gap: 16px; position: relative;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+#s7 .layer:hover { background: rgba(17,17,17,0.05); border-color: var(--grey); }
+#s7 .layer.found { border-color: var(--black); border-width: 2px; background: rgba(17,17,17,0.05); }
+#s7 .layer-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--light-grey); }
+#s7 .layer.found .layer-accent { background: var(--red); }
+#s7 .layer-n { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--red); letter-spacing: 0.1em; min-width: 20px; }
+#s7 .layer-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(18px, 2.6vw, 32px); letter-spacing: 0.05em; color: var(--black); flex: 1; }
+#s7 .layer-desc { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--grey); letter-spacing: 0.04em; text-align: right; max-width: 260px; line-height: 1.4; }
+#s7 .closing { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--black); border-top: 2px solid var(--black); padding-top: 11px; margin-top: 6px; letter-spacing: 0.02em; }
+#s7 .closing span { color: var(--red); font-weight: 600; }
+
+/* ============================================================
+   SLIDE 8 — DELIVERY PLAN
+============================================================ */
+#s8 .timeline { flex: 1; margin-top: 8px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+#s8 .timeline::before { content: ''; position: absolute; left: 60px; top: 0; bottom: 0; width: 1px; background: var(--light-grey); }
+#s8 .phase { display: flex; flex: 1; position: relative; }
+#s8 .p-time { width: 60px; display: flex; align-items: flex-start; justify-content: flex-end; padding-right: 14px; padding-top: 10px; }
+#s8 .p-months { font-family: 'IBM Plex Mono', monospace; font-size: 7px; color: var(--grey); letter-spacing: 0.05em; text-align: right; }
+#s8 .p-dot { position: absolute; left: 54px; top: 12px; width: 10px; height: 10px; border: 2px solid var(--black); background: var(--bg); border-radius: 50%; z-index: 1; }
+#s8 .p-dot.active { background: var(--red); border-color: var(--red); }
+#s8 .p-content { flex: 1; padding: 8px 0 8px 22px; border-bottom: 1px solid var(--light-grey); display: flex; gap: 12px; }
+#s8 .phase:last-child .p-content { border-bottom: none; }
+#s8 .p-num { font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: var(--red); letter-spacing: 0.1em; min-width: 16px; margin-top: 3px; }
+#s8 .p-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(14px, 1.8vw, 20px); letter-spacing: 0.05em; color: var(--black); margin-bottom: 1px; }
+#s8 .p-desc { font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; color: var(--grey); font-weight: 300; line-height: 1.35; }
+#s8 .ktp-line { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--black); border-top: 1px solid var(--black); padding-top: 7px; margin-top: 4px; letter-spacing: 0.02em; flex-shrink: 0; }
+#s8 .ktp-line span { color: var(--red); }
+
+/* ============================================================
+   SLIDE 10 — NEW CLOSE
+============================================================ */
+#s9 { display: flex; background: var(--black); }
+#s9 .s9-left {
+  flex: 1; padding: 40px 44px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border-right: 1px solid #1e1e1e;
+}
+#s9 .s9-right {
+  width: 30%; padding: 36px 28px;
+  display: flex; flex-direction: column; gap: 0;
+  justify-content: flex-end;
+}
+#s9 .s9-top { display: flex; flex-direction: column; gap: 6px; }
+#s9 .s9-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; letter-spacing: 0.02em; color: #fff; line-height: 0.92;
+}
+#s9 .s9-role {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  color: var(--red); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px;
+}
+#s9 .s9-position {
+  font-family: 'IBM Plex Sans', sans-serif; font-size: 13px;
+  color: rgba(255,255,255,0.45); font-weight: 300; font-style: italic;
+  letter-spacing: 0.01em; margin-top: 6px;
+}
+#s9 .s9-details { display: flex; flex-direction: column; gap: 0; }
+#s9 .s9-detail-row {
+  display: flex; gap: 16px; padding: 8px 0;
+  border-bottom: 1px solid #1e1e1e; align-items: baseline;
+}
+#s9 .s9-detail-row:first-child { border-top: 1px solid #1e1e1e; }
+#s9 .s9-detail-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 8px;
+  color: #444; letter-spacing: 0.12em; text-transform: uppercase; min-width: 90px;
+}
+#s9 .s9-detail-val {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: rgba(255,255,255,0.7); letter-spacing: 0.03em;
+}
+#s9 .s9-closing {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
+  color: rgba(255,255,255,0.55); border-top: 1px solid #2a2a2a;
+  padding-top: 14px; line-height: 1.65; letter-spacing: 0.01em;
+}
+#s9 .s9-closing span { color: rgba(255,255,255,0.85); }
+#s9 .s9-thank-you {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 60px);
+  color: var(--red); letter-spacing: 0.04em; margin-top: 0;
+  opacity: 0.95; line-height: 0.92;
+}
+#s9 .s9-contact-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 8px;
+  color: var(--red); letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+#s9 .s9-contact-block { display: flex; flex-direction: column; gap: 6px; }
+#s9 .s9-c-item { padding-bottom: 7px; border-bottom: 1px solid #1e1e1e; }
+#s9 .s9-c-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 7px;
+  color: #333; letter-spacing: 0.12em; text-transform: uppercase;
+}
+#s9 .s9-c-val {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  color: rgba(255,255,255,0.6); letter-spacing: 0.02em; margin-top: 2px;
+}
+#s9 .s9-stack-recap { display: flex; flex-direction: column; gap: 5px; }
+#s9 .s9-recap-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 7px;
+  color: #333; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px;
+}
+#s9 .s9-recap-row {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  color: rgba(255,255,255,0.35); line-height: 1.5;
+}
+#s9 .s9-recap-row span {
+  color: var(--red); margin-right: 6px; display: inline-block; min-width: 14px;
+}
+
+/* ============================================================
+   SLIDE RF — RESEARCH FOUNDATIONS
+============================================================ */
+#s_rf .rf-subhead {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 11.5px; font-weight: 300; color: var(--grey);
+  letter-spacing: 0.01em; flex-shrink: 0;
+}
+/* RF timeline layout — replaces old grid/card system */
+#s_rf .rf-timeline {
+  flex: 1; display: flex; flex-direction: column; gap: 0; min-height: 0;
+}
+#s_rf .rf-row {
+  flex: 1; display: flex; gap: 0; align-items: stretch;
+  border-bottom: 1px solid var(--light-grey); position: relative;
+  transition: background 0.2s ease;
+  min-height: 0;
+}
+#s_rf .rf-row:last-child { border-bottom: none; }
+#s_rf .rf-row:hover { background: rgba(17,17,17,0.025); }
+#s_rf .rf-row.accent .rf-row-accent { background: var(--red); }
+#s_rf .rf-row.accent {
+  background: rgba(193,18,31,0.028);
+}
+#s_rf .rf-row-accent {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--light-grey); border-radius: 0 2px 2px 0;
+  transition: background 0.2s ease; transform-origin: top;
+}
+#s_rf .rf-row:hover .rf-row-accent { background: var(--grey); }
+#s_rf .rf-row-time {
+  width: 152px; flex-shrink: 0; display: flex; flex-direction: column;
+  justify-content: center; padding: 10px 16px 10px 20px;
+  border-right: 1px solid var(--light-grey);
+  background: rgba(17,17,17,0.018);
+}
+#s_rf .rf-row-inst {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(14px, 1.7vw, 19px); letter-spacing: 0.04em; color: var(--black);
+  line-height: 1;
+}
+#s_rf .rf-row.accent .rf-row-inst { color: var(--red); }
+#s_rf .rf-row-date {
+  font-family: 'IBM Plex Mono', monospace; font-size: 8px;
+  color: var(--grey); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px;
+}
+#s_rf .rf-row.accent .rf-row-date { color: rgba(193,18,31,0.6); }
+#s_rf .rf-row-content {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  padding: 10px 18px; gap: 5px;
+}
+#s_rf .rf-row-role {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  color: var(--red); letter-spacing: 0.08em; text-transform: uppercase;
+}
+#s_rf .rf-row-output {
+  font-family: 'IBM Plex Sans', sans-serif; font-size: 11.5px;
+  font-weight: 300; color: var(--black); line-height: 1.45;
+}
+#s_rf .rf-insight {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9.5px;
+  color: var(--black); border-top: 2px solid var(--red);
+  padding-top: 9px; letter-spacing: 0.01em; line-height: 1.5; flex-shrink: 0;
+}
+
+/* ── RF Timeline — Spine + Counter + Visual Enhancements ── */
+#s_rf .rf-timeline {
+  position: relative;
+  counter-reset: rf-counter;
+}
+/* Vertical spine connecting all rows */
+#s_rf .rf-timeline::before {
+  content: '';
+  position: absolute; left: 1.5px; top: 14px; bottom: 14px; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--light-grey) 12%, var(--light-grey) 88%, transparent);
+  pointer-events: none; z-index: 0;
+  transform-origin: top;
+}
+/* Row counter increments */
+#s_rf .rf-row { counter-increment: rf-counter; }
+
+/* Subtle row-number badge inside time column */
+#s_rf .rf-row-time { position: relative; }
+#s_rf .rf-row-time::after {
+  content: counter(rf-counter, decimal-leading-zero);
+  position: absolute; top: 7px; right: 10px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 7px;
+  color: var(--light-grey); letter-spacing: 0.1em; line-height: 1;
+  pointer-events: none;
+}
+#s_rf .rf-row.accent .rf-row-time::after { color: rgba(193,18,31,0.3); }
+
+/* Accent row — richer tint + inset border */
+#s_rf .rf-row.accent {
+  background: rgba(193,18,31,0.038);
+  border-bottom: none;
+  box-shadow: inset 0 0 0 1px rgba(193,18,31,0.08);
+}
+/* Wider accent bar for current row */
+#s_rf .rf-row.accent .rf-row-accent { width: 5px; }
+/* Live-dot element — sits at top of accent bar */
+#s_rf .rf-row.accent .rf-row-accent::before {
+  display: none;
+}
+
+/* Enhanced hover */
+#s_rf .rf-row:hover {
+  background: rgba(17,17,17,0.04);
+  transition: background 0.18s ease;
+}
+#s_rf .rf-row:hover .rf-row-time { background: rgba(17,17,17,0.03); }
+#s_rf .rf-row-role { transition: color 0.2s ease; }
+#s_rf .rf-row:hover .rf-row-role { color: var(--black); }
+
+/* ── RF-specific keyframes ── */
+@keyframes rf-spine-draw {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+@keyframes rf-live-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(193,18,31,0.7); }
+  70%  { box-shadow: 0 0 0 6px rgba(193,18,31,0); }
+  100% { box-shadow: 0 0 0 0 rgba(193,18,31,0); }
+}
+@keyframes rf-row-pulse-bg {
+  0%, 100% { background: rgba(193,18,31,0.038); box-shadow: inset 0 0 0 1px rgba(193,18,31,0.08); }
+  50%       { background: rgba(193,18,31,0.072); box-shadow: inset 0 0 0 1px rgba(193,18,31,0.20); }
+}
+@keyframes rf-container-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Spine draws top-to-bottom when slide becomes active */
+.reveal .slides section.present #s_rf .rf-timeline::before {
+  animation: rf-spine-draw 0.85s var(--anim-ease) 0.14s both;
+}
+/* Spine reset on non-present so it re-draws on every re-entry */
+.reveal .slides section:not(.present) #s_rf .rf-timeline::before {
+  animation: none; transform: scaleY(0);
+}
+
+/* ============================================================
+   SLIDE RL — RL ACROSS EMBODIMENTS
+============================================================ */
+#s_rl { background: var(--black); }
+#s_rl .red-bar-left { background: var(--red); z-index: 2; }
+#s_rl .slide-inner { gap: 8px; }
+#s_rl .rl-tagline {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.01em; flex-shrink: 0;
+}
+#s_rl .rl-cards {
+  flex: 1; display: flex; gap: 8px; min-height: 0;
+}
+#s_rl .rl-ec {
+  flex: 1; display: flex; flex-direction: column; gap: 6px;
+  border: 1px solid #1e1e1e; padding: 10px 12px; min-height: 0;
+  transition: border-color 0.25s ease;
+}
+#s_rl .rl-ec:hover { border-color: #333; }
+#s_rl .rl-ec.hi { border-color: #333; }
+#s_rl .rl-img-slot {
+  flex: 1; min-height: 0; overflow: hidden; position: relative;
+}
+#s_rl .rl-img-slot img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+#s_rl .rl-img-slot.img-placeholder {
+  background: #141414; border: 1px dashed #2a2a2a;
+}
+#s_rl .rl-img-slot.img-placeholder::before {
+  background: repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,0.01) 20px,rgba(255,255,255,0.01) 21px);
+}
+#s_rl .rl-ec-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 8px;
+  color: var(--red); letter-spacing: 0.12em; text-transform: uppercase;
+  padding-bottom: 5px; border-bottom: 1px solid #1e1e1e;
+}
+#s_rl .rl-ec-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(14px, 1.8vw, 19px); letter-spacing: 0.04em; color: #fff;
+}
+#s_rl .rl-ec-sub {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.45;
+}
+#s_rl .rl-insight {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9.5px;
+  color: rgba(255,255,255,0.5); border-top: 1px solid #222;
+  padding-top: 9px; letter-spacing: 0.01em; line-height: 1.55; flex-shrink: 0;
+}
+#s_rl .rl-insight span { color: var(--red); }
+
+/* ── Reveal controls ── */
+.reveal .controls { color: var(--red); }
+.reveal .progress { color: var(--red); height: 3px; }
+
+/* ============================================================
+   KEYFRAME LIBRARY
+============================================================ */
+@keyframes fadeUpIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDownIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeLeftIn {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeRightIn {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.90); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes drawBarY {
+  from { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  to   { transform: scaleY(1); transform-origin: top; opacity: 1; }
+}
+@keyframes redGlow {
+  0%   { box-shadow: 0 0 0 0 rgba(193,18,31,0.55); }
+  50%  { box-shadow: 0 0 0 6px rgba(193,18,31,0); }
+  100% { box-shadow: 0 0 0 0 rgba(193,18,31,0); }
+}
+@keyframes dotPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(193,18,31,0.7); }
+  70%  { box-shadow: 0 0 0 7px rgba(193,18,31,0); }
+  100% { box-shadow: 0 0 0 0 rgba(193,18,31,0); }
+}
+@keyframes glintSweep {
+  0%   { background-position: -200% center; }
+  100% { background-position: 300% center; }
+}
+@keyframes flicker {
+  0%,100% { opacity: 1; }
+  48%      { opacity: 1; }
+  50%      { opacity: 0.72; }
+  52%      { opacity: 1; }
+  88%      { opacity: 1; }
+  90%      { opacity: 0.84; }
+  92%      { opacity: 1; }
+}
+@keyframes scanLine {
+  0%   { top: -4px; opacity: 0.6; }
+  100% { top: 105%; opacity: 0; }
+}
+
+/* ── Scan-line sweep over S1 background ── */
+#s1 .port-bg::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 4px;
+  background: rgba(255,255,255,0.06);
+  animation: scanLine 4s linear 0.8s infinite;
+}
+
+/* ============================================================
+   GLOBAL ENTRANCE ANIMATIONS
+   All elements default to opacity:0 — animate in on .present
+============================================================ */
+
+/* ════════════════════════════════════════════════════════════
+   RE-ENTRY FIX — Reset animations on non-present sections
+   Without this, fill-mode:both holds the `to` state after the
+   first play and the animation never re-fires on re-entry.
+   Combining `opacity: 0` and `animation: none` clears the state
+   so the next .present triggers a fresh run.
+════════════════════════════════════════════════════════════ */
+
+/* Global slide elements reset */
+.reveal .slides section:not(.present) #s1 .content > *,
+.reveal .slides section:not(.present) #s2 .red-bar-left,
+.reveal .slides section:not(.present) #s2 .slide-inner > *,
+.reveal .slides section:not(.present) #s3 .left-dark > *,
+.reveal .slides section:not(.present) #s3 .right-panel > *,
+.reveal .slides section:not(.present) #s4 .slide-inner > *,
+.reveal .slides section:not(.present) #s5 .slide-inner > *,
+.reveal .slides section:not(.present) #s6 .s6-left > *,
+.reveal .slides section:not(.present) #s9 .s9-left > *,
+.reveal .slides section:not(.present) #s9 .s9-right > *,
+.reveal .slides section:not(.present) #s_rf .red-bar-left,
+.reveal .slides section:not(.present) #s_rf .slide-inner > *,
+.reveal .slides section:not(.present) #s_rl .red-bar-left,
+.reveal .slides section:not(.present) #s_rl .slide-inner > * {
+  opacity: 0;
+  animation: none;
+}
+
+/* RF row children reset */
+.reveal .slides section:not(.present) #s_rf .rf-row-accent {
+  animation: none; transform: scaleY(0); opacity: 0;
+}
+.reveal .slides section:not(.present) #s_rf .rf-row-inst,
+.reveal .slides section:not(.present) #s_rf .rf-row-date,
+.reveal .slides section:not(.present) #s_rf .rf-row-role,
+.reveal .slides section:not(.present) #s_rf .rf-row-output {
+  opacity: 0;
+  animation: none;
+}
+
+/* Kelltron accent row bg pulse + live dot reset */
+.reveal .slides section:not(.present) #s_rf .rf-row.accent {
+  opacity: 1; /* Keep structural row visible */
+  animation: none;
+}
+.reveal .slides section:not(.present) #s_rf .rf-row.accent .rf-row-accent::before {
+  opacity: 0;
+  animation: none;
+}
+
+/* S1 constraint pills reset */
+.reveal .slides section:not(.present) #s1 .constraint-pill {
+  opacity: 0;
+  animation: none;
+}
+
+/* S2 brief-table: container always visible, rows own the entrance */
+.reveal .slides section:not(.present) #s2 .brief-table,
+.reveal .slides section.present #s2 .brief-table {
+  opacity: 1; animation: none;
+}
+.reveal .slides section:not(.present) #s2 .brief-header,
+.reveal .slides section:not(.present) #s2 .brief-row {
+  opacity: 0; animation: none;
+}
+
+/* S3 partners & insight reset */
+.reveal .slides section:not(.present) #s3 .partner,
+.reveal .slides section:not(.present) #s3 .insight-row {
+  opacity: 0;
+  animation: none;
+}
+
+/* S4 callout & status reset */
+.reveal .slides section:not(.present) #s4 .callout,
+.reveal .slides section:not(.present) #s4 .s4-status-tag {
+  opacity: 0;
+  animation: none;
+}
+
+/* S5 cap rows reset */
+.reveal .slides section:not(.present) #s5 .cap {
+  opacity: 0;
+  animation: none;
+}
+
+/* S6 image panel resets */
+.reveal .slides section:not(.present) #s6 .s6-right img {
+  opacity: 0;
+  animation: none;
+}
+
+/* RL embodiment cards reset */
+.reveal .slides section:not(.present) #s_rl .rl-ec {
+  opacity: 0;
+  animation: none;
+}
+
+/* ──────────────────────────────────────────────────────────── */
+
+/* ── Base: fade up ── */
+.reveal .slides section.present #s1 .content > *,
+.reveal .slides section.present #s2 .slide-inner > *,
+.reveal .slides section.present #s3 .left-dark > *,
+.reveal .slides section.present #s3 .right-panel > *,
+.reveal .slides section.present #s4 .slide-inner > *,
+.reveal .slides section.present #s5 .slide-inner > *,
+.reveal .slides section.present #s6 .s6-left > *,
+.reveal .slides section.present #s9 .s9-left > *,
+.reveal .slides section.present #s9 .s9-right > *,
+.reveal .slides section.present #s_rf .slide-inner > *,
+.reveal .slides section.present #s_rl .slide-inner > * {
+  animation: fadeUpIn 0.55s var(--anim-ease) both;
+}
+
+/* ── Headings: slide from left ── */
+.reveal .slides section.present #s1 .content > .question,
+.reveal .slides section.present #s2 .slide-inner h2.display,
+.reveal .slides section.present #s3 .right-panel h2.display,
+.reveal .slides section.present #s4 .slide-inner h2.display,
+.reveal .slides section.present #s5 .slide-inner h2.display,
+.reveal .slides section.present #s_rf .slide-inner h2.display,
+.reveal .slides section.present #s_rl .slide-inner h2.display {
+  animation-name: fadeLeftIn; animation-duration: 0.65s;
+}
+
+/* ── S3 left panel: slide from left ── */
+.reveal .slides section.present #s3 .left-dark > * { animation-name: fadeLeftIn; }
+
+/* ── S6 left panel: slide from left ── */
+.reveal .slides section.present #s6 .s6-left > * { animation-name: fadeLeftIn; }
+
+/* ── S9 right panel: slide from right ── */
+.reveal .slides section.present #s9 .s9-right > * { animation-name: fadeRightIn; }
+
+/* ── Red bar: draw downward from top ── */
+.reveal .slides section.present #s2 .red-bar-left {
+  animation: drawBarY 0.45s ease both, redGlow 2s ease 0.6s 3;
+}
+
+/* ─────────────────────────────────────────────
+   STAGGER TABLE — nth-child 2–5
+───────────────────────────────────────────── */
+.reveal .slides section.present #s1 .content > *:nth-child(2),
+.reveal .slides section.present #s2 .slide-inner > *:nth-child(2),
+.reveal .slides section.present #s3 .left-dark > *:nth-child(2),
+.reveal .slides section.present #s3 .right-panel > *:nth-child(2),
+.reveal .slides section.present #s4 .slide-inner > *:nth-child(2),
+.reveal .slides section.present #s5 .slide-inner > *:nth-child(2),
+.reveal .slides section.present #s6 .s6-left > *:nth-child(2),
+.reveal .slides section.present #s9 .s9-left > *:nth-child(2),
+.reveal .slides section.present #s9 .s9-right > *:nth-child(2),
+.reveal .slides section.present #s_rf .slide-inner > *:nth-child(2),
+.reveal .slides section.present #s_rl .slide-inner > *:nth-child(2) { animation-delay: 0.10s; }
+
+.reveal .slides section.present #s1 .content > *:nth-child(3),
+.reveal .slides section.present #s2 .slide-inner > *:nth-child(3),
+.reveal .slides section.present #s3 .left-dark > *:nth-child(3),
+.reveal .slides section.present #s3 .right-panel > *:nth-child(3),
+.reveal .slides section.present #s4 .slide-inner > *:nth-child(3),
+.reveal .slides section.present #s5 .slide-inner > *:nth-child(3),
+.reveal .slides section.present #s6 .s6-left > *:nth-child(3),
+.reveal .slides section.present #s9 .s9-left > *:nth-child(3),
+.reveal .slides section.present #s9 .s9-right > *:nth-child(3),
+.reveal .slides section.present #s_rf .slide-inner > *:nth-child(3),
+.reveal .slides section.present #s_rl .slide-inner > *:nth-child(3) { animation-delay: 0.20s; }
+
+.reveal .slides section.present #s1 .content > *:nth-child(4),
+.reveal .slides section.present #s2 .slide-inner > *:nth-child(4),
+.reveal .slides section.present #s3 .left-dark > *:nth-child(4),
+.reveal .slides section.present #s3 .right-panel > *:nth-child(4),
+.reveal .slides section.present #s4 .slide-inner > *:nth-child(4),
+.reveal .slides section.present #s5 .slide-inner > *:nth-child(4),
+.reveal .slides section.present #s6 .s6-left > *:nth-child(4),
+.reveal .slides section.present #s9 .s9-left > *:nth-child(4),
+.reveal .slides section.present #s9 .s9-right > *:nth-child(4),
+.reveal .slides section.present #s_rf .slide-inner > *:nth-child(4),
+.reveal .slides section.present #s_rl .slide-inner > *:nth-child(4) { animation-delay: 0.30s; }
+
+.reveal .slides section.present #s1 .content > *:nth-child(5),
+.reveal .slides section.present #s3 .left-dark > *:nth-child(5),
+.reveal .slides section.present #s3 .right-panel > *:nth-child(5),
+.reveal .slides section.present #s4 .slide-inner > *:nth-child(5),
+.reveal .slides section.present #s5 .slide-inner > *:nth-child(5),
+.reveal .slides section.present #s6 .s6-left > *:nth-child(5),
+.reveal .slides section.present #s6 .s6-left > *:nth-child(5),
+.reveal .slides section.present #s9 .s9-left > *:nth-child(5),
+.reveal .slides section.present #s_rf .slide-inner > *:nth-child(5),
+.reveal .slides section.present #s_rl .slide-inner > *:nth-child(5) { animation-delay: 0.40s; }
+
+/* ── S1 question flicker ── */
+.reveal .slides section.present #s1 .question {
+  animation: fadeLeftIn 0.65s var(--anim-ease) 0.10s both,
+             flicker 7s linear 1.6s infinite;
+}
+
+/* ── S1 constraint pills stagger ── */
+.reveal .slides section.present #s1 .constraint-pill {
+  opacity: 0; animation: fadeUpIn 0.4s var(--anim-ease) both;
+}
+.reveal .slides section.present #s1 .constraint-pill:nth-child(1) { animation-delay: 0.44s; }
+.reveal .slides section.present #s1 .constraint-pill:nth-child(2) { animation-delay: 0.54s; }
+.reveal .slides section.present #s1 .constraint-pill:nth-child(3) { animation-delay: 0.64s; }
+
+/* ── S_RF red bar: draw downward ── */
+.reveal .slides section.present #s_rf .red-bar-left {
+  animation: drawBarY 0.45s ease both, redGlow 2s ease 0.6s 3;
+}
+
+/* ── S_RF: timeline container is just a flex vessel — don't fade it ── */
+.reveal .slides section.present #s_rf .rf-timeline {
+  animation: none; opacity: 1;
+}
+/* ── S_RF: rows themselves are structural (borders visible) — not faded ── */
+.reveal .slides section.present #s_rf .rf-row {
+  animation: none; opacity: 1;
+}
+
+/* ── S_RF per-element animations ── */
+/* accent bar draws downward */
+.reveal .slides section.present #s_rf .rf-row-accent {
+  animation: drawBarY 0.30s ease both;
+}
+/* institution name slides in from left */
+.reveal .slides section.present #s_rf .rf-row-inst {
+  animation: fadeLeftIn 0.38s var(--anim-ease) both;
+}
+/* date fades up */
+.reveal .slides section.present #s_rf .rf-row-date {
+  animation: fadeUpIn 0.28s var(--anim-ease) both;
+}
+/* role label fades up */
+.reveal .slides section.present #s_rf .rf-row-role {
+  animation: fadeUpIn 0.32s var(--anim-ease) both;
+}
+/* output sentence fades up with slight offset */
+.reveal .slides section.present #s_rf .rf-row-output {
+  animation: fadeUpIn 0.40s var(--anim-ease) both;
+}
+
+/* row 1 — base 0.20s */
+.reveal .slides section.present #s_rf .rf-row:nth-child(1) .rf-row-accent  { animation-delay: 0.20s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(1) .rf-row-inst    { animation-delay: 0.28s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(1) .rf-row-role    { animation-delay: 0.34s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(1) .rf-row-date    { animation-delay: 0.38s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(1) .rf-row-output  { animation-delay: 0.44s; }
+
+/* row 2 — base 0.40s */
+.reveal .slides section.present #s_rf .rf-row:nth-child(2) .rf-row-accent  { animation-delay: 0.40s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(2) .rf-row-inst    { animation-delay: 0.48s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(2) .rf-row-role    { animation-delay: 0.54s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(2) .rf-row-date    { animation-delay: 0.58s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(2) .rf-row-output  { animation-delay: 0.62s; }
+
+/* row 3 — base 0.58s */
+.reveal .slides section.present #s_rf .rf-row:nth-child(3) .rf-row-accent  { animation-delay: 0.58s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(3) .rf-row-inst    { animation-delay: 0.66s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(3) .rf-row-role    { animation-delay: 0.72s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(3) .rf-row-date    { animation-delay: 0.76s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(3) .rf-row-output  { animation-delay: 0.80s; }
+
+/* row 4 (Kelltron / accent) — base 0.76s */
+.reveal .slides section.present #s_rf .rf-row:nth-child(4) .rf-row-accent  { animation-delay: 0.76s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(4) .rf-row-inst    { animation-delay: 0.84s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(4) .rf-row-role    { animation-delay: 0.90s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(4) .rf-row-date    { animation-delay: 0.94s; }
+.reveal .slides section.present #s_rf .rf-row:nth-child(4) .rf-row-output  { animation-delay: 0.98s; }
+
+/* Kelltron accent bar draws in then pulses */
+.reveal .slides section.present #s_rf .rf-row.accent .rf-row-accent {
+  animation: drawBarY 0.30s ease 0.76s both, dotPulse 1.8s ease 1.30s 3;
+}
+/* Kelltron row background pulses after all rows have settled */
+.reveal .slides section.present #s_rf .rf-row.accent {
+  animation: rf-row-pulse-bg 2.8s ease-in-out 1.8s infinite;
+}
+/* Live dot on accent bar pulses indefinitely */
+.reveal .slides section.present #s_rf .rf-row.accent .rf-row-accent::before {
+  animation: rf-live-dot 1.8s ease-out 1.8s infinite;
+}
+
+/* ── S_RL red bar ── */
+.reveal .slides section.present #s_rl .red-bar-left {
+  animation: drawBarY 0.45s ease both;
+}
+
+/* ── S_RL embodiment cards stagger ── */
+.reveal .slides section.present #s_rl .rl-ec {
+  opacity: 0; animation: fadeUpIn 0.48s var(--anim-ease) both;
+}
+.reveal .slides section.present #s_rl .rl-ec:nth-child(1) { animation-delay: 0.28s; }
+.reveal .slides section.present #s_rl .rl-ec:nth-child(2) { animation-delay: 0.40s; }
+.reveal .slides section.present #s_rl .rl-ec:nth-child(3) { animation-delay: 0.52s; }
+
+/* ── S2: brief-foot delayed until after last row ── */
+.reveal .slides section.present #s2 .slide-inner > *:nth-child(3) { animation-delay: 0.82s; }
+
+/* ── S2 brief-table row stagger ── */
+.reveal .slides section.present #s2 .brief-header,
+.reveal .slides section.present #s2 .brief-row {
+  opacity: 0; animation: fadeUpIn 0.36s var(--anim-ease) both;
+}
+.reveal .slides section.present #s2 .brief-header         { animation-delay: 0.10s; }
+.reveal .slides section.present #s2 .brief-row:nth-child(2) { animation-delay: 0.18s; }
+.reveal .slides section.present #s2 .brief-row:nth-child(3) { animation-delay: 0.26s; }
+.reveal .slides section.present #s2 .brief-row:nth-child(4) { animation-delay: 0.34s; }
+.reveal .slides section.present #s2 .brief-row:nth-child(5) { animation-delay: 0.42s; }
+.reveal .slides section.present #s2 .brief-row:nth-child(6) { animation-delay: 0.50s; }
+.reveal .slides section.present #s2 .brief-row:nth-child(7) { animation-delay: 0.58s; }
+.reveal .slides section.present #s2 .brief-row:nth-child(8) { animation-delay: 0.66s; }
+
+/* ── S3 partner rows stagger ── */
+.reveal .slides section.present #s3 .partner {
+  opacity: 0; animation: fadeLeftIn 0.38s var(--anim-ease) both;
+}
+.reveal .slides section.present #s3 .partner:nth-child(1) { animation-delay: 0.28s; }
+.reveal .slides section.present #s3 .partner:nth-child(2) { animation-delay: 0.38s; }
+.reveal .slides section.present #s3 .partner:nth-child(3) { animation-delay: 0.48s; }
+
+/* ── S3 insight rows stagger ── */
+.reveal .slides section.present #s3 .insight-row {
+  opacity: 0; animation: fadeUpIn 0.45s var(--anim-ease) both;
+}
+.reveal .slides section.present #s3 .insight-row:nth-child(1) { animation-delay: 0.22s; }
+.reveal .slides section.present #s3 .insight-row:nth-child(2) { animation-delay: 0.34s; }
+.reveal .slides section.present #s3 .insight-row:nth-child(3) { animation-delay: 0.46s; }
+
+/* ── S4 callout boxes stagger ── */
+.reveal .slides section.present #s4 .callout {
+  opacity: 0; animation: fadeRightIn 0.42s var(--anim-ease) both;
+}
+.reveal .slides section.present #s4 .callout:nth-child(1) { animation-delay: 0.28s; }
+.reveal .slides section.present #s4 .callout:nth-child(2) { animation-delay: 0.40s; }
+.reveal .slides section.present #s4 .callout:nth-child(3) { animation-delay: 0.52s; }
+
+/* ── S4 status tag ── */
+.reveal .slides section.present #s4 .s4-status-tag {
+  opacity: 0; animation: fadeUpIn 0.36s var(--anim-ease) 0.58s both;
+}
+
+/* ── S5 cap rows stagger (8 caps now) ── */
+.reveal .slides section.present #s5 .cap {
+  opacity: 0; animation: fadeLeftIn 0.38s var(--anim-ease) both;
+}
+.reveal .slides section.present #s5 .cap:nth-child(1) { animation-delay: 0.20s; }
+.reveal .slides section.present #s5 .cap:nth-child(2) { animation-delay: 0.28s; }
+.reveal .slides section.present #s5 .cap:nth-child(3) { animation-delay: 0.36s; }
+.reveal .slides section.present #s5 .cap:nth-child(4) { animation-delay: 0.44s; }
+.reveal .slides section.present #s5 .cap:nth-child(5) { animation-delay: 0.52s; }
+.reveal .slides section.present #s5 .cap:nth-child(6) { animation-delay: 0.60s; }
+.reveal .slides section.present #s5 .cap:nth-child(7) { animation-delay: 0.68s; }
+.reveal .slides section.present #s5 .cap:nth-child(8) { animation-delay: 0.76s; }
+
+/* ── S6 GIF strip: scale in ── */
+.reveal .slides section.present #s6 .rl-strip img {
+  opacity: 0; animation: scaleIn 0.5s var(--anim-ease) both;
+}
+.reveal .slides section.present #s6 .rl-strip img:nth-child(1) { animation-delay: 0.18s; }
+.reveal .slides section.present #s6 .rl-strip img:nth-child(2) { animation-delay: 0.28s; }
+.reveal .slides section.present #s6 .rl-strip img:nth-child(3) { animation-delay: 0.38s; }
+
+/* ── S6 spec items stagger ── */
+.reveal .slides section.present #s6 .spec-item {
+  opacity: 0; animation: fadeUpIn 0.42s var(--anim-ease) both;
+}
+.reveal .slides section.present #s6 .spec-item:nth-child(1) { animation-delay: 0.20s; }
+.reveal .slides section.present #s6 .spec-item:nth-child(2) { animation-delay: 0.30s; }
+.reveal .slides section.present #s6 .spec-item:nth-child(3) { animation-delay: 0.40s; }
+.reveal .slides section.present #s6 .spec-item:nth-child(4) { animation-delay: 0.50s; }
+
+/* ── S9 close: left panel elements ── */
+.reveal .slides section.present #s9 .s9-detail-row {
+  opacity: 0; animation: fadeUpIn 0.38s var(--anim-ease) both;
+}
+.reveal .slides section.present #s9 .s9-detail-row:nth-child(1) { animation-delay: 0.30s; }
+.reveal .slides section.present #s9 .s9-detail-row:nth-child(2) { animation-delay: 0.40s; }
+.reveal .slides section.present #s9 .s9-detail-row:nth-child(3) { animation-delay: 0.50s; }
+
+/* ── S9 recap rows ── */
+.reveal .slides section.present #s9 .s9-recap-row {
+  opacity: 0; animation: fadeRightIn 0.38s var(--anim-ease) both;
+}
+.reveal .slides section.present #s9 .s9-recap-row:nth-child(1) { animation-delay: 0.26s; }
+.reveal .slides section.present #s9 .s9-recap-row:nth-child(2) { animation-delay: 0.36s; }
+.reveal .slides section.present #s9 .s9-recap-row:nth-child(3) { animation-delay: 0.46s; }
+.reveal .slides section.present #s9 .s9-recap-row:nth-child(4) { animation-delay: 0.56s; }
+
+/* ── S9 contact items stagger ── */
+.reveal .slides section.present #s9 .s9-c-item {
+  opacity: 0; animation: fadeUpIn 0.38s var(--anim-ease) both;
+}
+.reveal .slides section.present #s9 .s9-c-item:nth-child(1) { animation-delay: 0.22s; }
+.reveal .slides section.present #s9 .s9-c-item:nth-child(2) { animation-delay: 0.32s; }
+.reveal .slides section.present #s9 .s9-c-item:nth-child(3) { animation-delay: 0.42s; }
+
+
+/* ============================================================ 
+  Slide 5 — Footer bar
+============================================================ */
+
+/* Layout Adjustment for Footer */
+#s5 .slide-inner { bottom: 32px; } 
+
+/* Footer bar styling */
+#s5 .deployed-footer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 52px; background: var(--black);
+  display: flex; align-items: center;
+  padding: 0 36px; gap: 14px;
+  border-top: 1px solid var(--red);
+  z-index: 10;
+}
+#s5 .deployed-footer {
+  font-family: 'Bebas Neue', sans-serif; 
+  font-size: clamp(22px, 2.8vw, 32px);
+  color: #fff; letter-spacing: 0.04em;
+}
+#s5 .deployed-footer span { color: var(--red); }

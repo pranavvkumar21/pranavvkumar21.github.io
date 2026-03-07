@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" version="21.0.0">
+  <diagram name="Drone BVLOS Architecture" id="drone-v3">
+    <mxGraphModel dx="1400" dy="900" grid="0" pageWidth="1400" pageHeight="900" background="#F0EDE8">
+      <root>
+        <mxCell id="0" /><mxCell id="1" parent="0" />
+
+        <!-- ── PAGE TITLE ── -->
+        <mxCell id="pg_title" value="OPERATIONS INFRASTRUCTURE — MULTI-DRONE BVLOS" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=15;fontStyle=1;fontColor=#1A1A1A;letterSpacing=2;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="30" y="18" width="800" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="pg_line" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="30" y="50" width="80" height="3" as="geometry"/>
+        </mxCell>
+
+        <!-- ── SECTION LABELS ── -->
+        <mxCell id="lbl_gcs" value="GROUND CONTROL STATION (GCS)" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=10;fontColor=#1A1A1A;letterSpacing=2;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="30" y="60" width="240" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="lbl_cloud" value="CLOUD INFRASTRUCTURE" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=10;fontColor=#1A1A1A;letterSpacing=2;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="300" y="60" width="500" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="lbl_drones" value="DRONES" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=10;fontColor=#1A1A1A;letterSpacing=2;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="830" y="60" width="540" height="22" as="geometry"/>
+        </mxCell>
+
+        <!-- ── SECTION CONTAINERS ── -->
+        <mxCell id="sec_gcs" value="" style="rounded=0;fillColor=#FFFFFF;strokeColor=#1A1A1A;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="30" y="82" width="240" height="710" as="geometry"/>
+        </mxCell>
+        <mxCell id="sec_gcs_bar" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="30" y="82" width="5" height="710" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sec_cloud" value="" style="rounded=0;fillColor=#FFFFFF;strokeColor=#1A1A1A;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="300" y="82" width="500" height="710" as="geometry"/>
+        </mxCell>
+        <mxCell id="sec_cloud_bar" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="300" y="82" width="500" height="5" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sec_drones" value="" style="rounded=0;fillColor=#FFFFFF;strokeColor=#1A1A1A;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="830" y="82" width="540" height="710" as="geometry"/>
+        </mxCell>
+        <mxCell id="sec_drones_bar" value="" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1365" y="82" width="5" height="710" as="geometry"/>
+        </mxCell>
+
+        <!-- ── JWT TOKEN PILLS (top) ── -->
+        <mxCell id="jwt1" value="JWT TOKEN" style="ellipse;fillColor=#E8001C;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#FFFFFF;letterSpacing=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="248" y="106" width="88" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="jwt2" value="JWT TOKEN" style="ellipse;fillColor=#E8001C;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#FFFFFF;letterSpacing=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="790" y="106" width="88" height="22" as="geometry"/>
+        </mxCell>
+
+        <!-- ── GCS: FLUTTER APP ── -->
+        <mxCell id="flutter" value="&lt;b style='font-family:Impact;letter-spacing:1px;font-size:11px;'&gt;FLUTTER GCS APP&lt;/b&gt;&lt;hr style='border-color:#E8001C;margin:5px 0 4px;'/&gt;&lt;span style='font-size:9px;line-height:1.6;'&gt;UI / UX&lt;br/&gt;MULTIPLE DRONE CONTROL&lt;br/&gt;TIME SCHEDULING&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="370" width="190" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- ── CLOUD: AUTH SERVICE ── -->
+        <mxCell id="auth" value="&lt;b style='font-family:Impact;letter-spacing:1px;font-size:10px;'&gt;AUTHENTICATION SERVICE&lt;/b&gt;&lt;br/&gt;&lt;span style='font-size:9px;color:#E8001C;font-weight:bold;'&gt;(JWT TOKEN)&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="375" y="140" width="350" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="auth_bar" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="375" y="140" width="350" height="4" as="geometry"/>
+        </mxCell>
+        <mxCell id="lock1" value="🔒" style="text;html=1;fillColor=#FFFFFF;strokeColor=#1A1A1A;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="534" y="120" width="28" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- ── CLOUD: API GATEWAY ── -->
+        <mxCell id="apigw" value="&lt;b style='font-family:Impact;letter-spacing:1px;font-size:10px;'&gt;API GATEWAY / CONTROL LOGIC&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A1A;strokeColor=none;fontColor=#FFFFFF;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="375" y="250" width="350" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="apigw_bar" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="375" y="294" width="350" height="3" as="geometry"/>
+        </mxCell>
+
+        <!-- ── CLOUD: PERM + SCHED ── -->
+        <mxCell id="perm" value="&lt;b style='font-family:Impact;letter-spacing:1px;font-size:9px;'&gt;PERMISSION &amp;amp;&#xa;ACCESS MANAGER&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="315" y="360" width="160" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="perm_bar" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="315" y="360" width="160" height="3" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sched" value="&lt;b style='font-family:Impact;letter-spacing:1px;font-size:9px;'&gt;SCHEDULE&#xa;MANAGER&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="525" y="360" width="160" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="sched_bar" value="" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="525" y="360" width="160" height="3" as="geometry"/>
+        </mxCell>
+
+        <!-- ── CLOUD: CLIENT API ── -->
+        <mxCell id="clientapi" value="&lt;b style='font-family:Impact;letter-spacing:1px;font-size:10px;'&gt;CLIENT INTEGRATION API&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="375" y="470" width="350" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="clientapi_bar" value="" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="375" y="470" width="350" height="4" as="geometry"/>
+        </mxCell>
+
+        <!-- ── CLOUD: MONGODB ── -->
+        <mxCell id="mongo_label" value="CLOUD SERVER (HUB)" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#5A5A5A;letterSpacing=2;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="415" y="528" width="270" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="mongo" value="&lt;b style='font-family:Impact;letter-spacing:1px;font-size:10px;'&gt;MONGODB&#xa;DATABASE&lt;/b&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;size=12;" vertex="1" parent="1">
+          <mxGeometry x="475" y="550" width="150" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="lock2" value="🔒" style="text;html=1;fillColor=#FFFFFF;strokeColor=#1A1A1A;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="534" y="530" width="28" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- ── DRONE 1 ── -->
+        <mxCell id="d1_outer" value="" style="rounded=0;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="848" y="110" width="502" height="280" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1_hdr" value="DRONE 1" style="rounded=0;fillColor=#E8001C;strokeColor=none;fontFamily=Impact;fontSize=11;fontColor=#FFFFFF;letterSpacing=3;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="848" y="110" width="502" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1_sub" value="ONBOARD COMPUTER" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#5A5A5A;letterSpacing=2;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="848" y="136" width="502" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- D1 Docker -->
+        <mxCell id="d1_docker" value="" style="rounded=0;fillColor=#FFFFFF;strokeColor=#1A1A1A;strokeWidth=1;dashed=1;dashPattern=5 3;" vertex="1" parent="1">
+          <mxGeometry x="862" y="158" width="474" height="216" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1_docker_lbl" value="DEPLOYABLE CONTAINER (DOCKER)" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#1A1A1A;letterSpacing=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="862" y="158" width="474" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="d1_fca" value="&lt;b style='font-family:Impact;font-size:9px;letter-spacing:1px;'&gt;FLIGHT CONTROL&#xa;AGENT&lt;/b&gt;" style="rounded=0;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="874" y="182" width="108" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1_fca_b" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="874" y="182" width="108" height="3" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="d1_ts" value="&lt;b style='font-family:Impact;font-size:9px;letter-spacing:1px;'&gt;TELEMETRY&#xa;STREAMER&lt;/b&gt;" style="rounded=0;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="994" y="182" width="108" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1_ts_b" value="" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="994" y="182" width="108" height="3" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="d1_ia" value="&lt;b style='font-family:Impact;font-size:9px;letter-spacing:1px;'&gt;INTELLIGENT ALGORITHMS&lt;/b&gt;&#xa;&lt;span style='font-size:8px;color:#5A5A5A;'&gt;SLAM · AI INFERENCE&lt;/span&gt;" style="rounded=0;fillColor=#F0EDE8;strokeColor=#E8001C;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1114" y="182" width="210" height="58" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="d1_div" value="" style="rounded=0;fillColor=#E8E4DC;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="862" y="246" width="474" height="2" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="d1_ldc" value="&lt;b style='font-family:Impact;font-size:9px;letter-spacing:1px;'&gt;LOCAL DATA CACHE&lt;/b&gt;" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="874" y="252" width="462" height="46" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1_ldc_b" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="874" y="294" width="462" height="3" as="geometry"/>
+        </mxCell>
+
+        <!-- Ellipsis -->
+        <mxCell id="ellipsis" value="• • •" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#1A1A1A;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="400" width="80" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ── DRONE N ── -->
+        <mxCell id="dn_outer" value="" style="rounded=0;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="848" y="450" width="502" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="dn_hdr" value="DRONE N" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;fontFamily=Impact;fontSize=11;fontColor=#FFFFFF;letterSpacing=3;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="848" y="450" width="502" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="dn_sub" value="ONBOARD COMPUTER" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#5A5A5A;letterSpacing=2;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="848" y="476" width="502" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dn_docker" value="" style="rounded=0;fillColor=#FFFFFF;strokeColor=#1A1A1A;strokeWidth=1;dashed=1;dashPattern=5 3;" vertex="1" parent="1">
+          <mxGeometry x="862" y="498" width="474" height="136" as="geometry"/>
+        </mxCell>
+        <mxCell id="dn_docker_lbl" value="DEPLOYABLE CONTAINER (DOCKER)" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#1A1A1A;letterSpacing=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="862" y="498" width="474" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dn_fca" value="&lt;b style='font-family:Impact;font-size:9px;letter-spacing:1px;'&gt;FLIGHT CONTROL&#xa;AGENT&lt;/b&gt;" style="rounded=0;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="874" y="522" width="108" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="dn_fca_b" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="874" y="522" width="108" height="3" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dn_ts" value="&lt;b style='font-family:Impact;font-size:9px;letter-spacing:1px;'&gt;TELEMETRY&#xa;STREAMER&lt;/b&gt;" style="rounded=0;fillColor=#F0EDE8;strokeColor=#1A1A1A;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="994" y="522" width="108" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="dn_ts_b" value="" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="994" y="522" width="108" height="3" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dn_ia" value="&lt;b style='font-family:Impact;font-size:9px;letter-spacing:1px;'&gt;INTELLIGENT ALGORITHMS&lt;/b&gt;&#xa;&lt;span style='font-size:8px;color:#5A5A5A;'&gt;SLAM · AI INFERENCE&lt;/span&gt;" style="rounded=0;fillColor=#F0EDE8;strokeColor=#E8001C;strokeWidth=1.5;fontColor=#1A1A1A;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1114" y="522" width="210" height="58" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dn_ldc" value="&lt;b style='font-family:Impact;font-size:9px;letter-spacing:1px;'&gt;LOCAL DATA CACHE&lt;/b&gt;" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;fontColor=#FFFFFF;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="874" y="590" width="450" height="36" as="geometry"/>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════ -->
+        <!-- CONNECTIONS -->
+        <!-- ══════════════════════════════════════ -->
+
+        <!-- JWT top: GCS → Cloud -->
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E8001C;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="117" as="sourcePoint"/>
+            <mxPoint x="300" y="117" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- JWT top: Cloud → Drones -->
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E8001C;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800" y="117" as="sourcePoint"/>
+            <mxPoint x="830" y="117" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Operator Commands: Flutter → API GW -->
+        <mxCell id="e3" value="OPERATOR COMMANDS" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1A1A1A;strokeWidth=1.5;endArrow=block;endFill=1;fontFamily=Impact;fontSize=8;fontColor=#1A1A1A;labelBackgroundColor=#F0EDE8;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="flutter" target="apigw">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- JWT back: API GW → Flutter -->
+        <mxCell id="e4" value="✦ JWT · TELEMETRY VIEW" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E8001C;strokeWidth=1.5;endArrow=block;endFill=1;fontFamily=Impact;fontSize=8;fontColor=#E8001C;labelBackgroundColor=#F0EDE8;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="1" source="apigw" target="flutter">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Auth ↔ API GW -->
+        <mxCell id="e5" value="HTTPS / REST / WS" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#5A5A5A;strokeWidth=1.5;dashed=1;dashPattern=5 3;endArrow=block;endFill=1;startArrow=block;startFill=1;fontFamily=Impact;fontSize=8;fontColor=#5A5A5A;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="auth" target="apigw">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- API GW → Perm -->
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1A1A1A;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="apigw" target="perm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- API GW → Sched -->
+        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1A1A1A;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="apigw" target="sched">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Perm → Client API -->
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1A1A1A;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="perm" target="clientapi">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Sched → Client API -->
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1A1A1A;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="sched" target="clientapi">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Client API ↔ Mongo -->
+        <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1A1A1A;strokeWidth=1.5;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1" source="clientapi" target="mongo">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloud → D1: Telemetry -->
+        <mxCell id="e11" value="TELEMETRY STREAM" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1A1A1A;strokeWidth=1.5;endArrow=block;endFill=1;fontFamily=Impact;fontSize=8;fontColor=#1A1A1A;labelBackgroundColor=#F0EDE8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="sec_cloud" target="d1_outer">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloud → D1: C&C -->
+        <mxCell id="e12" value="COMMAND &amp; CONTROL" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#5A5A5A;strokeWidth=1.5;dashed=1;dashPattern=5 3;endArrow=block;endFill=1;startArrow=block;startFill=1;fontFamily=Impact;fontSize=8;fontColor=#5A5A5A;labelBackgroundColor=#F0EDE8;exitX=1;exitY=0.42;exitDx=0;exitDy=0;entryX=0;entryY=0.42;entryDx=0;entryDy=0;" edge="1" parent="1" source="sec_cloud" target="d1_outer">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloud → D1: JWT -->
+        <mxCell id="e13" value="✦ JWT" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E8001C;strokeWidth=2;endArrow=block;endFill=1;startArrow=block;startFill=1;fontFamily=Impact;fontSize=8;fontColor=#E8001C;labelBackgroundColor=#F0EDE8;exitX=1;exitY=0.6;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;" edge="1" parent="1" source="sec_cloud" target="d1_outer">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloud → DN: Telemetry -->
+        <mxCell id="e14" value="TELEMETRY STREAM" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1A1A1A;strokeWidth=1.5;endArrow=block;endFill=1;fontFamily=Impact;fontSize=8;fontColor=#1A1A1A;labelBackgroundColor=#F0EDE8;exitX=1;exitY=0.72;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="sec_cloud" target="dn_outer">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloud → DN: C&C -->
+        <mxCell id="e15" value="COMMAND &amp; CONTROL" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#5A5A5A;strokeWidth=1.5;dashed=1;dashPattern=5 3;endArrow=block;endFill=1;startArrow=block;startFill=1;fontFamily=Impact;fontSize=8;fontColor=#5A5A5A;labelBackgroundColor=#F0EDE8;exitX=1;exitY=0.84;exitDx=0;exitDy=0;entryX=0;entryY=0.55;entryDx=0;entryDy=0;" edge="1" parent="1" source="sec_cloud" target="dn_outer">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloud → DN: JWT -->
+        <mxCell id="e16" value="✦ JWT" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#E8001C;strokeWidth=2;endArrow=block;endFill=1;startArrow=block;startFill=1;fontFamily=Impact;fontSize=8;fontColor=#E8001C;labelBackgroundColor=#F0EDE8;exitX=1;exitY=0.95;exitDx=0;exitDy=0;entryX=0;entryY=0.78;entryDx=0;entryDy=0;" edge="1" parent="1" source="sec_cloud" target="dn_outer">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════ -->
+        <!-- LEGEND -->
+        <!-- ══════════════════════════════════════ -->
+
+        <mxCell id="legend_bg" value="" style="rounded=0;fillColor=#1A1A1A;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="30" y="820" width="1340" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_red" value="" style="rounded=0;fillColor=#E8001C;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="30" y="820" width="5" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_title" value="LEGEND:" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=9;fontColor=#FFFFFF;letterSpacing=2;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="44" y="820" width="65" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="leg_l1" value="" style="edgeStyle=none;strokeColor=#FFFFFF;strokeWidth=2;endArrow=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="120" y="840" as="sourcePoint"/><mxPoint x="158" y="840" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="leg_t1" value="Lines" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#AAAAAA;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="162" y="820" width="50" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="leg_l2" value="" style="edgeStyle=none;strokeColor=#AAAAAA;strokeWidth=2;endArrow=none;dashed=1;dashPattern=5 3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="222" y="840" as="sourcePoint"/><mxPoint x="260" y="840" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="leg_t2" value="HTTPS / REST / Swoflow" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#AAAAAA;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="264" y="820" width="145" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="leg_l3" value="" style="edgeStyle=none;strokeColor=#FFFFFF;strokeWidth=2;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="420" y="840" as="sourcePoint"/><mxPoint x="458" y="840" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="leg_t3" value="Security / Flow" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#AAAAAA;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="462" y="820" width="110" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="leg_l4" value="" style="edgeStyle=none;strokeColor=#E8001C;strokeWidth=2;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="584" y="840" as="sourcePoint"/><mxPoint x="622" y="840" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="leg_t4" value="✦ JWT and Data Flow" style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=8;fontColor=#E8001C;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="626" y="820" width="140" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Tagline -->
+        <mxCell id="tag_red" value="FULLY DEPLOYED." style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=13;fontColor=#E8001C;letterSpacing=2;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="800" y="820" width="190" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="tag_wht" value="NOT A PROTOTYPE. NOT A DEMO." style="text;html=1;fillColor=none;strokeColor=none;fontFamily=Impact;fontSize=13;fontColor=#FFFFFF;letterSpacing=2;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="994" y="820" width="360" height="40" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

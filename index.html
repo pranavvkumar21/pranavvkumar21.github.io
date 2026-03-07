@@ -1,460 +1,514 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pranav Kumar — Robotics Engineer</title>
-
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="dns-prefetch" href="//api.github.com">
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <style>
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{overflow-x:hidden;scroll-behavior:smooth}
-        body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:none;transition:background .4s,color .4s}
-        :root{--bg:#070c14;--bg2:#0d1520;--surface:rgba(255,255,255,.03);--surface2:rgba(255,255,255,.06);--border:rgba(56,189,248,.12);--border2:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#7a91a8;--muted:#3d5166;--sky:#38bdf8;--sky-d:rgba(56,189,248,.15);--sky-g:rgba(56,189,248,.4);--mint:#6ee7b7;--amber:#f59e0b;--red:#f43f5e;--font-mono:'JetBrains Mono',monospace;--r:12px;--r-lg:20px;--ease:cubic-bezier(.16,1,.3,1);--spring:cubic-bezier(.34,1.56,.64,1)}
-        [data-theme="light"]{--bg:#dde4f0;--bg2:#d0d8ec;--surface:rgba(14,116,144,.06);--surface2:rgba(14,116,144,.11);--border:rgba(14,116,144,.22);--border2:rgba(14,116,144,.14);--text:#0d1b2e;--text2:#334e6b;--muted:#7090ae;--sky:#0369a1;--sky-d:rgba(3,105,161,.13);--sky-g:rgba(3,105,161,.42)}
-        #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;transition:opacity .5s,visibility .5s}
-        #loader.out{opacity:0;visibility:hidden;pointer-events:none}
-        #lbar-wrap{width:200px;height:1px;background:rgba(255,255,255,.06)}
-        #lbar{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--mint));box-shadow:0 0 10px var(--sky-g);transition:width .07s linear}
-        #ltxt{font-family:var(--font-mono);font-size:.62rem;color:var(--sky);letter-spacing:.25em}
-        #heroCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
-    </style>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap"></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KTP Associate · SAFEPOS · Pranav Vijaya Kumar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-        <polygon points="22,3 41,13 41,31 22,41 3,31 3,13"
-            stroke="#38bdf8" stroke-width="1.2" fill="none"
-            stroke-dasharray="110" stroke-dashoffset="110"
-            style="animation:ldraw 1s cubic-bezier(.16,1,.3,1) forwards"/>
-        <circle cx="22" cy="22" r="4.5" fill="#6ee7b7" opacity=".9">
-            <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.5s" repeatCount="indefinite"/>
-        </circle>
-    </svg>
-    <div id="lbar-wrap"><div id="lbar"></div></div>
-    <div id="ltxt">BOOTING SYSTEMS_</div>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 1 · THE HOOK  [30s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s1">
+        <div class="slide-label light">01 / 10 </div>
+        <div class="port-bg"></div>
+        <div class="port-bg-fallback"></div>
+        <div class="dark-gradient"></div>
+        <div class="content">
+
+          <div>
+            <div class="title-kicker">KTP Associate · SAFEPOS · ISS Aerospace</div>
+            <div class="question"><em>Safe Autonomy</em><br>at Scale: <br>From Research<br>to Operations.</div>
+            <div class="constraints">
+              <div class="constraint-pill">GPS-Denied Environments</div>
+              <div class="constraint-pill">Variable Payload Operations</div>
+              <div class="constraint-pill">Regulatory-Compliant by Design</div>
+            </div>
+          </div>
+
+          <div class="bottom">
+            <div>
+              <div class="name">Pranav Vijaya Kumar</div>
+              <div class="title-sub">Autonomous Systems Engineer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <aside class="notes">01 / The Hook · 30 s. Don't explain the slide. Let it land. Then: "Everything I'll show you today has been built toward these three constraints."</aside> -->
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 2 · RESEARCH FOUNDATIONS  [60s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s_rf">
+        <div class="slide-label">02 / 10 </div>
+        <div class="red-bar-left"></div>
+        <div class="slide-inner">
+
+          <div class="slide-header">
+            <h2 class="display">Research Foundations Built for<br>Real-World Deployment</h2>
+            <div class="slide-tag">02 / 10</div>
+          </div>
+
+          <!-- <div class="rf-subhead">Four positions, three institutions · each one compounding toward deployable autonomy</div> -->
+
+          <div class="rf-timeline">
+
+            <div class="rf-row">
+              <div class="rf-row-accent"></div>
+              <div class="rf-row-time">
+                <div class="rf-row-inst">Amrita University</div>
+                <div class="rf-row-date">2020 – 2021</div>
+              </div>
+              <div class="rf-row-content">
+                <div class="rf-row-role">Research Assistant · Soft Robotics</div>
+                <div class="rf-row-output">SCARA manipulator with soft pneumatic actuators and YOLOv2 vision · real-time perception integrated into a physical production system.</div>
+              </div>
+            </div>
+
+            <div class="rf-row">
+              <div class="rf-row-accent"></div>
+              <div class="rf-row-time">
+                <div class="rf-row-inst">Bristol Robotics Lab</div>
+                <div class="rf-row-date">Jun – Sep 2022</div>
+              </div>
+              <div class="rf-row-content">
+                <div class="rf-row-role">Research Intern · Quadruped locomotion using RL</div>
+                <div class="rf-row-output">Implementing bio-inspired rhythmic gait patterns using reinforcement learning.</div>
+              </div>
+            </div>
+
+            <div class="rf-row">
+              <div class="rf-row-accent"></div>
+              <div class="rf-row-time">
+                <div class="rf-row-inst">University of Exeter</div>
+                <div class="rf-row-date">2023 – 2024</div>
+              </div>
+              <div class="rf-row-content">
+                <div class="rf-row-role">Research Assistant · PROGENY Task 79</div>
+                <div class="rf-row-output">Adaptive sensor fusion pipeline validated across drone, UGV, and USV with QinetiQ, Supacat, and SeeByte · defence-grade, not lab-grade.</div>
+              </div>
+            </div>
+
+            <div class="rf-row accent">
+              <div class="rf-row-accent"></div>
+              <div class="rf-row-time">
+                <div class="rf-row-inst">Kelltron</div>
+                <div class="rf-row-date">Dec 2024 – Oct 2025</div>
+              </div>
+              <div class="rf-row-content">
+                <div class="rf-row-role">Product Developer · LLM IAM Engine</div>
+                <div class="rf-row-output">Research-to-production in nine months: FastAPI, PostgreSQL, Docker, Azure CI/CD · the production infrastructure layer PROGENY never had.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="rf-insight">
+            Research that compounds. Not research that sits.
+          </div>
+
+        </div>
+      </div>
+      <!-- <aside class="notes">02 / Research Foundations · 60 s. Don't read the rows. Pick one thread: "These aren't parallel tracks · they compound. Exeter validated field robustness, Bristol gave me systems breadth, Kelltron proved research can go to production."</aside> -->
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 3 · RL ACROSS EMBODIMENTS  [60s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s_rl">
+        <div class="slide-label light">03 / 10 </div>
+        <div class="red-bar-left"></div>
+        <div class="slide-inner">
+
+          <div class="slide-header">
+            <h2 class="display white">Reinforcement Learning<br>Across Embodiments</h2>
+            <div class="slide-tag white">03 / 10</div>
+          </div>
+
+          <div class="rl-tagline">From Quadrupeds to Humanoids to Multi-Agent Drones · Same Principles, Different Challenges</div>
+
+          <div class="rl-cards">
+
+            <div class="rl-ec">
+              <div class="rl-ec-tag">Quadruped Locomotion</div>
+              <div class="rl-img-slot">
+                <img src="assets/images/ruff_2.gif" alt="Bio-inspired quadruped locomotion · Isaac Sim PPO">
+              </div>
+              <div class="rl-ec-label">Bio-Inspired Rhythmic Gait</div>
+              <div class="rl-ec-sub"> PPO in IsaacLab · Residual action space with CPG-inspired frequency outputs · Variable terrains and under external perturbations </div>
+            </div>
+
+            <div class="rl-ec hi">
+              <div class="rl-ec-tag">Humanoid Motion Imitation</div>
+              <div class="rl-img-slot">
+                <img src="assets/images/steve_punch.gif" alt="Humanoid motion imitation · DeepMimic LAFAN1">
+              </div>
+              <div class="rl-ec-label">Motion Imitation on Unitree G1</div>
+              <div class="rl-ec-sub">DeepMimic framework · Physics-informed reward shaping for stability</div>
+            </div>
+
+            <div class="rl-ec">
+              <div class="rl-ec-tag">Multi-Agent Drones</div>
+              <div class="rl-img-slot">
+                <img src="assets/images/coop_lift.gif" alt="Coordinated multi-drone system">
+              </div>
+              <div class="rl-ec-label">Coordinated Multi-Drone System</div>
+              <div class="rl-ec-sub">Independent policies · Neighbor-aware state · Variable payload training · No central controller</div>
+            </div>
+
+          </div>
+
+          <div class="rl-insight">
+            Domain randomization from day one: friction, mass, terrain, external pushes · policies learn adaptive behavior, not memorized patterns. 
+          </div>
+
+        </div>
+      </div>
+      <!-- <aside class="notes">03 / RL Across Embodiments · 60 s. "The through-line isn't the platform · it's the design philosophy. Every policy trained to fail gracefully, not to perform under ideal conditions."</aside> -->
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 4 · PROGENY TASK 79  [75s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s3">
+        <div class="left-dark">
+          <div>
+            <!-- <div class="proj-id">Foundation · Defence Validated</div> -->
+            <div class="proj-title" style="margin-top:10px;">PROGENY<br>TASK 79</div>
+          </div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">In Collaboration With</div>
+            <div class="partner-list">
+            <div class="partner">QinetiQ <span>MOD Oversight</span></div>
+              <div class="partner">Supacat <span>Land Trials</span></div>
+              <div class="partner">SeeByte <span>Marine Trials</span></div>
+              <div class="partner">National Oceanography Centre <span>Marine Trials</span></div>
+            </div>
+          </div>
+          <div class="supervisor">
+            University of Exeter<br>
+            <em>Research Assistant · 2023–2024</em>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div class="slide-header">
+            <h2 class="display">Modular Position Fusion<br>System</h2>
+            <div class="slide-tag">04 / 10</div>
+          </div>
+
+          <div class="arch-img-slot">
+            <img src="assets/images/progeny_arch.png" alt="PROGENY adaptive sensor fusion · ROS2, ORB-SLAM3, Cartographer, Hector Mapping, cross-platform">
+          </div>
+
+          <div class="insight-row">
+            <div class="ins-num">01</div>
+            <div class="ins-text"><strong>Adaptive sensor fusion</strong><br>GPS fails, LiDAR trust rises. Camera struggles in low light, IMU takes over.</div>
+          </div>
+          <div class="insight-row">
+            <div class="ins-num">02</div>
+            <div class="ins-text"><strong>Validated with field trial data</strong><br>Land and marine trials · LiDAR, stereo camera, DVL, USBL, INS across drone, UGV, USV. Synthetic GPS denial and sensor noise injected post-trial for robustness validation.</div>
+          </div>
+          <div class="insight-row">
+            <div class="ins-num">03</div>
+            <div class="ins-text"><strong>Modular plug-and-play framework</strong><br>Backend-agnostic ROS2 pipeline. Python-based, Docker containerised, portable across platforms.</div>
+          </div>
+
+          <div class="key-rule">Sensors are interchangeable components. The pipeline doesn't care what's plugged in.</div>
+        </div>
+      </div>
+      <!-- <aside class="notes">04 / PROGENY · 75 s. "Prof Menon supervised this work directly · he can speak to it if you want more detail." Turn a potential conflict of interest into a credibility asset.</aside> -->
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 5 · CLOUD GCS  [60s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s5">
+        <div class="slide-label">05 / 10 </div>
+        <div class="slide-inner">
+          <div class="slide-header">
+            <h2 class="display">BVLOS Operations Infrastructure<br>for Multi-Drone System </h2>
+            <div class="slide-tag">05 / 10</div>
+          </div>
+
+          <div class="content-row">
+            <div class="left-stack">
+              <div class="caps-col">
+                <div class="cap hi">
+                  <span class="cap-name">ROS2 Drone-Side Server · Hub-and-Spoke Governance</span>
+                  <span class="cap-tag">Core Architecture</span>
+                </div>
+                <div class="cap hi">
+                  <span class="cap-name">JWT Auth · Secure Operator Access Control</span>
+                  <span class="cap-tag">Governance</span>
+                </div>
+                <div class="cap hi">
+                  <span class="cap-name">Hardware-Agnostic · BVLOS Capable</span>
+                  <span class="cap-tag">Operational</span>
+                </div>
+                <div class="cap hi">
+                  <span class="cap-name">SLAM / PNT Integration Ready</span>
+                  <span class="cap-tag">Navigation</span>
+                </div>
+                <div class="cap list">
+                  <span>Multi-Drone Scheduling</span><span>Live Telemetry</span><span>Mission Control</span>
+                </div>
+              </div>
+              <div class="gcs-arch-slot">
+                <img src="assets/images/gqmt_arch_2.drawio.svg" alt="System Architecture Diagram">
+              </div>
+            </div>
+
+            <div class="right-img-slot">
+              <!-- <img src="assets/images/ui_1.gif" alt="Drone BVLOS flight operations - UI Screenshot 1"> -->
+              <img src="assets/images/ui_2.gif" alt="Drone BVLOS flight operations - UI Screenshot 2">
+            </div>
+          </div>
+        </div>
+        <!-- <div class="deployed-footer">
+          <span>Fully deployed.</span> Not a prototype. Not a demo.
+        </div> -->
+      </div>
+      <!-- <aside class="notes">05 / Cloud GCS · 60 s. "This is the only project I'll show you today where I can say fully deployed without qualification. Everything else is in active development · this one is running."</aside> -->
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 6 · DIFFUSION TRAJECTORY MODEL  [75s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s4">
+        <div class="slide-label">06 / 10 </div>
+        <div class="slide-inner">
+          <div class="slide-header">
+            <h2 class="display">Trajectory Planning That<br>Assumes Sensor Failure</h2>
+            <div class="slide-tag">06 / 10</div>
+          </div>
+
+          <div class="content-row">
+            <div class="left-col">
+              <div class="arch-box-wrap">
+                <img src="assets/images/drone_flight2.gif" alt="Diffusion model architecture · sensor adapters, classifier-free guidance, graceful degradation">
+              </div>
+            </div>
+
+            <div class="right-col">
+              <div class="callout">
+                <div class="ct-title">Cross-Attention Adapters</div>
+                <div class="ct-body">Sensors plug in as adapters · not baked into the backbone. Any combination, any platform. Heterogeneous fleets supported by the architecture itself.</div>
+              </div>
+              <div class="callout">
+                <div class="ct-title">Classifier-Free Guidance</div>
+                <div class="ct-body">Sensor reliability is weighted at inference time. A noisy sensor gets downweighted · not trusted blindly. Directly extends the confidence-weighting logic from PROGENY.</div>
+              </div>
+              <div class="callout hi">
+                <div class="ct-title">Graceful Degradation</div>
+                <div class="ct-body">Multipath interference or signal spoofing detected · model continues on LiDAR and camera. No failure mode. Just a different conditioning signal.</div>
+              </div>
+              <div class="s4-status-tag">Currently: SITL / Simulation Testing</div>
+              <div class="key-line">
+                Sensor failure isn't an exception this system handles ·<br><span>it's the condition the architecture assumes from the start.</span><br><span style="font-size:9px;opacity:0.65;">(Multipath interference, signal spoofing, degraded sensors)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <aside class="notes">06 / Diffusion Model · 75 s. Pause after the key-line. Let it land. "This is currently in SITL / simulation testing · hardware validation is the natural next step. That's what months 7–12 are for."</aside> -->
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 7 · MULTI-AGENT RL COORDINATION  [75s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s6">
+        <div class="slide-label">07 / 10 </div>
+
+        <div class="s6-left">
+          <div>
+            <div class="slide-tag red" style="font-size:9px;margin-bottom:10px;">Architecture Decisions </div>
+            <h2 class="display white">Teaching Drones to<br>Coordinate Without a<br>Central Controller</h2>
+          </div>
+
+          <div class="s6-caption">
+            Each drone: own state + neighbour observations → independent policy → residual thrust + moment output
+          </div>
+
+          <div class="spec-list">
+            <div class="spec-item">
+              <div class="spec-label">Policy Type</div>
+              <div class="spec-val">Independent per agent · no central controller. Centralised control is a single point of failure. Doesn't scale to a port fleet.</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">State Space</div>
+              <div class="spec-val">Own state + neighbour observations. Coordination emerges from training · not hard-coded rules that break on edge cases.</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Action Space</div>
+              <div class="spec-val">Residual thrust + moment over a structured baseline. Better training stability. Maps cleanly to real actuator constraints.</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label">Training Condition</div>
+              <div class="spec-val">Crate mass and size randomised throughout training. Variable payloads are the training condition · not an edge case the policy sees once.</div>
+            </div>
+          </div>
+
+          <!-- <div class="cml"> -->
+            <!-- A policy that only works for one specific load<br>is a demo, not a <span>deployable product</span>. -->
+          <!-- </div> -->
+        </div>
+
+        <div class="s6-right">
+          <img src="assets/images/coop_lift.gif" alt="Multi-agent drone coordination">
+        </div>
+      </div>
+      <!-- <aside class="notes">07 / Multi-Agent RL · 75 s. The residual action space detail will land with the control professors · it signals you understand stability-learning tradeoffs. Say it clearly.</aside> -->
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 9 · DIRECT ALIGNMENT  [45s]
+         (second to last · kills panel concerns before Q&A)
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s2">
+        <div class="red-bar-left"></div>
+        <div class="slide-inner">
+          <div class="slide-header">
+            <h2 class="display">The Case For This Application</h2>
+            <div class="slide-tag">09 / 10</div>
+          </div>
+
+          <div class="brief-table">
+            <div class="brief-header">
+              <div class="brief-hcell">Requirement</div>
+              <div class="brief-hcell">Alignment</div>
+            </div>
+            <div class="brief-row strong">
+              <div class="brief-req">Modular Sensor Fusion · PNT</div>
+              <div class="brief-ev">PROGENY Task 79 · a standalone, scalable, modular fusion system. Built it, validated it, shipped it across three platforms.</div>
+            </div>
+            <div class="brief-row strong">
+              <div class="brief-req">Plug-and-play Integration &amp; System Communication</div>
+              <div class="brief-ev">The ROS2 pipeline was built around this principle from the start. Not retrofitted.</div>
+            </div>
+            <div class="brief-row strong">
+              <div class="brief-req">Simulation, Mission Planning &amp; Robotic Systems</div>
+              <div class="brief-ev">Gazebo, Isaac Sim, PyBullet · each project picked the right tool. Simulation is where assumptions get tested.</div>
+            </div>
+            <div class="brief-row">
+              <div class="brief-req">ML-Based Control &amp; Multi-Agent Systems</div>
+              <div class="brief-ev">RL across quadrupeds, humanoids, and multi-agent drones. Diffusion-based trajectory planning. Domain randomisation throughout · robustness isn't an afterthought.</div>
+            </div>
+            <div class="brief-row">
+              <div class="brief-req">Software Development &amp; Practical Application</div>
+              <div class="brief-ev">ROS2, Python, Docker, Flutter,  FastAPI, PostgreSQL, Azure CI/CD. Research and production experience across the stack.</div>
+            </div>
+            <div class="brief-row">
+              <div class="brief-req">Defence Exposure &amp; Industry Collaboration</div>
+              <div class="brief-ev">PROGENY involved direct collaboration with QinetiQ, Supacat, SeeByte, and the National Oceanography Centre. BPSS previously cleared.</div>
+            </div>
+            <div class="brief-row dim">
+              <div class="brief-req">Regulatory Frameworks - SORA, JARUS</div>
+              <div class="brief-ev">Studied seriously. Haven't built to them on a live system yet.</div>
+            </div>
+          </div>
+
+          <div class="brief-foot">This application isn't a pivot. It's a continuation.</div>
+        </div>
+      </div>
+      <!-- <aside class="notes">09 / Direct Alignment · 45 s. Don't read the table. Pick one row and speak to it. "The BPSS and relocation lines · those aren't small things. They kill two panel concerns before they're raised."</aside> -->
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 10 · CLOSE  [45s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s9">
+        <div class="slide-label light">10 / 10 </div>
+        <div class="s9-left">
+          <div class="s9-thank-you">
+            Thank you for your time.
+          </div>
+
+          <div class="s9-details">
+            <div class="s9-detail-row">
+              <div class="s9-detail-label">Availability</div>
+              <div class="s9-detail-val">On-site within one month of offer</div>
+            </div>
+            <div class="s9-detail-row">
+              <div class="s9-detail-label">BPSS Clearance</div>
+              <div class="s9-detail-val">Previously completed</div>
+            </div>
+            <div class="s9-detail-row">
+              <div class="s9-detail-label">Driver's Licence</div>
+              <div class="s9-detail-val">Valid</div>
+            </div>
+          </div>
+
+          <div class="s9-closing">
+          Autonomy in the real world · messy, constrained, unforgiving <br> that's the problem I want to spend my career on. <br>This is exactly where I belong
+          </div>
+
+          <div class="s9-top">
+            <div class="s9-name">Pranav Vijaya Kumar</div>
+            <!-- <div class="s9-role">KTP Associate · SAFEPOS · ISS Aerospace</div> -->
+            <div class="s9-position">Collaborative autonomy for environments that fight back.</div>
+          </div>
+        </div>
+
+        <div class="s9-right">
+          <div class="s9-contact-label">Contact</div>
+          <div class="s9-contact-block">
+            <div class="s9-c-item">
+              <div class="s9-c-label">Email</div>
+              <div class="s9-c-val">p.vijaya-kumar@exeter.ac.uk</div>
+            </div>
+            <div class="s9-c-item">
+              <div class="s9-c-label">LinkedIn</div>
+              <div class="s9-c-val">linkedin.com/in/pranavvijayakumar216/</div>
+            </div>
+            <div class="s9-c-item">
+              <div class="s9-c-label">GitHub</div>
+              <div class="s9-c-val">github.com/pranavvkumar21</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- <aside class="notes">10 / Close · 45 s. Let the last line land. Don't rush. No aggressive calls to action · the work speaks. "Build toward the solution with you" is deliberate: collaborative, not transactional.</aside> -->
+    </section>
+
+  </div>
 </div>
-<style>@keyframes ldraw{to{stroke-dashoffset:0}}</style>
 
-<!-- CURSOR -->
-<div id="cursor" aria-hidden="true">
-    <div class="c-dot"></div>
-    <div class="c-ring"></div>
-</div>
-
-<!-- SCROLL PROGRESS -->
-<div id="scroll-bar" aria-hidden="true"></div>
-
-<!-- THEME TOGGLE -->
-<button id="themeToggle" aria-label="Toggle theme">
-    <i class="fas fa-moon" id="themeIcon"></i>
-</button>
-
-<!-- NAV -->
-<nav id="nav">
-    <a href="#home" class="nav-logo">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="logo-hex-svg">
-            <polygon points="9,1 17,5 17,13 9,17 1,13 1,5" stroke="currentColor" stroke-width="1.2" fill="none"/>
-        </svg>
-        PK
-    </a>
-    <div class="nav-links" id="navLinks">
-        <a href="#home"         class="nav-link" data-s="home">Home</a>
-        <a href="#about"        class="nav-link" data-s="about">About</a>
-        <a href="#projects"     class="nav-link" data-s="projects">Projects</a>
-        <a href="#timeline"     class="nav-link" data-s="timeline">Journey</a>
-        <a href="#publications" class="nav-link" data-s="publications">Papers</a>
-        <a href="#github"       class="nav-link" data-s="github">GitHub</a>
-        <a href="#contact"      class="nav-link" data-s="contact">Contact</a>
-    </div>
-    <div class="nav-right">
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</nav>
-
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
-<section id="home" class="hero">
-    <canvas id="heroCanvas"></canvas>
-    <div class="grain" aria-hidden="true"></div>
-
-    <div class="hero-inner">
-        <div class="hero-left">
-            <div class="magic-badge" data-aos="fade-up">
-                <span class="badge-ping"></span>
-                <span class="mono badge-txt">Open to Opportunities</span>
-            </div>
-
-            <h1 class="hero-h1" data-aos="fade-up" data-aos-d="80">
-                <span class="h1-name" id="heroName">Pranav Kumar</span>
-                <span class="h1-role">
-                    <span class="mono role-gt">_</span><span id="typedRole"></span><span class="blink">|</span>
-                </span>
-            </h1>
-
-            <p class="hero-desc" data-aos="fade-up" data-aos-d="160">
-                Building intelligent machines at the intersection of bio-inspired robotics,
-                autonomous systems &amp; agentic AI. From quadrupeds to drones — if it moves and thinks, I build it.
-            </p>
-
-            <div class="hero-cta" data-aos="fade-up" data-aos-d="220">
-                <a href="#projects" class="btn-shimmer magnetic">
-                    <span class="bs-inner"><i class="fas fa-rocket"></i> View Projects</span>
-                    <span class="bs-sweep"></span>
-                </a>
-                <a href="#contact" class="btn-ghost magnetic">
-                    <i class="fas fa-terminal"></i> Get in Touch
-                </a>
-            </div>
-
-            <div class="hero-stats" data-aos="fade-up" data-aos-d="280">
-                <div class="h-stat"><span class="hs-n mono" data-count="10">0</span><span class="hs-n mono">+</span><span class="hs-l">Projects</span></div>
-                <div class="h-stat-div"></div>
-                <div class="h-stat"><span class="hs-n mono" data-count="5">0</span><span class="hs-l">Publications</span></div>
-                <div class="h-stat-div"></div>
-                <div class="h-stat"><span class="hs-n mono" data-count="3">0</span><span class="hs-n mono">+</span><span class="hs-l">Years Exp</span></div>
-            </div>
-        </div>
-
-        <div class="hero-right" data-aos="fade-left" data-aos-d="100">
-            <!-- Aurora profile card -->
-            <div class="aurora-card">
-                <div class="aurora-bg">
-                    <div class="aurora au1"></div>
-                    <div class="aurora au2"></div>
-                    <div class="aurora au3"></div>
-                </div>
-                <div class="aurora-content">
-                    <div class="profile-wrap">
-                        <div class="profile-glow-ring"></div>
-                        <picture>
-                            <source srcset="assets/cover.webp" type="image/webp">
-                            <img src="assets/cover.jpg" alt="Pranav Kumar" loading="eager" decoding="async" class="profile-img">
-                        </picture>
-                        <div class="online-dot" title="Available for work"></div>
-                    </div>
-                    <h3 class="a-name">Pranav Vijaya Kumar</h3>
-                    <p class="a-title mono">MSc Robotics</p>
-
-                    <div class="tech-pills">
-                        <span>ROS2</span><span>PyTorch</span><span>C++</span><span>SLAM</span><span>OpenCV</span>
-                    </div>
-
-                    <div class="a-socials">
-                        <a href="https://github.com/pranavvkumar21" target="_blank" class="a-soc magnetic" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" class="a-soc magnetic" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="/cdn-cgi/l/email-protection#1d6d6f7c737c6b6b7668707c6f2f2c5d7a707c7471337e7270" class="a-soc magnetic" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                        <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank" class="a-soc magnetic" aria-label="GrabCAD"><i class="fas fa-cube"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="scroll-hint">
-        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
-        <span class="mono">scroll</span>
-    </div>
-</section>
-
-<!-- ══════════════════════════════
-     ABOUT
-══════════════════════════════ -->
-<section id="about" class="s-about">
-    <div class="s-inner">
-        <div class="s-head" data-aos="fade-up">
-            <span class="s-num mono">01.</span>
-            <h2 class="s-title">About Me</h2>
-        </div>
-        <div class="about-grid">
-            <div class="about-text" data-aos="fade-up" data-aos-d="60">
-                <p class="about-lead">I've always been fascinated by machines that <em>think, adapt, and solve</em> problems.</p>
-                <p>That curiosity pushed me from mechanical engineering into robotics — where hardware, software, and intelligence collide. I've built microbial fuel cells that give robots bio-inspired emotions, and cross-domain localization tested on land, air, and sea.</p>
-                <p>I've worked on quadrupeds that learn to walk, agentic AI workflows, and vision-guided teleoperation. Today I focus on systems that don't just function — they <em>leave a mark.</em></p>
-            </div>
-
-            <div class="skill-board" data-aos="fade-up" data-aos-d="120">
-                <div class="sg">
-                    <span class="sg-lbl mono">&gt; robotics_</span>
-                    <div class="sg-tags">
-                        <span>ROS2</span><span>Gazebo</span><span>MoveIt</span>
-                        <span>SLAM</span><span>Legged</span><span>Teleoperation</span>
-                    </div>
-                </div>
-                <div class="sg">
-                    <span class="sg-lbl mono">&gt; ai_ml_</span>
-                    <div class="sg-tags">
-                        <span>PyTorch</span><span>RL</span><span>Transformers</span>
-                        <span>YOLO</span><span>OpenCV</span>
-                    </div>
-                </div>
-                <div class="sg">
-                    <span class="sg-lbl mono">&gt; systems_</span>
-                    <div class="sg-tags">
-                        <span>Python</span><span>C++</span><span>Docker</span>
-                        <span>Linux</span><span>Embedded</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════
-     PROJECTS
-══════════════════════════════ -->
-<section id="projects" class="s-projects">
-    <div class="s-inner">
-        <div class="s-head" data-aos="fade-up">
-            <span class="s-num mono">02.</span>
-            <h2 class="s-title">Featured Projects</h2>
-        </div>
-        <div id="projects-container" class="projects-grid">
-            <div class="ld-state mono"><span class="ld-dot"></span> Fetching projects...</div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════
-     TIMELINE
-══════════════════════════════ -->
-<section id="timeline" class="s-timeline">
-    <div class="s-inner">
-        <div class="s-head" data-aos="fade-up">
-            <span class="s-num mono">03.</span>
-            <h2 class="s-title">Journey</h2>
-        </div>
-
-        <div class="timeline-wrap">
-            <!-- central spine -->
-            <div class="tl-spine" id="tlSpine"></div>
-
-            <div class="tl-item tl-left" data-aos="fade-right">
-                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
-                <div class="tl-card">
-                    <span class="tl-year mono">Jan 2025 – Oct 2025</span>
-                    <h3>AI Product Developer</h3>
-                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> Kelltron Cyber Security Services</p>
-                    <p class="tl-desc">Developed LangChain/LLM framework with PostgreSQL for automated role mining, conflict detection, and Teams IAM chatbot. Deployed modular REST-ready AI solutions to Azure via Docker/GitHub Actions CI/CD.</p>
-                    <div class="tl-tags"><span>LangChain</span><span>PostgreSQL</span><span>Docker</span><span>Azure</span></div>
-                </div>
-            </div>
-
-            <div class="tl-item tl-right" data-aos="fade-left">
-                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
-                <div class="tl-card">
-                    <span class="tl-year mono">Jul 2023 – Aug 2024</span>
-                    <h3>Research Assistant</h3>
-                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> University of Exeter, UK</p>
-                    <p class="tl-desc">Developed DSTL-funded cross-domain localization system with adaptive sensor fusion using ROS2, Python &amp; Docker. Conducted field trials with QinetiQ, Supacat, SeeByte, and NOC, achieving measurable gains over standalone SLAM baselines.</p>
-                    <div class="tl-tags"><span>ROS2</span><span>SLAM</span><span>Sensor Fusion</span><span>Docker</span></div>
-                </div>
-            </div>
-
-            <div class="tl-item tl-left" data-aos="fade-right">
-                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
-                <div class="tl-card">
-                    <span class="tl-year mono">Jun 2022 – Jul 2022</span>
-                    <h3>Robotics Intern</h3>
-                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> Bristol Robotics Laboratory, UK</p>
-                    <p class="tl-desc">Designed and simulated a custom quadruped robot in PyBullet with full URDF model for gait training. Optimised PPO reinforcement learning rewards, achieving 95% average episodic reward with stable and repeatable locomotion.</p>
-                    <div class="tl-tags"><span>PyBullet</span><span>PPO</span><span>RL</span><span>URDF</span></div>
-                </div>
-            </div>
-
-            <div class="tl-item tl-right" data-aos="fade-left">
-                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
-                <div class="tl-card">
-                    <span class="tl-year mono">2021 – 2022</span>
-                    <h3>MSc Robotics</h3>
-                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> University of Bristol &amp; UWE Bristol, UK</p>
-                    <p class="tl-desc">Advanced study in autonomous systems, legged locomotion, and robot learning. Specialisation in learning-based control and real-world deployment of robotic platforms.</p>
-                    <div class="tl-tags"><span>ROS</span><span>PyTorch</span><span>C++</span><span>Gazebo</span></div>
-                </div>
-            </div>
-
-            <div class="tl-item tl-left" data-aos="fade-right">
-                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
-                <div class="tl-card">
-                    <span class="tl-year mono">Sep 2020 – Sep 2021</span>
-                    <h3>Research Assistant</h3>
-                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> Mechatronics &amp; Intelligent Systems Research Lab</p>
-                    <p class="tl-desc">Designed and analysed pneumatic soft bellow actuators for a soft SCARA robot. Built and tested the full pneumatic system for automated egg palletising, demonstrating a projected 40% reduction in packaging costs.</p>
-                    <div class="tl-tags"><span>Soft Robotics</span><span>Pneumatics</span><span>CAD</span><span>Embedded C</span></div>
-                </div>
-            </div>
-
-            <div class="tl-item tl-right" data-aos="fade-left">
-                <div class="tl-dot"><span class="tl-dot-ring"></span></div>
-                <div class="tl-card">
-                    <span class="tl-year mono">2016 – 2020</span>
-                    <h3>BTech Mechanical Engineering</h3>
-                    <p class="tl-where"><i class="fas fa-map-marker-alt"></i> Amrita Vishwa Vidyapeetham, India</p>
-                    <p class="tl-desc">Foundation in mechanical design, embedded systems, and control theory. Early robotics projects including an octagonal space rover and bio-inspired SCARA robot with pneumatic gripper for the poultry industry.</p>
-                    <div class="tl-tags"><span>CAD</span><span>Arduino</span><span>Embedded C</span><span>Control Theory</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════
-     PUBLICATIONS
-══════════════════════════════ -->
-<section id="publications" class="s-pubs">
-    <div class="s-inner">
-        <div class="s-head" data-aos="fade-up">
-            <span class="s-num mono">04.</span>
-            <h2 class="s-title">Publications</h2>
-        </div>
-        <ul class="pub-list" id="pubList">
-            <div class="ld-state mono"><span class="ld-dot"></span> Loading...</div>
-        </ul>
-    </div>
-</section>
-
-<!-- ══════════════════════════════
-     GITHUB
-══════════════════════════════ -->
-<section id="github" class="s-github">
-    <div class="s-inner">
-        <div class="s-head" data-aos="fade-up">
-            <span class="s-num mono">05.</span>
-            <h2 class="s-title">GitHub Stats</h2>
-        </div>
-        <div id="githubStats" class="gh-grid">
-            <div class="ld-state mono"><span class="ld-dot"></span> Fetching data...</div>
-        </div>
-        <div id="ghLangs" class="gh-langs" data-aos="fade-up"></div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════
-     CONTACT
-══════════════════════════════ -->
-<section id="contact" class="s-contact">
-    <div class="s-inner">
-        <div class="s-head" data-aos="fade-up">
-            <span class="s-num mono">06.</span>
-            <h2 class="s-title">Get In Touch</h2>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-left" data-aos="fade-up" data-aos-d="60">
-                <p class="contact-lead">Open to robotics research, AI engineering, and interesting collaborations.</p>
-                <div class="contact-links">
-                    <a href="/cdn-cgi/l/email-protection#2c5c5e4d424d5a5a4759414d5e1e1d6c4b414d4540024f4341" class="c-link magnetic">
-                        <div class="c-ico"><i class="fas fa-envelope"></i></div>
-                        <div class="c-info"><span class="mono c-lbl">email</span><span><span class="__cf_email__" data-cfemail="5d2d2f3c333c2b2b3628303c2f6f6c1d3a303c3431733e3230">pranavvkumar21@gmail.com</span></span></div>
-                        <i class="fas fa-arrow-right c-arr"></i>
-                    </a>
-                    <a href="/cdn-cgi/l/email-protection#62124c140b08031b034f09170f031022071a071607104c03014c1709" class="c-link magnetic">
-                        <div class="c-ico"><i class="fas fa-university"></i></div>
-                        <div class="c-info"><span class="mono c-lbl">academic</span><span><span class="__cf_email__" data-cfemail="0b7b257d62616a726a26607e666a794b6e736e7f6e79256a68257e60">p.vijaya-kumar@exeter.ac.uk</span></span></div>
-                        <i class="fas fa-arrow-right c-arr"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank" class="c-link magnetic">
-                        <div class="c-ico"><i class="fab fa-linkedin"></i></div>
-                        <div class="c-info"><span class="mono c-lbl">linkedin</span><span>pranavvijayakumar216</span></div>
-                        <i class="fas fa-arrow-right c-arr"></i>
-                    </a>
-                    <a href="https://github.com/pranavvkumar21" target="_blank" class="c-link magnetic">
-                        <div class="c-ico"><i class="fab fa-github"></i></div>
-                        <div class="c-info"><span class="mono c-lbl">github</span><span>pranavvkumar21</span></div>
-                        <i class="fas fa-arrow-right c-arr"></i>
-                    </a>
-                    <a href="tel:+447824074707" class="c-link magnetic">
-                        <div class="c-ico"><i class="fab fa-whatsapp"></i></div>
-                        <div class="c-info"><span class="mono c-lbl">whatsapp</span><span>+44 7824 074707</span></div>
-                        <i class="fas fa-arrow-right c-arr"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Terminal Form -->
-            <div class="terminal-card" data-aos="fade-up" data-aos-d="140">
-                <div class="term-bar">
-                    <span class="term-dot dot-r"></span>
-                    <span class="term-dot dot-y"></span>
-                    <span class="term-dot dot-g"></span>
-                    <span class="mono term-title">message.sh</span>
-                </div>
-                <div class="term-body">
-                    <form id="contact-form" action="https://formspree.io/f/xgvrnvba" method="POST">
-                        <div class="t-row">
-                            <span class="mono t-prompt"><span class="t-gt">$</span> name_</span>
-                            <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
-                        </div>
-                        <div class="t-row">
-                            <span class="mono t-prompt"><span class="t-gt">$</span> email_</span>
-                            <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
-                        </div>
-                        <div class="t-row t-row-ta">
-                            <span class="mono t-prompt"><span class="t-gt">$</span> message_</span>
-                            <textarea name="message" rows="4" placeholder="What's on your mind?" required></textarea>
-                        </div>
-                        <input type="hidden" name="_subject" value="New Portfolio Contact">
-                        <button type="submit" class="btn-shimmer submit-btn magnetic" style="width:100%;margin-top:.75rem;justify-content:center">
-                            <span class="bs-inner"><i class="fas fa-paper-plane"></i> Send Message</span>
-                            <span class="bs-sweep"></span>
-                        </button>
-                    </form>
-                    <div id="form-status"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-    <div class="foot-inner">
-        <span class="mono">© 2024 Pranav Vijaya Kumar</span>
-        <div class="foot-soc">
-            <a href="https://linkedin.com/in/pranavvijayakumar216" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/pranavvkumar21" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://grabcad.com/pranav.vijaya.kumar-1" target="_blank"><i class="fas fa-cube"></i></a>
-        </div>
-        <span class="mono">built with <span style="color:var(--sky)">♥</span> &amp; caffeine</span>
-    </div>
-</footer>
-
-<!-- MODAL -->
-<div id="projectModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-bg"></div>
-    <div class="modal-box">
-        <button class="modal-x" aria-label="Close"><i class="fas fa-times"></i></button>
-        <div class="modal-hdr">
-            <h2 id="modalTitle"></h2>
-            <div id="modalTags"></div>
-        </div>
-        <div class="modal-bdy">
-            <img id="modalImage" src="" alt="" loading="lazy" decoding="async">
-         <p id="modalDescription"></p>
-            <div id="modalLinks"></div>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<script src="script.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1100, height: 619,
+    margin: 0.04, minScale: 0.2, maxScale: 2.0,
+    controls: true, controlsTutorial: false,
+    progress: true, hash: true, history: true,
+    keyboard: true, overview: true, center: false,
+    touch: true, loop: false, rtl: false,
+    shuffle: false, fragments: false, fragmentInURL: false,
+    transition: 'convex', transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    showNotes: false, disableLayout: false,
+    slideNumber: 'c/t',
+  });
+</script>
 </body>
 </html>

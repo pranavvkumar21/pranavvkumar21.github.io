@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-03-07T00:00:00.000Z" agent="Claude" version="21.0.0" type="device">
+  <diagram name="Drone Management Architecture" id="drone-arch-main">
+    <mxGraphModel dx="1800" dy="1000" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1050" math="0" shadow="1" background="#0d1b2e">
+
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- BACKGROUND SECTIONS -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- GCS Section Background -->
+        <mxCell id="bg_gcs" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d2240;strokeColor=#1a4a7a;strokeWidth=2;opacity=60;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="30" y="100" width="300" height="560" as="geometry" />
+        </mxCell>
+
+        <!-- Cloud Infrastructure Section Background -->
+        <mxCell id="bg_cloud" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d2240;strokeColor=#1a4a7a;strokeWidth=2;opacity=60;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="380" y="100" width="680" height="560" as="geometry" />
+        </mxCell>
+
+        <!-- Drones Section Background -->
+        <mxCell id="bg_drones" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d2240;strokeColor=#1a4a7a;strokeWidth=2;opacity=60;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="100" width="640" height="560" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- SECTION TITLES -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <mxCell id="title_gcs" value="GROUND CONTROL&#xa;STATION (GCS)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#FFFFFF;letterSpacing=2;" vertex="1" parent="1">
+          <mxGeometry x="30" y="108" width="300" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="title_cloud" value="CLOUD INFRASTRUCTURE" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#FFFFFF;letterSpacing=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="108" width="680" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="title_drones" value="DRONES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#FFFFFF;letterSpacing=2;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="108" width="640" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- GROUND CONTROL STATION -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- Flutter GCS App Box -->
+        <mxCell id="flutter_app" value="&lt;b&gt;FLUTTER GCS APP&lt;/b&gt;&#xa;&#xa;UI / UX&#xa;MULTIPLE DRONE CONTROL&#xa;TIME SCHEDULING" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#2196F3;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;arcSize=8;shadow=1;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="65" y="360" width="230" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- CLOUD INFRASTRUCTURE - Cloud Shape -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- Cloud outer shape (simulated with rounded rect) -->
+        <mxCell id="cloud_body" value="" style="shape=mxgraph.cisco.sites.generic_building;fillColor=#0d3060;strokeColor=#1565C0;strokeWidth=3;opacity=40;" vertex="1" parent="1">
+          <mxGeometry x="410" y="160" width="620" height="460" as="geometry" />
+        </mxCell>
+
+        <!-- Cloud shape overlay -->
+        <mxCell id="cloud_shape" value="" style="shape=cloud;fillColor=#0d3870;strokeColor=#1976D2;strokeWidth=2;opacity=70;" vertex="1" parent="1">
+          <mxGeometry x="415" y="158" width="618" height="468" as="geometry" />
+        </mxCell>
+
+        <!-- Authentication Service -->
+        <mxCell id="auth_service" value="&lt;b&gt;AUTHENTICATION SERVICE&lt;/b&gt;&#xa;(JWT TOKEN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d3870;strokeColor=#42A5F5;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;arcSize=10;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="200" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Lock icon on Auth -->
+        <mxCell id="lock_icon" value="🔒" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="700" y="174" width="40" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- API Gateway -->
+        <mxCell id="api_gateway" value="&lt;b&gt;API GATEWAY / CONTROL LOGIC&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d3870;strokeColor=#42A5F5;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;arcSize=10;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="310" width="300" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Permission & Access Manager -->
+        <mxCell id="permission_mgr" value="&lt;b&gt;PERMISSION &amp;amp;&#xa;ACCESS MANAGER&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d3870;strokeColor=#42A5F5;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;arcSize=10;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="405" width="185" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Schedule Manager -->
+        <mxCell id="schedule_mgr" value="&lt;b&gt;SCHEDULE&#xa;MANAGER&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d3870;strokeColor=#42A5F5;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;arcSize=10;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="405" width="185" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Client Integration API -->
+        <mxCell id="client_api" value="&lt;b&gt;CLIENT INTEGRATION API&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d3870;strokeColor=#42A5F5;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;arcSize=10;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="510" width="300" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Cloud Server Hub Label -->
+        <mxCell id="cloud_hub_label" value="CLOUD SERVER (HUB)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#90CAF9;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="583" width="180" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- MongoDB Database -->
+        <mxCell id="mongodb" value="&lt;b&gt;MONGODB&#xa;DATABASE&lt;/b&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;align=center;verticalAlign=middle;shadow=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="630" y="620" width="140" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Lock icon on MongoDB connection -->
+        <mxCell id="lock_mongo" value="🔒" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="692" y="600" width="30" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- DRONE 1 -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- Drone 1 outer box -->
+        <mxCell id="drone1_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a2a4a;strokeColor=#1E88E5;strokeWidth=2;arcSize=6;opacity=80;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="160" width="580" height="260" as="geometry" />
+        </mxCell>
+
+        <mxCell id="drone1_title" value="DRONE 1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#FFFFFF;fontSize=13;fontStyle=1;letterSpacing=2;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="165" width="580" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="drone1_computer_label" value="ONBOARD COMPUTER" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#90CAF9;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="193" width="580" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- Drone 1 Docker Container -->
+        <mxCell id="drone1_docker" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d3060;strokeColor=#1565C0;strokeWidth=1.5;arcSize=6;opacity=90;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="220" width="540" height="185" as="geometry" />
+        </mxCell>
+
+        <mxCell id="drone1_docker_label" value="DEPLOYABLE CONTAINER (DOCKER)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#64B5F6;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="222" width="540" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- Flight Control Agent D1 -->
+        <mxCell id="d1_flight" value="&lt;b&gt;FLIGHT CONTROL&#xa;AGENT&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=10;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="250" width="175" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Telemetry Streamer D1 -->
+        <mxCell id="d1_telem" value="&lt;b&gt;TELEMETRY&#xa;STREAMER&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=10;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="250" width="175" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Local Data Cache D1 -->
+        <mxCell id="d1_cache" value="&lt;b&gt;LOCAL DATA&#xa;CACHE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=10;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="330" width="175" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Intelligent Algorithms D1 -->
+        <mxCell id="d1_algo" value="&lt;b&gt;INTELLIGENT&#xa;ALGORITHMS&lt;/b&gt;&#xa;(e.g., SLAM, AI INFERENCE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=10;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="330" width="175" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- ELLIPSIS BETWEEN DRONES -->
+        <!-- ═══════════════════════════════════════════════ -->
+        <mxCell id="ellipsis" value="•  •  •" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#90CAF9;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="430" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- DRONE N -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- Drone N outer box -->
+        <mxCell id="dronen_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a2a4a;strokeColor=#1E88E5;strokeWidth=2;arcSize=6;opacity=80;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="480" width="580" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dronen_title" value="DRONE N" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#FFFFFF;fontSize=13;fontStyle=1;letterSpacing=2;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="484" width="580" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dronen_computer_label" value="ONBOARD COMPUTER" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#90CAF9;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="506" width="580" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- Drone N Docker Container -->
+        <mxCell id="dronen_docker" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d3060;strokeColor=#1565C0;strokeWidth=1.5;arcSize=6;opacity=90;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="528" width="540" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dronen_docker_label" value="DEPLOYABLE CONTAINER (DOCKER)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#64B5F6;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="530" width="540" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- Flight Control Agent DN -->
+        <mxCell id="dn_flight" value="&lt;b&gt;FLIGHT CONTROL&#xa;AGENT&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=10;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="552" width="130" height="58" as="geometry" />
+        </mxCell>
+
+        <!-- Telemetry Streamer DN -->
+        <mxCell id="dn_telem" value="&lt;b&gt;TELEMETRY&#xa;STREAMER&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=10;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1315" y="552" width="130" height="58" as="geometry" />
+        </mxCell>
+
+        <!-- Local Data Cache DN -->
+        <mxCell id="dn_cache" value="&lt;b&gt;LOCAL DATA&#xa;CACHE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=10;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1463" y="552" width="130" height="58" as="geometry" />
+        </mxCell>
+
+        <!-- Intelligent Algorithms DN -->
+        <mxCell id="dn_algo" value="&lt;b&gt;INTELLIGENT ALGORITHMS&lt;/b&gt;&#xa;(e.g., SLAM, AI INFERENCE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1165" y="552" width="0" height="0" as="geometry" />
+        </mxCell>
+
+        <!-- Rearranged DN modules to fit 4 in a row -->
+        <mxCell id="dn_algo2" value="&lt;b&gt;INTELLIGENT ALGORITHMS&lt;/b&gt;&#xa;(e.g., SLAM, AI INFERENCE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a3060;strokeColor=#42A5F5;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;align=center;verticalAlign=middle;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1463" y="552" width="0" height="0" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- JWT TOKEN LABELS (top) -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- JWT Token - GCS to Cloud -->
+        <mxCell id="jwt_label1" value="JWT TOKEN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#90CAF9;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="170" width="100" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- JWT Token - Cloud to Drone -->
+        <mxCell id="jwt_label2" value="JWT TOKEN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#90CAF9;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="970" y="170" width="100" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- JWT Star icons -->
+        <mxCell id="jwt_star1" value="✦" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#FF6B6B;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="320" y="166" width="24" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="jwt_star2" value="✦" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#FF6B6B;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="958" y="166" width="24" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- CONNECTIONS / ARROWS -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- JWT Token arrow: GCS to Auth Service (top horizontal) -->
+        <mxCell id="edge_jwt_gcs_cloud" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=2;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=none;" edge="1" parent="1" source="flutter_app" target="auth_service">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="178" />
+              <mxPoint x="570" y="178" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- JWT Token arrow: Auth to Drone1 (top horizontal) -->
+        <mxCell id="edge_jwt_cloud_drone1" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=2;exitX=1;exitY=0;exitDx=0;exitDy=0;endArrow=block;endFill=1;" edge="1" parent="1" source="auth_service" target="drone1_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="178" />
+              <mxPoint x="1130" y="178" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Operator Commands: Flutter to API Gateway -->
+        <mxCell id="edge_operator_cmd" value="OPERATOR COMMANDS" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#64B5F6;strokeWidth=1.5;endArrow=block;endFill=1;fontColor=#90CAF9;fontSize=9;fontStyle=1;labelBackgroundColor=none;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="flutter_app" target="api_gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- JWT back to Flutter -->
+        <mxCell id="edge_jwt_back" value="✦ JWT" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#FF6B6B;strokeWidth=1.5;endArrow=block;endFill=1;fontColor=#FF9090;fontSize=9;fontStyle=1;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="1" source="api_gateway" target="flutter_app">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Telemetry View label on edge back -->
+        <mxCell id="label_telem_view" value="TELEMETRY VIEW" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#90CAF9;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="420" width="120" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- HTTPS / REST / WebSockets: Auth Service vertical -->
+        <mxCell id="edge_https_auth_api" value="HTTPS / REST / WEBSOCKETS" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=1.5;endArrow=block;endFill=1;startArrow=block;startFill=1;fontColor=#90CAF9;fontSize=9;fontStyle=1;dashed=1;dashPattern=8 4;" edge="1" parent="1" source="auth_service" target="api_gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- API Gateway to Permission Manager -->
+        <mxCell id="edge_api_perm" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="api_gateway" target="permission_mgr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- API Gateway to Schedule Manager -->
+        <mxCell id="edge_api_sched" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="api_gateway" target="schedule_mgr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Permission Manager to Client API -->
+        <mxCell id="edge_perm_client" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="permission_mgr" target="client_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Schedule Manager to Client API -->
+        <mxCell id="edge_sched_client" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="schedule_mgr" target="client_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Client API to MongoDB -->
+        <mxCell id="edge_client_mongo" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=1.5;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1" source="client_api" target="mongodb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Cloud to Drone 1: Telemetry Stream -->
+        <mxCell id="edge_telem_d1" value="TELEMETRY STREAM" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=1.5;endArrow=block;endFill=1;fontColor=#90CAF9;fontSize=9;fontStyle=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="cloud_shape" target="drone1_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Cloud to Drone 1: Command & Control -->
+        <mxCell id="edge_cmd_d1" value="COMMAND &amp; CONTROL" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#64B5F6;strokeWidth=1.5;endArrow=block;endFill=1;startArrow=block;startFill=1;fontColor=#90CAF9;fontSize=9;fontStyle=1;exitX=1;exitY=0.45;exitDx=0;exitDy=0;entryX=0;entryY=0.45;entryDx=0;entryDy=0;" edge="1" parent="1" source="cloud_shape" target="drone1_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- JWT to Drone1 -->
+        <mxCell id="edge_jwt_d1" value="✦ JWT" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#FF6B6B;strokeWidth=1.5;endArrow=block;endFill=1;startArrow=block;startFill=1;fontColor=#FF9090;fontSize=9;fontStyle=1;exitX=1;exitY=0.6;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="cloud_shape" target="drone1_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Cloud to Drone N: Telemetry Stream -->
+        <mxCell id="edge_telem_dn" value="TELEMETRY STREAM" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#42A5F5;strokeWidth=1.5;endArrow=block;endFill=1;fontColor=#90CAF9;fontSize=9;fontStyle=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="cloud_shape" target="dronen_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Cloud to Drone N: Command & Control -->
+        <mxCell id="edge_cmd_dn" value="COMMAND &amp; CONTROL" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#64B5F6;strokeWidth=1.5;endArrow=block;endFill=1;startArrow=block;startFill=1;fontColor=#90CAF9;fontSize=9;fontStyle=1;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=0;entryY=0.55;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="cloud_shape" target="dronen_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- JWT to DroneN -->
+        <mxCell id="edge_jwt_dn" value="✦ JWT" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#FF6B6B;strokeWidth=1.5;endArrow=block;endFill=1;startArrow=block;startFill=1;fontColor=#FF9090;fontSize=9;fontStyle=1;exitX=1;exitY=0.95;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="cloud_shape" target="dronen_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- LEGEND BOX -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a2040;strokeColor=#1E88E5;strokeWidth=1.5;arcSize=6;opacity=90;" vertex="1" parent="1">
+          <mxGeometry x="280" y="720" width="900" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend_title" value="LEGEND:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="295" y="728" width="70" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- Legend: Lines -->
+        <mxCell id="leg_line" value="Lines" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#90CAF9;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="728" width="60" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_line_arrow" value="" style="edgeStyle=none;html=1;strokeColor=#64B5F6;strokeWidth=2;endArrow=none;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="745" as="sourcePoint" />
+            <mxPoint x="428" y="745" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend: HTTPS/REST/Swoflow -->
+        <mxCell id="leg_https" value="HTTPS / REST / Swoflow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#90CAF9;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="570" y="728" width="155" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_https_arrow" value="" style="edgeStyle=none;html=1;strokeColor=#64B5F6;strokeWidth=2;endArrow=none;dashed=1;dashPattern=8 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="498" y="745" as="sourcePoint" />
+            <mxPoint x="568" y="745" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend: Security / Flow -->
+        <mxCell id="leg_sec" value="Security / Flow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#90CAF9;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="728" width="110" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sec_arrow" value="" style="edgeStyle=none;html=1;strokeColor=#42A5F5;strokeWidth=2;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="730" y="745" as="sourcePoint" />
+            <mxPoint x="798" y="745" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend: JWT and Data Flow -->
+        <mxCell id="leg_jwt" value="✦ JWT and Data Flow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#FF9090;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="990" y="728" width="150" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_jwt_arrow" value="" style="edgeStyle=none;html=1;strokeColor=#FF6B6B;strokeWidth=2;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="916" y="745" as="sourcePoint" />
+            <mxPoint x="988" y="745" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAFEPOS — Pranav Vijaya Kumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EDEBE7;
+    --black: #111111;
+    --red: #C1121F;
+    --grey: #888580;
+    --light-grey: #D4D1CC;
+    --white: #F9F7F4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #141414;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 20px 80px;
+    min-height: 100vh;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  .deck {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .slide-wrapper {
+    position: relative;
+    margin-top: 52px;
+  }
+
+  .slide-label {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .slide {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+  }
+
+  /* ── IMAGE PLACEHOLDER SYSTEM ── */
+  .img-placeholder {
+    background: #1e1e1e;
+    border: 1px dashed #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .img-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.015) 20px,
+      rgba(255,255,255,0.015) 21px
+    );
+  }
+
+  .img-placeholder .ph-icon {
+    font-size: 28px;
+    opacity: 0.3;
+  }
+
+  .img-placeholder .ph-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5;
+    padding: 0 12px;
+  }
+
+  .img-placeholder .ph-size {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: #333;
+    letter-spacing: 0.08em;
+  }
+
+  /* on light bg variants */
+  .img-placeholder.light {
+    background: #d8d5d0;
+    border-color: #bbb;
+  }
+  .img-placeholder.light .ph-label { color: #888; }
+  .img-placeholder.light .ph-size { color: #aaa; }
+  .img-placeholder.light::before {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(0,0,0,0.03) 20px,
+      rgba(0,0,0,0.03) 21px
+    );
+  }
+
+  /* ── SHARED TYPOGRAPHY ── */
+  .slide-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .slide-tag.red { color: var(--red); }
+  .slide-tag.white { color: rgba(255,255,255,0.4); }
+
+  h2.display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 4.2vw, 56px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    color: var(--black);
+  }
+
+  h2.display.white { color: #fff; }
+
+  /* ── RED ACCENT BAR ── */
+  .red-bar-left {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--red);
+  }
+
+  /* ============================================================
+     SLIDE 1 — THE HOOK (cinematic port BG)
+  ============================================================ */
+  #s1 {
+    background: var(--black);
+    flex-direction: column;
+  }
+
+  /* Port background — swap src to real image */
+  #s1 .port-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('PORT_BG_IMAGE.jpg'); /* ← REPLACE with real image path */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;
+    filter: grayscale(40%);
+  }
+
+  /* Fallback rendered port when no image */
+  #s1 .port-bg-fallback {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 40%, #0d1117 100%);
+  }
+
+  #s1 .port-bg-fallback::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.012) 80px, rgba(255,255,255,0.012) 81px),
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px);
+  }
+
+  #s1 .dark-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.2) 100%);
+  }
+
+  #s1 .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 36px 52px;
+  }
+
+  #s1 .question {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5.8vw, 72px);
+    line-height: 0.88;
+    color: #fff;
+    max-width: 68%;
+    margin-top: 16px;
+  }
+
+  #s1 .constraints {
+    display: flex;
+    gap: 0;
+    margin-top: 24px;
+  }
+
+  #s1 .constraint-pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.75);
+    padding: 5px 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-right: none;
+    backdrop-filter: blur(4px);
+  }
+
+  #s1 .constraint-pill:first-child {
+    border-left: 3px solid var(--red);
+  }
+
+  #s1 .constraint-pill:last-child {
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+
+  #s1 .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  #s1 .name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: #fff;
+  }
+
+  #s1 .title-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  #s1 .env-panel {
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  #s1 .env-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  #s1 .env-item::before {
+    content: '— ';
+    color: var(--red);
+    opacity: 0.7;
+  }
+
+  /* ============================================================
+     SLIDE 2 — THE UNSOLVED PROBLEM
+  ============================================================ */
+  #s2 .diagram {
+    display: flex;
+    flex: 1;
+    gap: 0;
+    margin-top: 10px;
+  }
+
+  #s2 .diagram-col {
+    flex: 1;
+    border: 1px solid var(--light-grey);
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #s2 .diagram-col.right { border-left: none; border-left: 3px solid var(--red); }
+
+  #s2 .col-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  #s2 .col-status.solved { color: var(--grey); }
+  #s2 .col-status.hard { color: var(--red); }
+
+  #s2 .col-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 3vw, 36px);
+    line-height: 1;
+    color: var(--black);
+  }
+
+  #s2 .tag-list { display: flex; flex-direction: column; gap: 5px; margin-top: auto; }
+
+  #s2 .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--grey);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--light-grey);
+  }
+
+  #s2 .tag.on { color: var(--black); }
+
+  #s2 .rl-box {
+    border-top: 2px solid var(--black);
+    padding-top: 10px;
+    margin-top: 6px;
+  }
+
+  #s2 .rl-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  #s2 .rl-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--black);
+    font-weight: 300;
+  }
+
+  #s2 .bottom-rule {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--black);
+    border-top: 1px solid var(--black);
+    padding-top: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  #s2 .bottom-rule span { color: var(--red); font-weight: 600; }
+
+  /* ============================================================
+     SLIDE 3 — PROGENY (with architecture image placeholder)
+  ============================================================ */
+  #s3 .left-dark {
+    width: 40%;
+    background: var(--black);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #s3 .proj-id {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  #s3 .proj-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 0.88;
+    color: #fff;
+  }
+
+  #s3 .partner-list { display: flex; flex-direction: column; gap: 6px; }
+
+  #s3 .partner {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #666;
+    padding: 6px 0;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #s3 .partner span {
+    color: #999;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  #s3 .supervisor {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  #s3 .supervisor em { color: var(--red); font-style: normal; }
+
+  #s3 .right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 36px;
+    gap: 14px;
+  }
+
+  #s3 .arch-img-slot {
+    flex: 1;
+    min-height: 0;
+  }
+
+  #s3 .insight-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  #s3 .ins-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    min-width: 20px;
+    margin-top: 2px;
+  }
+
+  #s3 .ins-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--black);
+    font-weight: 300;
+  }
+
+  #s3 .ins-text strong { font-weight: 500; }
+
+  #s3 .key-rule {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--black);
+    background: var(--light-grey);
+    padding: 8px 12px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============================================================
+     SLIDE 4 — DIFFUSION MODEL (with output image placeholders)
+  ============================================================ */
+  #s4 .content-row {
+    display: flex;
+    gap: 28px;
+    flex: 1;
+    margin-top: 12px;
+    min-height: 0;
+  }
+
+  #s4 .left-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  #s4 .arch-box-wrap {
+    flex: 1;
+    min-height: 0;
+    border: 1px solid var(--light-grey);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .abox {
+    border: 1px solid var(--light-grey);
+    padding: 5px 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    color: var(--grey);
+  }
+
+  .abox.backbone {
+    background: var(--black);
+    color: var(--white);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 8px;
+    border-color: var(--black);
+  }
+
+  .abox.failed {
+    border: 1px dashed var(--red);
+    color: var(--red);
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+
+  .abox.on { border-color: var(--black); color: var(--black); }
+
+  .arch-row-flex {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arch-arrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--grey);
+    text-align: center;
+  }
+
+  #s4 .output-row {
+    display: flex;
+    gap: 8px;
+    height: 72px;
+  }
+
+  #s4 .output-slot {
+    flex: 1;
+    position: relative;
+  }
+
+  #s4 .output-label {
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    z-index: 2;
+  }
+
+  #s4 .output-label.red-lbl { color: var(--red); }
+  #s4 .output-label.grey-lbl { color: var(--grey); }
+
+  #s4 .right-col {
+    width: 42%;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  #s4 .callout {
+    padding: 11px 14px;
+    border-left: 2px solid var(--light-grey);
+    flex: 1;
+  }
+
+  #s4 .callout.hi { border-left: 3px solid var(--red); background: rgba(193,18,31,0.03); }
+
+  #s4 .ct-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--grey);
+    margin-bottom: 3px;
+  }
+
+  #s4 .ct-body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    line-height: 1.45;
+    font-weight: 300;
+    color: var(--black);
+  }
+
+  #s4 .key-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    border-top: 2px solid var(--black);
+    padding-top: 9px;
+    letter-spacing: 0.02em;
+    color: var(--black);
+    line-height: 1.4;
+  }
+
+  #s4 .key-line span { color: var(--red); }
+
+  /* ============================================================
+     SLIDE 5 — MULTI-AGENT RL (3-panel RL breadth + collab)
+  ============================================================ */
+  #s5 .left {
+    flex: 1;
+    padding: 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #s5 .right-dark {
+    width: 42%;
+    background: var(--black);
+    padding: 28px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* 3-panel RL strip */
+  #s5 .rl-strip {
+    display: flex;
+    gap: 6px;
+    height: 120px;
+  }
+
+  #s5 .rl-panel {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #s5 .rl-panel-img {
+    flex: 1;
+    min-height: 0;
+  }
+
+  #s5 .rl-panel-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 0 0;
+    text-align: center;
+  }
+
+  #s5 .rl-panel-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7px;
+    color: var(--light-grey);
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  /* Agent diagram (collab visual) now replaced by image placeholder in right col */
+  #s5 .spec-list { display: flex; flex-direction: column; gap: 8px; }
+
+  #s5 .spec-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  #s5 .spec-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    min-width: 72px;
+    margin-top: 2px;
+  }
+
+  #s5 .spec-val {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  #s5 .cml {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--white);
+    border-top: 1px solid #2a2a2a;
+    padding-top: 10px;
+    line-height: 1.5;
+  }
+
+  #s5 .cml span { color: var(--red); }
+
+  /* ============================================================
+     SLIDE 6 — CLOUD GCS (with GCS screenshot placeholder)
+  ============================================================ */
+  #s6 .content-row {
+    display: flex;
+    gap: 24px;
+    flex: 1;
+    margin-top: 10px;
+    min-height: 0;
+  }
+
+  #s6 .gcs-img-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+  }
+
+  #s6 .gcs-img-slot { flex: 1; min-height: 0; }
+
+  #s6 .arch-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  #s6 .caps-col {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  #s6 .cap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid var(--light-grey);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+  }
+
+  #s6 .cap.hi { border-color: var(--black); }
+  #s6 .cap .cap-name { color: var(--black); }
+  #s6 .cap .cap-tag {
+    font-size: 8px;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  #s6 .cap.hi .cap-tag { color: var(--red); }
+
+  #s6 .deployed-banner {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(16px, 2.2vw, 26px);
+    color: var(--black);
+    border-top: 2px solid var(--black);
+    padding-top: 10px;
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  #s6 .deployed-banner span { color: var(--red); }
+
+  /* ============================================================
+     SLIDE 7 — THE STACK
+  ============================================================ */
+  #s7 .stack-visual {
+    flex: 1;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  #s7 .layer {
+    flex: 1;
+    border: 1px solid var(--light-grey);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 16px;
+    position: relative;
+  }
+
+  #s7 .layer.found {
+    border-color: var(--black);
+    border-width: 2px;
+    background: rgba(17,17,17,0.05);
+  }
+
+  #s7 .layer-accent {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--light-grey);
+  }
+
+  #s7 .layer.found .layer-accent { background: var(--red); }
+
+  #s7 .layer-n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    min-width: 20px;
+  }
+
+  #s7 .layer-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 2.6vw, 32px);
+    letter-spacing: 0.05em;
+    color: var(--black);
+    flex: 1;
+  }
+
+  #s7 .layer-desc {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+    text-align: right;
+    max-width: 260px;
+    line-height: 1.4;
+  }
+
+  #s7 .closing {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--black);
+    border-top: 2px solid var(--black);
+    padding-top: 11px;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  #s7 .closing span { color: var(--red); font-weight: 600; }
+
+  /* ============================================================
+     SLIDE 8 — DELIVERY
+  ============================================================ */
+  #s8 .timeline {
+    flex: 1;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #s8 .timeline::before {
+    content: '';
+    position: absolute;
+    left: 60px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--light-grey);
+  }
+
+  #s8 .phase {
+    display: flex;
+    flex: 1;
+    position: relative;
+  }
+
+  #s8 .p-time {
+    width: 60px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-right: 14px;
+    padding-top: 10px;
+  }
+
+  #s8 .p-months {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7px;
+    color: var(--grey);
+    letter-spacing: 0.05em;
+    text-align: right;
+  }
+
+  #s8 .p-dot {
+    position: absolute;
+    left: 54px;
+    top: 12px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--black);
+    background: var(--bg);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  #s8 .p-dot.active { background: var(--red); border-color: var(--red); }
+
+  #s8 .p-content {
+    flex: 1;
+    padding: 8px 0 8px 22px;
+    border-bottom: 1px solid var(--light-grey);
+    display: flex;
+    gap: 12px;
+  }
+
+  #s8 .phase:last-child .p-content { border-bottom: none; }
+
+  #s8 .p-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    min-width: 16px;
+    margin-top: 3px;
+  }
+
+  #s8 .p-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(14px, 1.8vw, 20px);
+    letter-spacing: 0.05em;
+    color: var(--black);
+    margin-bottom: 1px;
+  }
+
+  #s8 .p-desc {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 10px;
+    color: var(--grey);
+    font-weight: 300;
+    line-height: 1.35;
+  }
+
+  #s8 .ktp-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--black);
+    border-top: 1px solid var(--black);
+    padding-top: 7px;
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+
+  #s8 .ktp-line span { color: var(--red); }
+
+  /* ============================================================
+     SLIDE 9 — CLOSE
+  ============================================================ */
+  #s9 .left { flex: 1; padding: 40px 44px; display: flex; flex-direction: column; justify-content: space-between; }
+  #s9 .right { width: 34%; background: var(--black); padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+
+  #s9 .recap { display: flex; flex-direction: column; gap: 5px; margin: 14px 0; }
+
+  #s9 .recap-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--light-grey);
+  }
+
+  #s9 .rc-num { font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: var(--red); min-width: 18px; }
+  #s9 .rc-name { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--black); letter-spacing: 0.04em; flex: 1; }
+  #s9 .rc-tag { font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; color: var(--grey); font-weight: 300; }
+
+  #s9 .cta {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4.2vw, 52px);
+    line-height: 0.88;
+    color: var(--black);
+    letter-spacing: 0.02em;
+  }
+
+  #s9 .r-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--red); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  #s9 .contact-block { display: flex; flex-direction: column; gap: 8px; }
+
+  #s9 .c-item { padding-bottom: 8px; border-bottom: 1px solid #1e1e1e; }
+
+  #s9 .c-label { font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: #444; letter-spacing: 0.1em; text-transform: uppercase; }
+  #s9 .c-val { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--white); letter-spacing: 0.03em; margin-top: 1px; }
+
+  #s9 .avail {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(20px, 2.8vw, 34px);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: 0.05em;
+  }
+
+  #s9 .avail span { color: var(--red); }
+
+  /* ── Shared inner layout helper ── */
+  .slide-inner {
+    position: absolute;
+    inset: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #s8.slide .slide-inner {
+    inset: 28px 36px;
+    gap: 6px;
+  }
+
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-shrink: 0;
+  }
+
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- ════════════════════════════════════════════
+     SLIDE 1 — THE HOOK
+════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">01 / The Hook — 45 s</div>
+  <div class="slide" id="s1">
+
+    <!-- BACKGROUND: swap .port-bg-fallback for a real <img> or set background-image on .port-bg -->
+    <div class="port-bg-fallback"></div>
+    <!-- To use a real image, add this instead:
+    <div class="port-bg"></div>
+    and set --  background-image: url('your-port-photo.jpg') in #s1 .port-bg -->
+
+    <div class="dark-gradient"></div>
+
+    <div class="content">
+      <div class="slide-tag white">SAFEPOS — KTP Associate · ISS Aerospace</div>
+
+      <div>
+        <div class="question">Ports are one of the hardest environments to automate.<br>This is the stack I built to do it.</div>
+        <div class="constraints">
+          <div class="constraint-pill">GPS Interference</div>
+          <div class="constraint-pill">Variable Payloads</div>
+          <div class="constraint-pill">Regulatory Constraints</div>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div>
+          <div class="name">Pranav Vijaya Kumar</div>
+          <div class="title-sub">Autonomous Systems Engineer</div>
+        </div>
+        <div class="env-panel">
+          <div class="env-item">Container GPS shadow zones</div>
+          <div class="env-item">Heterogeneous fleets</div>
+          <div class="env-item">BVLOS operations</div>
+          <div class="env-item">Variable payload per lift</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 2 — THE UNSOLVED PROBLEM
+════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">02 / The Unsolved Problem — 60 s</div>
+  <div class="slide" id="s2">
+    <div class="red-bar-left"></div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <h2 class="display">The Bottleneck Isn't<br>Single-Agent Autonomy</h2>
+        <div class="slide-tag">02 / 09</div>
+      </div>
+
+      <div id="s2" class="diagram" style="position:static;display:flex;flex:1;gap:0;margin-top:6px;min-height:0;">
+        <div class="diagram-col">
+          <div class="col-status solved">✓ Solved</div>
+          <div class="col-heading">One Drone.<br>Clean World.</div>
+          <div class="tag-list">
+            <div class="tag on">Single-agent navigation</div>
+            <div class="tag on">Waypoint autopilot</div>
+            <div class="tag on">GPS-reliable positioning</div>
+            <div class="tag" style="color:var(--light-grey)">Off-the-shelf today</div>
+          </div>
+        </div>
+
+        <div class="diagram-col right">
+          <div class="col-status hard">← The Real Problem</div>
+          <div class="col-heading">Multiple Agents.<br>Degraded World.</div>
+          <div class="tag-list">
+            <div class="tag on">Heterogeneous sensor configs</div>
+            <div class="tag on">GPS-hostile environments</div>
+            <div class="tag on">Variable payloads per lift</div>
+            <div class="tag on">Safe under active degradation</div>
+          </div>
+          <div class="rl-box">
+            <div class="rl-label">Why RL — not classical control</div>
+            <div class="rl-text">You cannot hand-code coordination rules for a system this dynamic. RL lets coordination emerge from training — not from assumptions. I've trained policies across quadrupeds, humanoids, and multi-agent aerial systems. Same principles, different platforms.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-rule">
+        Safe multi-agent coordination requires systems that <span>assume degradation</span> — not systems that handle it as an exception.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 3 — PROGENY TASK 79
+════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">03 / PROGENY Task 79 — 75 s</div>
+  <div class="slide" id="s3">
+    <div class="left-dark">
+      <div>
+        <div class="proj-id">Foundation Layer · Defence Validated</div>
+        <div class="proj-title" style="margin-top:10px;">PROGENY<br>TASK 79</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Validated With</div>
+        <div class="partner-list">
+          <div class="partner">QinetiQ <span>Land Trials</span></div>
+          <div class="partner">Supacat <span>UGV Platform</span></div>
+          <div class="partner">SeeByte <span>Marine Trials</span></div>
+        </div>
+      </div>
+      <div class="supervisor">
+        University of Exeter<br>
+        <em>Research Assistant · 2023–2024</em>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="slide-header">
+        <h2 class="display">Defence-Grade Sensor Fusion,<br>Field Validated</h2>
+        <div class="slide-tag">03 / 09</div>
+      </div>
+
+      <!-- PROGENY Architecture image placeholder -->
+      <div class="arch-img-slot img-placeholder light">
+        <div class="ph-icon">🏗</div>
+        <div class="ph-label">MPF Architecture Diagram<br>Replace with PROGENY system diagram image</div>
+        <div class="ph-size">Annotated: Adaptive weighting · Sensor-agnostic interface · ROS 2 pipeline</div>
+      </div>
+
+      <div class="insight-row">
+        <div class="ins-num">01</div>
+        <div class="ins-text"><strong>Adaptive confidence weighting</strong> — sensor reliability adjusts in real time. GPS fails in a container shadow? System shifts to LiDAR and INS automatically.</div>
+      </div>
+      <div class="insight-row">
+        <div class="ins-num">02</div>
+        <div class="ins-text"><strong>Same ROS 2 pipeline — drone, UGV, USV.</strong> Minimal reconfiguration. That modularity is exactly what SAFEPOS requires.</div>
+      </div>
+      <div class="insight-row">
+        <div class="ins-num">03</div>
+        <div class="ins-text"><strong>BPSS clearance already completed</strong> through this defence work. Not a delay you'd be managing.</div>
+      </div>
+
+      <div class="key-rule">Same pipeline · Three platforms · Named defence partners · Field validated — not simulation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 4 — DIFFUSION TRAJECTORY MODEL
+════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">04 / Diffusion Trajectory Model — 75 s</div>
+  <div class="slide" id="s4">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <h2 class="display">Trajectory Planning That<br>Assumes Sensor Failure</h2>
+        <div class="slide-tag">04 / 09</div>
+      </div>
+
+      <div class="content-row">
+        <!-- LEFT: Architecture + output placeholders -->
+        <div class="left-col">
+          <!-- Compact arch diagram -->
+          <div class="arch-box-wrap" style="flex:0 0 auto;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--grey);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Model Architecture</div>
+            <div class="arch-row-flex">
+              <div class="abox on">GPS</div>
+              <div class="abox on">LiDAR</div>
+              <div class="abox failed">GPS ✕</div>
+              <div class="abox on">Camera</div>
+              <div class="abox on">Radar</div>
+            </div>
+            <div class="arch-arrow" style="font-size:8px;">↓ cross-attention adapters</div>
+            <div class="abox backbone">DIFFUSION BACKBONE</div>
+            <div class="arch-arrow" style="font-size:8px;">↓ CFG — sensor reliability weighted at inference</div>
+          </div>
+          <!-- Output image placeholders below arch -->
+          <div style="display:flex;gap:6px;flex:1;min-height:0;">
+            <div style="flex:1;position:relative;" class="img-placeholder light">
+              <div style="position:absolute;top:4px;left:6px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--grey);letter-spacing:0.06em;">Full sensor suite</div>
+              <div class="ph-label" style="font-size:7px;">Trajectory output A<br>Replace with sim screenshot</div>
+            </div>
+            <div style="flex:1;position:relative;" class="img-placeholder" style="border-color:var(--red);border-style:dashed;">
+              <div style="position:absolute;top:4px;left:6px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--red);letter-spacing:0.06em;">GPS dropped</div>
+              <div class="ph-label" style="font-size:7px;color:#555;">Trajectory output B<br>Still coherent</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Callouts -->
+        <div class="right-col">
+          <div class="callout">
+            <div class="ct-title">Cross-Attention Adapters</div>
+            <div class="ct-body">Sensors plug in around the backbone — not baked in. Any combination, any platform. Heterogeneous fleets by design.</div>
+          </div>
+          <div class="callout">
+            <div class="ct-title">Classifier-Free Guidance</div>
+            <div class="ct-body">Sensor reliability weighted at inference. Noisy sensor gets downweighted — not trusted blindly.</div>
+          </div>
+          <div class="callout hi">
+            <div class="ct-title">Graceful Degradation</div>
+            <div class="ct-body">GPS drops in a container shadow zone — model continues on LiDAR and camera. No failure mode. Just a different conditioning signal.</div>
+          </div>
+          <div class="key-line">
+            Sensor failure isn't an exception this system handles —<br><span>it's a condition the architecture assumes from the start.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 5 — MULTI-AGENT RL + RL BREADTH
+════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">05 / Multi-Agent RL Coordination — 75 s</div>
+  <div class="slide" id="s5">
+    <div class="left">
+      <div class="slide-header">
+        <h2 class="display">Teaching Drones to<br>Coordinate Without a<br>Central Controller</h2>
+        <div class="slide-tag">05 / 09</div>
+      </div>
+
+      <!-- 3-panel RL breadth strip -->
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--grey);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:5px;">RL Across Platforms — Same Principles</div>
+        <div class="rl-strip">
+          <div class="rl-panel">
+            <div class="rl-panel-img img-placeholder light">
+              <div class="ph-icon" style="font-size:18px;">🐾</div>
+              <div class="ph-label" style="font-size:7px;">Quadruped<br>IsaacLab / Isaac Sim</div>
+            </div>
+            <div class="rl-panel-label">Quadruped Locomotion</div>
+            <div class="rl-panel-sub">Bio-inspired CPG · PPO · Domain rand.</div>
+          </div>
+          <div class="rl-panel">
+            <div class="rl-panel-img img-placeholder light">
+              <div class="ph-icon" style="font-size:18px;">🤖</div>
+              <div class="ph-label" style="font-size:7px;">Unitree G1<br>Motion Imitation</div>
+            </div>
+            <div class="rl-panel-label">Humanoid (Unitree G1)</div>
+            <div class="rl-panel-sub">DeepMimic · LAFAN1 retargeting</div>
+          </div>
+          <div class="rl-panel">
+            <div class="rl-panel-img img-placeholder light">
+              <div class="ph-icon" style="font-size:18px;">🚁</div>
+              <div class="ph-label" style="font-size:7px;">Multi-Drone Collab<br>Crate Pickup/Place</div>
+            </div>
+            <div class="rl-panel-label">Multi-Agent Drones</div>
+            <div class="rl-panel-sub">Independent policies · Neighbour-aware</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--grey);border-top:1px solid var(--light-grey);padding-top:8px;letter-spacing:0.03em;">
+        Each drone: own state + neighbour obs → independent policy → residual thrust + moment
+      </div>
+    </div>
+
+    <div class="right-dark">
+      <div class="slide-tag red" style="font-size:9px;">Architecture Decisions</div>
+
+      <div class="spec-list">
+        <div class="spec-item">
+          <div class="spec-label">Policy Type</div>
+          <div class="spec-val">Independent per agent — no central controller. Centralised control is a single point of failure and doesn't scale.</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">State Space</div>
+          <div class="spec-val">Own state + neighbour observations. Coordination emerges from training — not explicit rules.</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Action Space</div>
+          <div class="spec-val">Residual thrust + moment over a structured baseline. Better training stability, maps to real actuator constraints.</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Training</div>
+          <div class="spec-val">Crate mass and size randomised throughout. Variable payloads are the training condition — not an edge case.</div>
+        </div>
+      </div>
+
+      <div class="cml">
+        A policy that only works for one specific load<br>is a demo, not a <span>product</span>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 6 — CLOUD GCS
+════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">06 / Cloud GCS Platform — 60 s</div>
+  <div class="slide" id="s6">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <h2 class="display">Operations Infrastructure<br>for Multi-Drone BVLOS</h2>
+        <div class="slide-tag">06 / 09</div>
+      </div>
+
+      <div class="content-row">
+        <!-- GCS screenshot placeholder (hero) -->
+        <div class="gcs-img-col">
+          <div class="gcs-img-slot img-placeholder light">
+            <div class="ph-icon">📱</div>
+            <div class="ph-label">GCS Interface Screenshot<br>Replace with mobile / web app screenshot<br>showing mission scheduling across multiple drones</div>
+            <div class="ph-size">Recommended: landscape crop of the mission planning view</div>
+          </div>
+          <div class="arch-label">Hub-and-spoke · Operators + Drones → Cloud Server → Geographic distance no longer a constraint</div>
+        </div>
+
+        <!-- Capabilities -->
+        <div class="caps-col">
+          <div class="cap hi">
+            <span class="cap-name">Hardware-Agnostic</span>
+            <span class="cap-tag">Key Differentiator</span>
+          </div>
+          <div class="cap hi">
+            <span class="cap-name">BVLOS Capable</span>
+            <span class="cap-tag">Operational</span>
+          </div>
+          <div class="cap">
+            <span class="cap-name">Multi-Drone Scheduling</span>
+            <span class="cap-tag">✓</span>
+          </div>
+          <div class="cap">
+            <span class="cap-name">Live Telemetry + Camera</span>
+            <span class="cap-tag">✓</span>
+          </div>
+          <div class="cap">
+            <span class="cap-name">JWT Authentication</span>
+            <span class="cap-tag">✓</span>
+          </div>
+          <div class="cap">
+            <span class="cap-name">Cross-Platform Compatible</span>
+            <span class="cap-tag">✓</span>
+          </div>
+          <div class="deployed-banner">
+            <span>Fully deployed</span> and operational.<br>Not a prototype.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 7 — THE STACK
+════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">07 / The Stack — 30 s</div>
+  <div class="slide" id="s7">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <h2 class="display">Safe Collaborative Autonomy<br>Needs All of These Layers</h2>
+        <div class="slide-tag">07 / 09</div>
+      </div>
+
+      <div class="stack-visual">
+        <div class="layer">
+          <div class="layer-accent"></div>
+          <div class="layer-n">04</div>
+          <div class="layer-name">Operations Infrastructure</div>
+          <div class="layer-desc">Cloud GCS · BVLOS · Multi-drone scheduling · Fully deployed</div>
+        </div>
+        <div class="layer">
+          <div class="layer-accent"></div>
+          <div class="layer-n">03</div>
+          <div class="layer-name">Coordination Intelligence</div>
+          <div class="layer-desc">Multi-agent RL · Independent policies · Residual action space · Variable loads</div>
+        </div>
+        <div class="layer">
+          <div class="layer-accent"></div>
+          <div class="layer-n">02</div>
+          <div class="layer-name">Trajectory Planning</div>
+          <div class="layer-desc">Diffusion model · Sensor adapters · Assumes degradation</div>
+        </div>
+        <div class="layer found">
+          <div class="layer-accent"></div>
+          <div class="layer-n" style="font-size:11px;">F</div>
+          <div class="layer-name">Sensor Fusion Foundation</div>
+          <div class="layer-desc">PROGENY Task 79 · QinetiQ · Supacat · SeeByte · Field validated · Three platforms</div>
+        </div>
+      </div>
+
+      <div class="closing">
+        SAFEPOS needs all of these layers working together. <span>I've been building them.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 8 — DELIVERY PLAN
+════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">08 / Delivery Plan — 60 s</div>
+  <div class="slide" id="s8">
+    <div class="slide-inner">
+      <div class="slide-header">
+        <h2 class="display">What You'll Get in 26 Months</h2>
+        <div class="slide-tag">08 / 09</div>
+      </div>
+
+      <div class="timeline">
+        <div class="phase">
+          <div class="p-time"><div class="p-months">0–6 mo</div></div>
+          <div class="p-dot active"></div>
+          <div class="p-content">
+            <div class="p-num">01</div>
+            <div>
+              <div class="p-title">Simulation Foundation</div>
+              <div class="p-desc">IsaacLab / Gazebo environment · Baseline multi-agent policies · Framework established</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="p-time"><div class="p-months">7–12 mo</div></div>
+          <div class="p-dot"></div>
+          <div class="p-content">
+            <div class="p-num">02</div>
+            <div>
+              <div class="p-title">Hardware Integration</div>
+              <div class="p-desc">Sensor fusion integrated with ISS Aerospace hardware · Initial validation trials · PROGENY pipeline applied</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="p-time"><div class="p-months">13–18 mo</div></div>
+          <div class="p-dot"></div>
+          <div class="p-content">
+            <div class="p-num">03</div>
+            <div>
+              <div class="p-title">Regulatory Compliance</div>
+              <div class="p-desc">JARUS · SORA · ACAS · TMPR documentation · Field trial preparation at target port environments</div>
+            </div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="p-time"><div class="p-months">19–26 mo</div></div>
+          <div class="p-dot"></div>
+          <div class="p-content">
+            <div class="p-num">04</div>
+            <div>
+              <div class="p-title">Production + Knowledge Transfer</div>
+              <div class="p-desc">Production-ready system · Documentation at each phase gate · Internal workshops · Capability stays in the company after I'm gone</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ktp-line">
+        Research outputs + a commercial product + a trained team. <span>That's the KTP promise.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SLIDE 9 — THE CLOSE
+════════════════════════════════════════════ -->
+<div class="slide-wrapper" style="margin-bottom:60px;">
+  <div class="slide-label">09 / The Close — 45 s</div>
+  <div class="slide" id="s9">
+    <div class="left">
+      <div>
+        <div class="slide-tag">09 / 09 · Safe Collaborative Autonomy for Complex Environments</div>
+        <div style="margin-top:10px;">
+          <h2 class="display" style="font-size:clamp(28px,4.5vw,54px);">The Stack.<br>Built.</h2>
+        </div>
+      </div>
+
+      <div class="recap">
+        <div class="recap-row">
+          <div class="rc-num">F</div>
+          <div class="rc-name">Sensor Fusion</div>
+          <div class="rc-tag">PROGENY · Field validated</div>
+        </div>
+        <div class="recap-row">
+          <div class="rc-num">02</div>
+          <div class="rc-name">Trajectory Planning</div>
+          <div class="rc-tag">Diffusion · Assumes failure</div>
+        </div>
+        <div class="recap-row">
+          <div class="rc-num">03</div>
+          <div class="rc-name">Coordination</div>
+          <div class="rc-tag">Multi-agent RL · Variable loads</div>
+        </div>
+        <div class="recap-row">
+          <div class="rc-num">04</div>
+          <div class="rc-name">Operations</div>
+          <div class="rc-tag">Cloud GCS · Deployed</div>
+        </div>
+      </div>
+
+      <div class="cta">Ready to start.</div>
+    </div>
+
+    <div class="right">
+      <div class="r-label">Pranav Vijaya Kumar</div>
+
+      <div class="contact-block">
+        <div class="c-item">
+          <div class="c-label">Role</div>
+          <div class="c-val">Autonomous Systems Engineer</div>
+        </div>
+        <div class="c-item">
+          <div class="c-label">Location</div>
+          <div class="c-val">India — relocating</div>
+        </div>
+        <div class="c-item">
+          <div class="c-label">BPSS</div>
+          <div class="c-val">Previously completed</div>
+        </div>
+      </div>
+
+      <div class="avail">ON-SITE<br><span>WITHIN</span><br>ONE MONTH.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+</body>
+</html>
