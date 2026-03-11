@@ -44,7 +44,6 @@
           </div>
         </div>
       </div>
-      <!-- <aside class="notes">01 / The Hook · 30 s. Don't explain the slide. Let it land. Then: "Everything I'll show you today has been built toward these three constraints."</aside> -->
     </section>
 
     <!-- ════════════════════════════════════════════
@@ -60,8 +59,6 @@
             <h2 class="display">Research Foundations Built for<br>Real-World Deployment</h2>
             <div class="slide-tag">02 / 10</div>
           </div>
-
-          <!-- <div class="rf-subhead">Four positions, three institutions · each one compounding toward deployable autonomy</div> -->
 
           <div class="rf-timeline">
 
@@ -121,7 +118,6 @@
 
         </div>
       </div>
-      <!-- <aside class="notes">02 / Research Foundations · 60 s. Don't read the rows. Pick one thread: "These aren't parallel tracks · they compound. Exeter validated field robustness, Bristol gave me systems breadth, Kelltron proved research can go to production."</aside> -->
     </section>
 
     <!-- ════════════════════════════════════════════
@@ -177,7 +173,6 @@
 
         </div>
       </div>
-      <!-- <aside class="notes">03 / RL Across Embodiments · 60 s. "The through-line isn't the platform · it's the design philosophy. Every policy trained to fail gracefully, not to perform under ideal conditions."</aside> -->
     </section>
 
     <!-- ════════════════════════════════════════════
@@ -187,7 +182,6 @@
       <div class="slide" id="s3">
         <div class="left-dark">
           <div>
-            <!-- <div class="proj-id">Foundation · Defence Validated</div> -->
             <div class="proj-title" style="margin-top:10px;">PROGENY<br>TASK 79</div>
           </div>
           <div>
@@ -231,7 +225,6 @@
           <div class="key-rule">Sensors are interchangeable components. The pipeline doesn't care what's plugged in.</div>
         </div>
       </div>
-      <!-- <aside class="notes">04 / PROGENY · 75 s. "Prof Menon supervised this work directly · he can speak to it if you want more detail." Turn a potential conflict of interest into a credibility asset.</aside> -->
     </section>
 
     <!-- ════════════════════════════════════════════
@@ -254,7 +247,7 @@
                   <span class="cap-tag">Core Architecture</span>
                 </div>
                 <div class="cap hi">
-                  <span class="cap-name">JWT Auth · Secure Operator Access Control</span>
+                  <span class="cap-name">JWT Auth · Secure Operator Access Control & Role Based Access Management</span>
                   <span class="cap-tag">Governance</span>
                 </div>
                 <div class="cap hi">
@@ -275,16 +268,11 @@
             </div>
 
             <div class="right-img-slot">
-              <!-- <img src="assets/images/ui_1.gif" alt="Drone BVLOS flight operations - UI Screenshot 1"> -->
               <img src="assets/images/ui_2.gif" alt="Drone BVLOS flight operations - UI Screenshot 2">
             </div>
           </div>
         </div>
-        <!-- <div class="deployed-footer">
-          <span>Fully deployed.</span> Not a prototype. Not a demo.
-        </div> -->
       </div>
-      <!-- <aside class="notes">05 / Cloud GCS · 60 s. "This is the only project I'll show you today where I can say fully deployed without qualification. Everything else is in active development · this one is running."</aside> -->
     </section>
 
     <!-- ════════════════════════════════════════════
@@ -316,8 +304,8 @@
                 <div class="ct-body">Sensor reliability is weighted at inference time. A noisy sensor gets downweighted · not trusted blindly. Directly extends the confidence-weighting logic from PROGENY.</div>
               </div>
               <div class="callout hi">
-                <div class="ct-title">Graceful Degradation</div>
-                <div class="ct-body">Multipath interference or signal spoofing detected · model continues on LiDAR and camera. No failure mode. Just a different conditioning signal.</div>
+                <div class="ct-title">Graceful Degradation & Tactical Deconfliction</div>
+                <div class="ct-body">Multipath interference or degraded signals detected · model continues on LiDAR and camera. Deployable adapters enable real-time tactical deconfliction without retraining the core backbone.</div>
               </div>
               <div class="s4-status-tag">Currently: SITL / Simulation Testing</div>
               <div class="key-line">
@@ -327,7 +315,6 @@
           </div>
         </div>
       </div>
-      <!-- <aside class="notes">06 / Diffusion Model · 75 s. Pause after the key-line. Let it land. "This is currently in SITL / simulation testing · hardware validation is the natural next step. That's what months 7–12 are for."</aside> -->
     </section>
 
     <!-- ════════════════════════════════════════════
@@ -365,21 +352,16 @@
               <div class="spec-val">Crate mass and size randomised throughout training. Variable payloads are the training condition · not an edge case the policy sees once.</div>
             </div>
           </div>
-
-          <!-- <div class="cml"> -->
-            <!-- A policy that only works for one specific load<br>is a demo, not a <span>deployable product</span>. -->
-          <!-- </div> -->
         </div>
 
         <div class="s6-right">
           <img src="assets/images/coop_lift.gif" alt="Multi-agent drone coordination">
         </div>
       </div>
-      <!-- <aside class="notes">07 / Multi-Agent RL · 75 s. The residual action space detail will land with the control professors · it signals you understand stability-learning tradeoffs. Say it clearly.</aside> -->
     </section>
 
     <!-- ════════════════════════════════════════════
-         SLIDE 8 · REGULATORY RUNWAY  [60s]
+         SLIDE 8 · PROJECT ROADMAP  [75s]
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s8">
@@ -388,112 +370,122 @@
 
           <!-- HEADER -->
           <div class="slide-header">
-            <h2 class="display">SAFEPOS and the<br>Regulatory <span style="color:var(--red)">Runway</span></h2>
+            <h2 class="display">SAFEPOS · 26-Month<br>Project <span style="color:var(--red)">Roadmap</span></h2>
             <div class="slide-tag">08 / 10</div>
           </div>
 
-          <!-- BODY — two-column row -->
-          <div class="s8-body">
+          <!-- ROADMAP BODY -->
+          <div class="s8-road-wrap">
 
-            <!-- LEFT COLUMN — Pathway Timeline -->
-            <div class="s8-pathway">
-              <div class="s8-pathway-label">FULLY INTEGRATED PATHWAY · SAFEPOS</div>
+            <!-- SVG Winding Road -->
+            <svg class="s8-road-svg" viewBox="0 0 1040 480" preserveAspectRatio="xMidYMid meet" fill="none">
+              <path class="s8-road-glow"
+                d="M -5,50 C 140,28 280,62 420,45 C 560,28 700,62 870,45 C 960,38 1012,145 1012,240 C 1012,335 960,442 870,435 C 700,418 560,452 420,435 C 280,418 140,452 -5,430"/>
+              <path class="s8-road-surface"
+                d="M -5,50 C 140,28 280,62 420,45 C 560,28 700,62 870,45 C 960,38 1012,145 1012,240 C 1012,335 960,442 870,435 C 700,418 560,452 420,435 C 280,418 140,452 -5,430"/>
+              <path class="s8-road-center"
+                d="M -5,50 C 140,28 280,62 420,45 C 560,28 700,62 870,45 C 960,38 1012,145 1012,240 C 1012,335 960,442 870,435 C 700,418 560,452 420,435 C 280,418 140,452 -5,430"/>
+              <!-- Direction arrows along the road -->
+              <polygon class="s8-road-arrow" points="200,38 212,43 200,48" />
+              <polygon class="s8-road-arrow" points="600,38 612,43 600,48" />
+              <polygon class="s8-road-arrow" points="612,438 600,433 612,428" />
+              <polygon class="s8-road-arrow" points="200,442 188,437 200,432" />
+            </svg>
 
-              <div class="s8-timeline">
-                <div class="s8-timeline-line"></div>
-
-                <!-- NODE 1 — FI0 · NOW -->
-                <div class="s8-node">
-                  <div class="s8-node-dot"><span>FI0</span></div>
-                  <div class="s8-node-content">
-                    <div class="s8-node-date">NOW · 2026</div>
-                    <div class="s8-node-title">Segregated Operations</div>
-                    <div class="s8-node-desc">Simulation validation. Baseline policies. Safety case evidence building begins.</div>
-                  </div>
-                </div>
-
-                <!-- NODE 2 — FI1 · KTP PERIOD (active) -->
-                <div class="s8-node active">
-                  <div class="s8-node-dot"><span>FI1</span></div>
-                  <div class="s8-node-content">
-                    <div class="s8-node-date">2026 – 2028 · KTP</div>
-                    <div class="s8-node-title">Specific Volumes · Bespoke Entry</div>
-                    <div class="s8-node-desc">Hardware trials. UTM integration. C2 validated to SAIL 3. Port operations demonstrated.</div>
-                    <div class="s8-node-tag">KTP TARGET</div>
-                  </div>
-                </div>
-
-                <!-- NODE 3 — FI2 · HORIZON (dim) -->
-                <div class="s8-node dim">
-                  <div class="s8-node-dot"><span>FI2</span></div>
-                  <div class="s8-node-content">
-                    <div class="s8-node-date">2028+ · HORIZON</div>
-                    <div class="s8-node-title">Point-to-Point Freight · Port Operations</div>
-                    <div class="s8-node-desc">Commercial port logistics. The architecture built in this KTP is the foundation.</div>
-                  </div>
-                </div>
+            <!-- Phase 1 — Top Road, Left -->
+            <div class="s8-stop s8-stop-top s8-stop-1">
+              <div class="s8-badge">1</div>
+              <div class="s8-stem"></div>
+              <div class="s8-card">
+                <div class="s8-card-title">Regulatory Scoping &amp; ConOps</div>
+                <div class="s8-card-months">Months 1–6</div>
+                <ul>
+                  <li>Execute <strong>UK SORA Steps 1–9</strong> for Final SAIL decision from CAA</li>
+                  <li>Determine <strong>iGRC / ARC</strong> for port operational volumes &amp; buffers</li>
+                  <li>Full <strong>ConOps</strong> for multi-agent coordination &amp; flight profiles</li>
+                  <li><strong>Isaac Sim</strong> scenario modeling for SORA Step 1 information</li>
+                </ul>
               </div>
             </div>
 
-            <!-- RIGHT COLUMN — Four Pillars -->
-            <div class="s8-pillars">
-
-              <!-- PILLAR 1 -->
-              <div class="s8-pillar s8-pillar-primary">
-                <div class="s8-pillar-index">01</div>
-                <div class="s8-pillar-body">
-                  <div class="s8-pillar-cat">SIMULATION · FI1 EVIDENCE BASE</div>
-                  <div class="s8-pillar-title">High-Fidelity Port Simulation</div>
-                  <div class="s8-pillar-desc">Validate autonomous behaviour before hardware. Build the safety case evidence FI1 approval requires. ISS has the platforms — this is the validation environment they don't have.</div>
-                </div>
+            <!-- Phase 2 — Top Road, Center -->
+            <div class="s8-stop s8-stop-top s8-stop-2">
+              <div class="s8-badge">2</div>
+              <div class="s8-stem"></div>
+              <div class="s8-card">
+                <div class="s8-card-title">Core Framework &amp; RL Training</div>
+                <div class="s8-card-months">Months 7–12</div>
+                <ul>
+                  <li><strong>ROS2</strong> drone-side server + <strong>Docker</strong> flight agents</li>
+                  <li><strong>JWT authentication</strong> for secure operator access &amp; scheduling</li>
+                  <li><strong>Isaac Lab:</strong> independent RL policies, neighbor-aware states</li>
+                  <li><strong>Domain randomization:</strong> crate mass &amp; size variation</li>
+                </ul>
               </div>
-
-              <!-- PILLAR 2 -->
-              <div class="s8-pillar s8-pillar-primary">
-                <div class="s8-pillar-index">02</div>
-                <div class="s8-pillar-body">
-                  <div class="s8-pillar-cat">TACTICAL DECONFLICTION · UTM VEHICLE LAYER</div>
-                  <div class="s8-pillar-title">Independent RL Policies</div>
-                  <div class="s8-pillar-desc">UTM handles strategic separation at the planning level. Your onboard policies handle real-time coordination — the tactical layer UTM relies on at the vehicle level. No central controller means no single point of failure at scale.</div>
-                </div>
-              </div>
-
-              <!-- PILLAR 3 -->
-              <div class="s8-pillar s8-pillar-supporting">
-                <div class="s8-pillar-index">03</div>
-                <div class="s8-pillar-body">
-                  <div class="s8-pillar-cat">DAA READINESS · GPS-DENIED ENVIRONMENTS</div>
-                  <div class="s8-pillar-title">Adaptive Sensor Fusion under Denial</div>
-                  <div class="s8-pillar-desc">DAA is approved to ARC-b by 2027. Its reliability depends entirely on position data quality. Adaptive PNT fusion keeps position trustworthy in container shadow zones — making DAA operationally viable in a port.</div>
-                </div>
-              </div>
-
-              <!-- PILLAR 4 -->
-              <div class="s8-pillar s8-pillar-supporting">
-                <div class="s8-pillar-index">04</div>
-                <div class="s8-pillar-body">
-                  <div class="s8-pillar-cat">STRATEGIC DECONFLICTION · UTM INTEGRATION</div>
-                  <div class="s8-pillar-title">UTM-Aware Architecture from Day One</div>
-                  <div class="s8-pillar-desc">C2 Link moves to SAIL 1–3 approved by 2026–2027. Building UTM awareness into the coordination architecture now means the system is ready for strategic deconfliction integration as the pathway matures — not retrofitted later.</div>
-                </div>
-              </div>
-
             </div>
-          </div>
 
-          <!-- FOOTER -->
-          <div class="s8-footer">
-            <span class="s8-footer-left">Aligned with the UK CAA Future of Flight BVLOS Roadmap</span>
-            <span class="s8-footer-right">CAA · FoF BVLOS Roadmap · 2025</span>
-          </div>
+            <!-- Phase 3 — Top Road, Right -->
+            <div class="s8-stop s8-stop-top s8-stop-3">
+              <div class="s8-badge">3</div>
+              <div class="s8-stem"></div>
+              <div class="s8-card">
+                <div class="s8-card-title">Integration &amp; SORA Compliance</div>
+                <div class="s8-card-months">Months 13–18</div>
+                <ul>
+                  <li><strong>PROGENY Task 79</strong> plug-and-play sensor fusion pipeline</li>
+                  <li><strong>OSO evidence:</strong> multi-crew coordination &amp; C3 link (Steps 10–12)</li>
+                  <li><strong>SITL stress test:</strong> spoofing &amp; multipath interference</li>
+                  <li><strong>Graceful degradation</strong> validated under high-stress conditions</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 4 — Bottom Road, Right -->
+            <div class="s8-stop s8-stop-btm s8-stop-4">
+              <div class="s8-card">
+                <div class="s8-card-title">Field Trials &amp; Safety Portfolio</div>
+                <div class="s8-card-months">Months 19–24</div>
+                <ul>
+                  <li><strong>Defence-grade port trials</strong> with synthetic noise injection</li>
+                  <li><strong>CSP:</strong> map simulation data to SAIL robustness levels</li>
+                  <li><strong>Final assessment:</strong> CSP submission via SORA Step 13</li>
+                  <li>Fusion system <strong>reliability verified</strong> in real-world conditions</li>
+                </ul>
+              </div>
+              <div class="s8-stem"></div>
+              <div class="s8-badge">4</div>
+            </div>
+
+            <!-- Phase 5 — Bottom Road, Left (Final) -->
+            <div class="s8-stop s8-stop-btm s8-stop-5">
+              <div class="s8-card s8-card-final">
+                <div class="s8-card-title">Authorisation &amp; Scaling</div>
+                <div class="s8-card-months">Months 25–26+</div>
+                <ul>
+                  <li>Formal <strong>CAA Operational Authorisation</strong> received</li>
+                  <li><strong>LL1/LL2</strong> pathway for last-mile delivery operations</li>
+                  <li><strong>FI2/FI3</strong> pathway for point-to-point logistics</li>
+                  <li>UK <strong>Future of Flight:</strong> routine BVLOS by 2027</li>
+                </ul>
+              </div>
+              <div class="s8-stem"></div>
+              <div class="s8-badge s8-badge-final">5</div>
+            </div>
+
+          </div><!-- end s8-road-wrap -->
 
         </div>
+
+        <div class="s8-footer">
+          <span class="s8-footer-left">Aligned with the UK CAA Future of Flight BVLOS Roadmap</span>
+          <span class="s8-footer-right">CAA · FoF BVLOS Roadmap · 2025</span>
+        </div>
+
       </div>
     </section>
 
     <!-- ════════════════════════════════════════════
          SLIDE 9 · DIRECT ALIGNMENT  [45s]
-         (second to last · kills panel concerns before Q&A)
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s2">
@@ -527,7 +519,7 @@
             </div>
             <div class="brief-row">
               <div class="brief-req">Software Development &amp; Practical Application</div>
-              <div class="brief-ev">ROS2, Python, Docker, Flutter,  FastAPI, PostgreSQL, Azure CI/CD. Research and production experience across the stack.</div>
+              <div class="brief-ev">ROS2, Python, Docker, Flutter, FastAPI, PostgreSQL, Azure CI/CD. Research and production experience across the stack.</div>
             </div>
             <div class="brief-row">
               <div class="brief-req">Defence Exposure &amp; Industry Collaboration</div>
@@ -542,7 +534,6 @@
           <div class="brief-foot">This application isn't a pivot. It's a continuation.</div>
         </div>
       </div>
-      <!-- <aside class="notes">09 / Direct Alignment · 45 s. Don't read the table. Pick one row and speak to it. "The BPSS and relocation lines · those aren't small things. They kill two panel concerns before they're raised."</aside> -->
     </section>
 
     <!-- ════════════════════════════════════════════
@@ -577,7 +568,6 @@
 
           <div class="s9-top">
             <div class="s9-name">Pranav Vijaya Kumar</div>
-            <!-- <div class="s9-role">KTP Associate · SAFEPOS · ISS Aerospace</div> -->
             <div class="s9-position">Collaborative autonomy for environments that fight back.</div>
           </div>
         </div>
@@ -598,10 +588,8 @@
               <div class="s9-c-val">github.com/pranavvkumar21</div>
             </div>
           </div>
-
         </div>
       </div>
-      <!-- <aside class="notes">10 / Close · 45 s. Let the last line land. Don't rush. No aggressive calls to action · the work speaks. "Build toward the solution with you" is deliberate: collaborative, not transactional.</aside> -->
     </section>
 
   </div>
@@ -622,6 +610,16 @@
     showNotes: false, disableLayout: false,
     slideNumber: 'c/t',
   });
+</script>
+<script>
+  // Calculate SVG road path length for draw animation
+  (function() {
+    var road = document.querySelector('.s8-road-surface');
+    if (road) {
+      var len = road.getTotalLength();
+      document.documentElement.style.setProperty('--s8-road-len', len);
+    }
+  })();
 </script>
 </body>
 </html>
