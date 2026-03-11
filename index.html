@@ -20,7 +20,7 @@
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s1">
-        <div class="slide-label light">01 / 10 </div>
+        <div class="slide-label light">01 / 11 </div>
         <div class="port-bg"></div>
         <div class="port-bg-fallback"></div>
         <div class="dark-gradient"></div>
@@ -47,17 +47,78 @@
     </section>
 
     <!-- ════════════════════════════════════════════
-         SLIDE 2 · RESEARCH FOUNDATIONS  [60s]
+         SLIDE 2 · THE PROBLEM SPACE  [45s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s_view">
+        <div class="slide-label light">02 / 11 </div>
+        <div class="port-bg"></div>
+        <div class="port-bg-fallback"></div>
+        <div class="dark-gradient"></div>
+
+        <div class="sv-inner">
+          <div class="sv-header">
+            <div class="sv-kicker">SAFEPOS · KTP Objective</div>
+            <h2 class="sv-title">The Problem Space · As I See It</h2>
+          </div>
+
+          <div class="sv-grid">
+
+            <div class="sv-item">
+              <div class="sv-num">01</div>
+              <div class="sv-item-body">
+                <div class="sv-item-title">Sensor Deception, Not Sensor Failure</div>
+                <div class="sv-item-context">In a metal-dense port, the dangerous failure mode isn't a sensor going offline.</div>
+                <div class="sv-item-q">What happens when the sensor is confidently wrong and the system has no reason to doubt it?</div>
+              </div>
+            </div>
+
+            <div class="sv-item">
+              <div class="sv-num">02</div>
+              <div class="sv-item-body">
+                <div class="sv-item-title">Weather as an Operational Gate</div>
+                <div class="sv-item-context">Port schedules don't pause for marginal conditions.</div>
+                <div class="sv-item-q">Who decides when it's safe to fly, on what evidence, and how is that decision defensible to the CAA?</div>
+              </div>
+            </div>
+
+            <div class="sv-item">
+              <div class="sv-num">03</div>
+              <div class="sv-item-body">
+                <div class="sv-item-title">Coordination Fragility</div>
+                <div class="sv-item-context">Independent policies only stay safe if each agent has accurate state information.</div>
+                <div class="sv-item-q">If one drone lies about its position mid-lift, what does that do to every drone coordinating against it?</div>
+              </div>
+            </div>
+
+            <div class="sv-item">
+              <div class="sv-num">04</div>
+              <div class="sv-item-body">
+                <div class="sv-item-title">Operational Authority at Scale</div>
+                <div class="sv-item-context">A single BVLOS mission has a clear authority chain. A twelve-drone fleet mid-operation over an active dock does not.</div>
+                <div class="sv-item-q">When a crane swings into a flight path, who overrides — the operator, the system, or neither?</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="sv-footer">These aren't edge cases. They are the design constraints.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 3 · RESEARCH FOUNDATIONS  [60s]
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s_rf">
-        <div class="slide-label">02 / 10 </div>
+        <div class="slide-label">03 / 11 </div>
         <div class="red-bar-left"></div>
         <div class="slide-inner">
 
           <div class="slide-header">
             <h2 class="display">Research Foundations Built for<br>Real-World Deployment</h2>
-            <div class="slide-tag">02 / 10</div>
+            <div class="slide-tag">03 / 11</div>
           </div>
 
           <div class="rf-timeline">
@@ -125,13 +186,13 @@
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s_rl">
-        <div class="slide-label light">03 / 10 </div>
+        <div class="slide-label light">04 / 11 </div>
         <div class="red-bar-left"></div>
         <div class="slide-inner">
 
           <div class="slide-header">
             <h2 class="display white">Reinforcement Learning<br>Across Embodiments</h2>
-            <div class="slide-tag white">03 / 10</div>
+            <div class="slide-tag white">04 / 11</div>
           </div>
 
           <div class="rl-tagline">From Quadrupeds to Humanoids to Multi-Agent Drones · Same Principles, Different Challenges</div>
@@ -185,11 +246,12 @@
             <div class="proj-title" style="margin-top:10px;">PROGENY<br>TASK 79</div>
           </div>
           <div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">In Collaboration With</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">In Collaboration With</div>
             <div class="partner-list">
             <div class="partner">QinetiQ <span>MOD Oversight</span></div>
               <div class="partner">Supacat <span>Land Trials</span></div>
               <div class="partner">SeeByte <span>Marine Trials</span></div>
+              <div class="partner">Sonardyne <span>Marine Trials</span></div>
               <div class="partner">National Oceanography Centre <span>Marine Trials</span></div>
             </div>
           </div>
@@ -202,7 +264,7 @@
         <div class="right-panel">
           <div class="slide-header">
             <h2 class="display">Modular Position Fusion<br>System</h2>
-            <div class="slide-tag">04 / 10</div>
+            <div class="slide-tag">05 / 11</div>
           </div>
 
           <div class="arch-img-slot">
@@ -222,6 +284,11 @@
             <div class="ins-text"><strong>Modular plug-and-play framework</strong><br>Backend-agnostic ROS2 pipeline. Python-based, Docker containerised, portable across platforms.</div>
           </div>
 
+          <div class="insight-row">
+            <div class="ins-num">04</div>
+            <div class="ins-text"><strong>Software Delivery Completed</strong><br>Full software stack delivered to DSTL for integration into autonomous vessel operations.</div>
+          </div>
+
           <div class="key-rule">Sensors are interchangeable components. The pipeline doesn't care what's plugged in.</div>
         </div>
       </div>
@@ -232,38 +299,114 @@
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s5">
-        <div class="slide-label">05 / 10 </div>
+        <div class="slide-label">06 / 11 </div>
         <div class="slide-inner">
           <div class="slide-header">
             <h2 class="display">BVLOS Operations Infrastructure<br>for Multi-Drone System </h2>
-            <div class="slide-tag">05 / 10</div>
+            <div class="slide-tag">06 / 11</div>
           </div>
 
           <div class="content-row">
             <div class="left-stack">
               <div class="caps-col">
-                <div class="cap hi">
-                  <span class="cap-name">ROS2 Drone-Side Server · Hub-and-Spoke Governance</span>
-                  <span class="cap-tag">Core Architecture</span>
+                <div class="cap-hdr-row">
+                  <span class="cap-col-hdr">Feature</span>
+                  <span class="cap-col-hdr">Why It Matters</span>
                 </div>
                 <div class="cap hi">
-                  <span class="cap-name">JWT Auth · Secure Operator Access Control & Role Based Access Management</span>
-                  <span class="cap-tag">Governance</span>
+                  <span class="cap-name">Each drone runs its own onboard command server — no dependency on a central node</span>
+                  <span class="cap-tag">Ground link drops mid-mission? The drone completes its task anyway.</span>
                 </div>
                 <div class="cap hi">
-                  <span class="cap-name">Hardware-Agnostic · BVLOS Capable</span>
-                  <span class="cap-tag">Operational</span>
+                  <span class="cap-name">Every operator login is cryptographically verified with role-based access controls</span>
+                  <span class="cap-tag">A stolen tablet or rogue signal cannot issue commands to the fleet.</span>
                 </div>
                 <div class="cap hi">
-                  <span class="cap-name">SLAM / PNT Integration Ready</span>
-                  <span class="cap-tag">Navigation</span>
+                  <span class="cap-name">Platform-agnostic software — tested across multiple drone makes and models</span>
+                  <span class="cap-tag">Scale to any port fleet without replacing existing hardware or rewriting software.</span>
+                </div>
+                <div class="cap hi">
+                  <span class="cap-name">Navigation fuses GPS, LiDAR, and camera inputs simultaneously in real time</span>
+                  <span class="cap-tag">Stays accurate inside warehouses, near cranes, and under signal jamming.</span>
                 </div>
                 <div class="cap list">
                   <span>Multi-Drone Scheduling</span><span>Live Telemetry</span><span>Mission Control</span>
                 </div>
               </div>
               <div class="gcs-arch-slot">
-                <img src="assets/images/gqmt_arch_2.drawio.svg" alt="System Architecture Diagram">
+                <div class="gcs-diagram" id="gcsDiagram">
+
+                  <!-- ── Column 1: GCS ── -->
+                  <div class="gcs-col gcs-col-gcs">
+                    <div class="gcs-col-label">GCS</div>
+                    <div class="gcs-node gcs-node-app">
+                      <div class="gcs-node-title">Flutter GCS</div>
+                      <div class="gcs-node-chips">
+                        <span>Multi-Drone</span>
+                        <span>Scheduling</span>
+                        <span>Telemetry</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ── Column 2: Cloud ── -->
+                  <div class="gcs-col gcs-col-cloud">
+                    <div class="gcs-col-label">Cloud Infrastructure</div>
+                    <div class="gcs-cloud-wrap">
+                      <div class="gcs-cloud-row gcs-cloud-top">
+                        <div class="gcs-node gcs-node-auth">
+                          <div class="gcs-node-title">Auth Service</div>
+                          <div class="gcs-node-sub">JWT Token</div>
+                        </div>
+                      </div>
+                      <div class="gcs-cloud-row">
+                        <div class="gcs-node gcs-node-gw">
+                          <div class="gcs-node-title">API Gateway</div>
+                          <div class="gcs-node-sub">Control Logic</div>
+                        </div>
+                      </div>
+                      <div class="gcs-cloud-row">
+                        <div class="gcs-node gcs-node-perm">
+                          <div class="gcs-node-title">Permission &amp; Access</div>
+                        </div>
+                        <div class="gcs-node gcs-node-sched">
+                          <div class="gcs-node-title">Scheduler</div>
+                        </div>
+                      </div>
+                      <div class="gcs-cloud-row">
+                        <div class="gcs-node gcs-node-client">
+                          <div class="gcs-node-title">Client Integration API</div>
+                        </div>
+                      </div>
+                      <div class="gcs-cloud-row gcs-cloud-bottom">
+                        <div class="gcs-node gcs-node-db">
+                          <div class="gcs-node-title">MongoDB</div>
+                          <div class="gcs-node-sub">Hub · DB</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ── Column 3: Drones ── -->
+                  <div class="gcs-col gcs-col-drones">
+                    <div class="gcs-col-label">Drones</div>
+                    <div class="gcs-drone-stack">
+                      <div class="gcs-drone-unit">
+                        <div class="gcs-drone-label">Drone 1…N</div>
+                        <div class="gcs-drone-inner">
+                          <div class="gcs-node gcs-node-fc"><div class="gcs-node-title">Flight Control</div></div>
+                          <div class="gcs-node gcs-node-tel"><div class="gcs-node-title">Telemetry</div></div>
+                          <div class="gcs-node gcs-node-cache"><div class="gcs-node-title">Local Cache</div></div>
+                          <div class="gcs-node gcs-node-ai"><div class="gcs-node-title">SLAM / AI</div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ── SVG connector layer ── -->
+                  <svg class="gcs-svg" id="gcsConnectors" aria-hidden="true"></svg>
+
+                </div>
               </div>
             </div>
 
@@ -273,6 +416,130 @@
           </div>
         </div>
       </div>
+    <script>
+    (function () {
+      function drawConnectors() {
+        const svg     = document.getElementById('gcsConnectors');
+        const diagram = document.getElementById('gcsDiagram');
+        if (!svg || !diagram) return;
+        svg.innerHTML = '';
+        const dRect = diagram.getBoundingClientRect();
+        function rel(el) {
+          const r = el.getBoundingClientRect();
+          return {
+            cx: r.left - dRect.left + r.width  / 2,
+            cy: r.top  - dRect.top  + r.height / 2,
+            rx: r.left - dRect.left + r.width,
+            lx: r.left - dRect.left,
+            ty: r.top  - dRect.top,
+            by: r.top  - dRect.top  + r.height,
+          };
+        }
+        function line(x1, y1, x2, y2, o) {
+          const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+          l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+          l.setAttribute('stroke', o.color || '#888580');
+          l.setAttribute('stroke-width', o.w || '0.75');
+          if (o.dash) l.setAttribute('stroke-dasharray', o.dash);
+          l.setAttribute('opacity', o.opacity || '0.7');
+          svg.appendChild(l);
+        }
+        function arrow(x1, y1, x2, y2, o) {
+          const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+          l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+          l.setAttribute('stroke', o.color || '#888580');
+          l.setAttribute('stroke-width', o.w || '0.75');
+          if (o.dash) l.setAttribute('stroke-dasharray', o.dash);
+          l.setAttribute('opacity', o.opacity || '0.9');
+          const angle = Math.atan2(y2 - y1, x2 - x1), size = 4;
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+          p.setAttribute('points', [
+            [x2, y2],
+            [x2 - size * Math.cos(angle - 0.4), y2 - size * Math.sin(angle - 0.4)],
+            [x2 - size * Math.cos(angle + 0.4), y2 - size * Math.sin(angle + 0.4)],
+          ].map(pt => pt.join(',')).join(' '));
+          p.setAttribute('fill', o.color || '#888580');
+          p.setAttribute('opacity', o.opacity || '0.9');
+          g.appendChild(l); g.appendChild(p); svg.appendChild(g);
+        }
+        function biArrow(x1, y1, x2, y2, o) {
+          const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+          l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+          l.setAttribute('stroke', o.color || '#888580');
+          l.setAttribute('stroke-width', o.w || '0.75');
+          if (o.dash) l.setAttribute('stroke-dasharray', o.dash);
+          l.setAttribute('opacity', o.opacity || '0.9');
+          function head(tx, ty, fx, fy) {
+            const angle = Math.atan2(ty - fy, tx - fx), size = 4;
+            const p = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            p.setAttribute('points', [
+              [tx, ty],
+              [tx - size * Math.cos(angle - 0.4), ty - size * Math.sin(angle - 0.4)],
+              [tx - size * Math.cos(angle + 0.4), ty - size * Math.sin(angle + 0.4)],
+            ].map(pt => pt.join(',')).join(' '));
+            p.setAttribute('fill', o.color || '#888580');
+            p.setAttribute('opacity', o.opacity || '0.9');
+            return p;
+          }
+          g.appendChild(l);
+          g.appendChild(head(x2, y2, x1, y1));
+          g.appendChild(head(x1, y1, x2, y2));
+          svg.appendChild(g);
+        }
+        function lbl(x, y, text, o) {
+          const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          t.setAttribute('x', x); t.setAttribute('y', y);
+          t.setAttribute('font-family', "'IBM Plex Mono', monospace");
+          t.setAttribute('font-size', o.size || '5');
+          t.setAttribute('fill', o.color || '#888580');
+          t.setAttribute('letter-spacing', '0.06em');
+          t.setAttribute('text-anchor', o.anchor || 'middle');
+          t.setAttribute('dominant-baseline', 'middle');
+          t.textContent = text;
+          svg.appendChild(t);
+        }
+        const app  = diagram.querySelector('.gcs-node-app');
+        const auth = diagram.querySelector('.gcs-node-auth');
+        const gw   = diagram.querySelector('.gcs-node-gw');
+        const perm = diagram.querySelector('.gcs-node-perm');
+        const cl   = diagram.querySelector('.gcs-node-client');
+        const db   = diagram.querySelector('.gcs-node-db');
+        const cw   = diagram.querySelector('.gcs-cloud-wrap');
+        const dr   = diagram.querySelector('.gcs-drone-unit');
+        const colGcs   = diagram.querySelector('.gcs-col-gcs');
+        const colCloud = diagram.querySelector('.gcs-col-cloud');
+        const colDrone = diagram.querySelector('.gcs-col-drones');
+        if (!colGcs || !colCloud || !colDrone) return;
+        const midY = dRect.height / 2;
+        const Gc = rel(colGcs), Cc = rel(colCloud), Dc = rel(colDrone);
+        const RED = '#C1121F';
+        // GCS ↔ Cloud — straight horizontal
+        biArrow(Gc.rx, midY, Cc.lx, midY, {color: RED, w: 1.5});
+        // Cloud ↔ Drones — straight horizontal
+        biArrow(Cc.rx, midY, Dc.lx, midY, {color: RED, w: 1.5});
+      }
+
+      function init() { setTimeout(drawConnectors, 80); }
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        init();
+      } else {
+        document.addEventListener('DOMContentLoaded', init);
+      }
+      if (typeof Reveal !== 'undefined') {
+        Reveal.on('slidechanged', function () {
+          if (document.getElementById('gcsDiagram')) setTimeout(drawConnectors, 60);
+        });
+        Reveal.on('ready', function () { setTimeout(drawConnectors, 120); });
+      }
+      window.addEventListener('resize', function () { setTimeout(drawConnectors, 50); });
+    })();
+    </script>
+
     </section>
 
     <!-- ════════════════════════════════════════════
@@ -280,11 +547,11 @@
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s4">
-        <div class="slide-label">06 / 10 </div>
+        <div class="slide-label">07 / 11 </div>
         <div class="slide-inner">
           <div class="slide-header">
             <h2 class="display">Trajectory Planning That<br>Assumes Sensor Failure</h2>
-            <div class="slide-tag">06 / 10</div>
+            <div class="slide-tag">07 / 11</div>
           </div>
 
           <div class="content-row">
@@ -305,11 +572,11 @@
               </div>
               <div class="callout hi">
                 <div class="ct-title">Graceful Degradation & Tactical Deconfliction</div>
-                <div class="ct-body">Multipath interference or degraded signals detected · model continues on LiDAR and camera. Deployable adapters enable real-time tactical deconfliction without retraining the core backbone.</div>
+                <div class="ct-body">Multipath interference or degraded signals detected · model continues on LiDAR and camera. Deployable adapters feeding neighbouring drone states enable real-time tactical deconfliction without retraining the core backbone.</div>
               </div>
               <div class="s4-status-tag">Currently: SITL / Simulation Testing</div>
               <div class="key-line">
-                Sensor failure isn't an exception this system handles ·<br><span>it's the condition the architecture assumes from the start.</span><br><span style="font-size:9px;opacity:0.65;">(Multipath interference, signal spoofing, degraded sensors)</span>
+                Sensor failure isn't an exception this system handles ·<br><span>it's the condition the architecture assumes from the start.</span><br><span style="font-size:11px;opacity:0.65;">(Multipath interference, signal spoofing, degraded sensors)</span>
               </div>
             </div>
           </div>
@@ -322,11 +589,11 @@
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s6">
-        <div class="slide-label">07 / 10 </div>
+        <div class="slide-label">08 / 11 </div>
 
         <div class="s6-left">
           <div>
-            <div class="slide-tag red" style="font-size:9px;margin-bottom:10px;">Architecture Decisions </div>
+            <div class="slide-tag red" style="font-size:11px;margin-bottom:10px;">Architecture Decisions </div>
             <h2 class="display white">Teaching Drones to<br>Coordinate Without a<br>Central Controller</h2>
           </div>
 
@@ -361,131 +628,7 @@
     </section>
 
     <!-- ════════════════════════════════════════════
-         SLIDE 8 · PROJECT ROADMAP  [75s]
-    ════════════════════════════════════════════ -->
-    <section>
-      <div class="slide" id="s8">
-        <div class="red-bar-left"></div>
-        <div class="slide-inner">
-
-          <!-- HEADER -->
-          <div class="slide-header">
-            <h2 class="display">SAFEPOS · 26-Month<br>Project <span style="color:var(--red)">Roadmap</span></h2>
-            <div class="slide-tag">08 / 10</div>
-          </div>
-
-          <!-- ROADMAP BODY -->
-          <div class="s8-road-wrap">
-
-            <!-- SVG Winding Road -->
-            <svg class="s8-road-svg" viewBox="0 0 1040 480" preserveAspectRatio="xMidYMid meet" fill="none">
-              <path class="s8-road-glow"
-                d="M -5,50 C 140,28 280,62 420,45 C 560,28 700,62 870,45 C 960,38 1012,145 1012,240 C 1012,335 960,442 870,435 C 700,418 560,452 420,435 C 280,418 140,452 -5,430"/>
-              <path class="s8-road-surface"
-                d="M -5,50 C 140,28 280,62 420,45 C 560,28 700,62 870,45 C 960,38 1012,145 1012,240 C 1012,335 960,442 870,435 C 700,418 560,452 420,435 C 280,418 140,452 -5,430"/>
-              <path class="s8-road-center"
-                d="M -5,50 C 140,28 280,62 420,45 C 560,28 700,62 870,45 C 960,38 1012,145 1012,240 C 1012,335 960,442 870,435 C 700,418 560,452 420,435 C 280,418 140,452 -5,430"/>
-              <!-- Direction arrows along the road -->
-              <polygon class="s8-road-arrow" points="200,38 212,43 200,48" />
-              <polygon class="s8-road-arrow" points="600,38 612,43 600,48" />
-              <polygon class="s8-road-arrow" points="612,438 600,433 612,428" />
-              <polygon class="s8-road-arrow" points="200,442 188,437 200,432" />
-            </svg>
-
-            <!-- Phase 1 — Top Road, Left -->
-            <div class="s8-stop s8-stop-top s8-stop-1">
-              <div class="s8-badge">1</div>
-              <div class="s8-stem"></div>
-              <div class="s8-card">
-                <div class="s8-card-title">Regulatory Scoping &amp; ConOps</div>
-                <div class="s8-card-months">Months 1–6</div>
-                <ul>
-                  <li>Execute <strong>UK SORA Steps 1–9</strong> for Final SAIL decision from CAA</li>
-                  <li>Determine <strong>iGRC / ARC</strong> for port operational volumes &amp; buffers</li>
-                  <li>Full <strong>ConOps</strong> for multi-agent coordination &amp; flight profiles</li>
-                  <li><strong>Isaac Sim</strong> scenario modeling for SORA Step 1 information</li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Phase 2 — Top Road, Center -->
-            <div class="s8-stop s8-stop-top s8-stop-2">
-              <div class="s8-badge">2</div>
-              <div class="s8-stem"></div>
-              <div class="s8-card">
-                <div class="s8-card-title">Core Framework &amp; RL Training</div>
-                <div class="s8-card-months">Months 7–12</div>
-                <ul>
-                  <li><strong>ROS2</strong> drone-side server + <strong>Docker</strong> flight agents</li>
-                  <li><strong>JWT authentication</strong> for secure operator access &amp; scheduling</li>
-                  <li><strong>Isaac Lab:</strong> independent RL policies, neighbor-aware states</li>
-                  <li><strong>Domain randomization:</strong> crate mass &amp; size variation</li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Phase 3 — Top Road, Right -->
-            <div class="s8-stop s8-stop-top s8-stop-3">
-              <div class="s8-badge">3</div>
-              <div class="s8-stem"></div>
-              <div class="s8-card">
-                <div class="s8-card-title">Integration &amp; SORA Compliance</div>
-                <div class="s8-card-months">Months 13–18</div>
-                <ul>
-                  <li><strong>PROGENY Task 79</strong> plug-and-play sensor fusion pipeline</li>
-                  <li><strong>OSO evidence:</strong> multi-crew coordination &amp; C3 link (Steps 10–12)</li>
-                  <li><strong>SITL stress test:</strong> spoofing &amp; multipath interference</li>
-                  <li><strong>Graceful degradation</strong> validated under high-stress conditions</li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Phase 4 — Bottom Road, Right -->
-            <div class="s8-stop s8-stop-btm s8-stop-4">
-              <div class="s8-card">
-                <div class="s8-card-title">Field Trials &amp; Safety Portfolio</div>
-                <div class="s8-card-months">Months 19–24</div>
-                <ul>
-                  <li><strong>Defence-grade port trials</strong> with synthetic noise injection</li>
-                  <li><strong>CSP:</strong> map simulation data to SAIL robustness levels</li>
-                  <li><strong>Final assessment:</strong> CSP submission via SORA Step 13</li>
-                  <li>Fusion system <strong>reliability verified</strong> in real-world conditions</li>
-                </ul>
-              </div>
-              <div class="s8-stem"></div>
-              <div class="s8-badge">4</div>
-            </div>
-
-            <!-- Phase 5 — Bottom Road, Left (Final) -->
-            <div class="s8-stop s8-stop-btm s8-stop-5">
-              <div class="s8-card s8-card-final">
-                <div class="s8-card-title">Authorisation &amp; Scaling</div>
-                <div class="s8-card-months">Months 25–26+</div>
-                <ul>
-                  <li>Formal <strong>CAA Operational Authorisation</strong> received</li>
-                  <li><strong>LL1/LL2</strong> pathway for last-mile delivery operations</li>
-                  <li><strong>FI2/FI3</strong> pathway for point-to-point logistics</li>
-                  <li>UK <strong>Future of Flight:</strong> routine BVLOS by 2027</li>
-                </ul>
-              </div>
-              <div class="s8-stem"></div>
-              <div class="s8-badge s8-badge-final">5</div>
-            </div>
-
-          </div><!-- end s8-road-wrap -->
-
-        </div>
-
-        <div class="s8-footer">
-          <span class="s8-footer-left">Aligned with the UK CAA Future of Flight BVLOS Roadmap</span>
-          <span class="s8-footer-right">CAA · FoF BVLOS Roadmap · 2025</span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ════════════════════════════════════════════
-         SLIDE 9 · DIRECT ALIGNMENT  [45s]
+         SLIDE 8 · DIRECT ALIGNMENT  [45s]
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s2">
@@ -493,7 +636,7 @@
         <div class="slide-inner">
           <div class="slide-header">
             <h2 class="display">The Case For This Application</h2>
-            <div class="slide-tag">09 / 10</div>
+            <div class="slide-tag">09 / 11</div>
           </div>
 
           <div class="brief-table">
@@ -523,7 +666,7 @@
             </div>
             <div class="brief-row">
               <div class="brief-req">Defence Exposure &amp; Industry Collaboration</div>
-              <div class="brief-ev">PROGENY involved direct collaboration with QinetiQ, Supacat, SeeByte, and the National Oceanography Centre. BPSS previously cleared.</div>
+              <div class="brief-ev">PROGENY involved direct collaboration with QinetiQ, Supacat, SeeByte, Sonardyne, and the National Oceanography Centre. BPSS previously cleared.</div>
             </div>
             <div class="brief-row dim">
               <div class="brief-req">Regulatory Frameworks - SORA, JARUS</div>
@@ -537,11 +680,219 @@
     </section>
 
     <!-- ════════════════════════════════════════════
+         SLIDE 10 · WHAT I STILL NEED TO LEARN  [60s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s_gaps">
+        <div class="slide-label">10 / 12 </div>
+        <div class="red-bar-left"></div>
+        <div class="slide-inner">
+
+          <div class="slide-header">
+            <div>
+              <h2 class="display">What I Still Need to Learn</h2>
+              <div class="sg-subtitle">Three gaps · a training plan · and why the KTP is the right place to close them.</div>
+            </div>
+            <div class="slide-tag">10 / 12</div>
+          </div>
+
+          <div class="sg-cards">
+
+            <!-- Card 1 -->
+            <div class="sg-card">
+              <div class="sg-card-num">01</div>
+              <div class="sg-card-title">Regulatory Frameworks</div>
+              <div class="sg-card-tag warn">Studied · Not Yet Applied</div>
+              <div class="sg-card-liner">“Mapped the full SORA pathway for this application. Never authored a live ConOps or submitted to the CAA.”</div>
+              <ul class="sg-card-bullets">
+                <li>ARPAS-UK GVC course &mdash; flight operations certification and the practical gateway to understanding how operational authorisations work on real systems</li>
+                <li>ARPAS-UK Practitioner Programme &mdash; regulatory fluency across SORA, JARUS, PDRA frameworks</li>
+                <li>Shadow ISS Aerospace’s existing OA submissions from month one</li>
+                <li>Lead SAFEPOS ConOps authoring by month 3 under supervisor sign-off</li>
+              </ul>
+              <div class="sg-card-budget">£ 1,800 – £ 2,300</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="sg-card">
+              <div class="sg-card-num">02</div>
+              <div class="sg-card-title">Safety Case &amp; FMEA</div>
+              <div class="sg-card-tag warn">Adjacent Evidence · No Direct Experience</div>
+              <div class="sg-card-liner">“PROGENY involved defence-grade validation and delivery to DSTL. Never framed it as a formal safety case or applied FMEA methodology explicitly.”</div>
+              <ul class="sg-card-bullets">
+                <li>IET or Lloyd’s Register FMEA &amp; Safety Case fundamentals short course</li>
+                <li>Apply FMEA methodology directly to SAFEPOS sensor fusion failure modes from month 2</li>
+                <li>Use OSO compliance work in the roadmap as the live safety case artefact</li>
+              </ul>
+              <div class="sg-card-budget">£ 600 – £ 900</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="sg-card">
+              <div class="sg-card-num">03</div>
+              <div class="sg-card-title">Real-World Drone Operations</div>
+              <div class="sg-card-tag info">Sim-Validated · Field Experience Building</div>
+              <div class="sg-card-liner">“PROGENY gave me real field data across drone, UGV and USV. My own builds have been validated in simulation &mdash; the KTP is where that changes.”</div>
+              <ul class="sg-card-bullets">
+                <li>GVC covered under ARPAS-UK &mdash; provides legal flying rights and operational ground school</li>
+                <li>Structured flight hours alongside ISS Aerospace’s operational team from month 2 onward</li>
+                <li>SITL rigour means arriving knowing exactly what needs field validation &mdash; not learning that from scratch</li>
+              </ul>
+              <div class="sg-card-budget">Covered under Card 01</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SLIDE 11 · PROJECT ROADMAP  [75s]
+    ════════════════════════════════════════════ -->
+    <section>
+      <div class="slide" id="s8">
+        <div class="red-bar-left"></div>
+        <div class="slide-inner">
+
+          <!-- HEADER -->
+          <div class="slide-header">
+            <h2 class="display">SAFEPOS · 26-Month Project <span style="color:var(--red)">Roadmap</span></h2>
+            <div class="slide-tag">11 / 12</div>
+          </div>
+
+          <!-- SWIM LANE GRID -->
+          <div class="s8-swim">
+
+            <!-- ── Phase Headers Row ── -->
+            <div class="s8-sw-headers">
+              <div class="s8-sw-corner">
+                <span class="s8-sw-corner-label">26 months</span>
+              </div>
+              <div class="s8-ph-hdr">
+                <div class="s8-ph-num">01</div>
+                <div class="s8-ph-name">Foundation &amp;<br>Requirements</div>
+                <div class="s8-ph-months">Months 1 – 4</div>
+                <div class="s8-ph-bar" style="width:15%"></div>
+              </div>
+              <div class="s8-ph-hdr">
+                <div class="s8-ph-num">02</div>
+                <div class="s8-ph-name">Core Development<br>&amp; Safety Evidence</div>
+                <div class="s8-ph-months">Months 5 – 14</div>
+                <div class="s8-ph-bar" style="width:38%"></div>
+              </div>
+              <div class="s8-ph-hdr">
+                <div class="s8-ph-num">03</div>
+                <div class="s8-ph-name">Validation &amp;<br>Portfolio</div>
+                <div class="s8-ph-months">Months 15 – 22</div>
+                <div class="s8-ph-bar" style="width:31%"></div>
+              </div>
+              <div class="s8-ph-hdr s8-ph-hdr-final">
+                <div class="s8-ph-num">04</div>
+                <div class="s8-ph-name">Field Trials &amp;<br>Authorisation</div>
+                <div class="s8-ph-months">Months 23 – 26+</div>
+                <div class="s8-ph-bar s8-ph-bar-final" style="width:100%"></div>
+              </div>
+            </div>
+
+            <!-- ── Lane 1: Technical Development ── -->
+            <div class="s8-sw-row">
+              <div class="s8-sw-lbl">
+                <span class="s8-lbl-main">Technical</span>
+                <span class="s8-lbl-sub">Development</span>
+              </div>
+              <div class="s8-sw-cell">
+                <ul class="s8-ul">
+                  <li>Review existing solutions <span class="s8-task">Task 1</span></li>
+                  <li>Define system specification requirements <span class="s8-task">Task 2</span></li>
+                  <li>Complete software requirement specifications <span class="s8-task">Task 3</span></li>
+                </ul>
+              </div>
+              <div class="s8-sw-cell">
+                <ul class="s8-ul">
+                  <li>Data preparation <span class="s8-task">Task 4</span></li>
+                  <li>System development begins <span class="s8-task">Task 5</span></li>
+                  <li>Multi-agent communication framework &amp; transport logic</li>
+                </ul>
+              </div>
+              <div class="s8-sw-cell">
+                <ul class="s8-ul">
+                  <li>SITL validation &amp; fine-tuning <span class="s8-task">Task 6</span></li>
+                  <li>Stress-test multi-agent coordination</li>
+                  <li>High-fidelity simulated port environment</li>
+                </ul>
+              </div>
+              <div class="s8-sw-cell s8-sw-cell-final">
+                <ul class="s8-ul">
+                  <li>Field testing in real-world port <span class="s8-task">Task 7</span></li>
+                  <li>Final system fine-tuning</li>
+                  <li>Transition FI1 → FI2 → FI3 pathway</li>
+                  <li>Routine BVLOS across UK by 2027/28</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ── Lane 2: Regulatory / UK SORA ── -->
+            <div class="s8-sw-row s8-sw-row-reg">
+              <div class="s8-sw-lbl s8-sw-lbl-reg">
+                <span class="s8-lbl-main">Regulatory</span>
+                <span class="s8-lbl-sub">UK · SORA</span>
+              </div>
+              <div class="s8-sw-cell s8-sw-cell-reg">
+                <div class="s8-sora-tag">Steps 1 – 9</div>
+                <ul class="s8-ul">
+                  <li><strong>ConOps (Step 1):</strong> Define operational volume; AAE / ARC-a classification for port</li>
+                  <li><strong>Risk (iGRC / ARC):</strong> Port population density &amp; airspace class assessment</li>
+                  <li><strong>SAIL (Step 9):</strong> Final SAIL decision from CAA — defines robustness level</li>
+                </ul>
+              </div>
+              <div class="s8-sw-cell s8-sw-cell-reg">
+                <div class="s8-sora-tag">OSO Compliance</div>
+                <ul class="s8-ul">
+                  <li>Identify required OSOs based on SAIL outcome</li>
+                  <li><strong>OSO 16:</strong> Evidence for multi-crew coordination across drones</li>
+                  <li><strong>FI1 Alignment:</strong> Fully integrated ops in specific volumes with bespoke entry</li>
+                </ul>
+              </div>
+              <div class="s8-sw-cell s8-sw-cell-reg">
+                <div class="s8-sora-tag">Steps 10 – 13</div>
+                <ul class="s8-ul">
+                  <li><strong>Step 10:</strong> Containment evidence within authorised volume &amp; ground risk buffer</li>
+                  <li><strong>Step 12 (TMPR):</strong> Tactical Mitigation Performance Requirements for residual air risk</li>
+                  <li><strong>Step 13 (CSP):</strong> Compile Comprehensive Safety Portfolio for CAA</li>
+                </ul>
+              </div>
+              <div class="s8-sw-cell s8-sw-cell-reg s8-sw-cell-final">
+                <div class="s8-sora-tag s8-sora-tag-final">Step 14 · CAA</div>
+                <ul class="s8-ul">
+                  <li>Submit CSP for Operational Authorisation (Step 14)</li>
+                  <li>FI2 pathway: controlled airspace operations</li>
+                  <li>FI3 pathway: integrated controlled / uncontrolled airspace</li>
+                  <li>Middle-mile logistics across UK — 2027/28+</li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- end s8-swim -->
+
+        </div>
+
+        <div class="s8-footer">
+          <span class="s8-footer-left">Aligned with the UK CAA Future of Flight BVLOS Roadmap</span>
+          <span class="s8-footer-right">CAA · FoF BVLOS Roadmap · 2025</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
          SLIDE 10 · CLOSE  [45s]
     ════════════════════════════════════════════ -->
     <section>
       <div class="slide" id="s9">
-        <div class="slide-label light">10 / 10 </div>
+        <div class="slide-label light">12 / 12 </div>
+        <div class="port-bg"></div>
+        <div class="port-bg-fallback"></div>
+        <div class="dark-gradient"></div>
         <div class="s9-left">
           <div class="s9-thank-you">
             Thank you for your time.
