@@ -942,6 +942,22 @@
     @media (max-width: 600px) {
       section { padding: 4rem 0; }
       .hero-inner { padding-top: 5rem; }
+
+      /* Smaller hero stats on mobile */
+      .hero-stats { gap: .75rem; }
+      .h-stat { padding: .65rem .9rem; }
+      .hs-n { font-size: 1.15rem; }
+      .hs-l { font-size: .65rem; }
+      .h-stat-div { height: 28px; }
+
+      /* Projects carousel — full-width cards with comfortable padding */
+      .proj-track { gap: 1rem; padding: .5rem 1rem 1.25rem; }
+      .proj-slide {
+        flex: 0 0 calc(100vw - 4rem);
+        min-width: 0;
+        max-width: 340px;
+      }
+      .proj-info { padding: 1rem; }
     }
 
     /* --- ANIMATIONS --- */
