@@ -6,7 +6,7 @@
   <title>KTP Associate · SAFEPOS · Pranav Vijaya Kumar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
@@ -67,9 +67,9 @@
             <div class="sv-item">
               <div class="sv-num">01</div>
               <div class="sv-item-body">
-                <div class="sv-item-title">Sensor Deception, Not Sensor Failure</div>
-                <div class="sv-item-context">In a metal-dense port, the dangerous failure mode isn't a sensor going offline.</div>
-                <div class="sv-item-q">What happens when the sensor is confidently wrong and the system has no reason to doubt it?</div>
+                <div class="sv-item-title">Sensor Deception</div>
+                <div class="sv-item-context">In a metal-dense port environment, a sensor doesn't have to fail to cause a crash: it just has to be confidently wrong.</div>
+                <div class="sv-item-q">How does the system know when to stop trusting a sensor that hasn't gone offline, when it's just lying?</div>
               </div>
             </div>
 
@@ -77,26 +77,26 @@
               <div class="sv-num">02</div>
               <div class="sv-item-body">
                 <div class="sv-item-title">Weather as an Operational Gate</div>
-                <div class="sv-item-context">Port schedules don't pause for marginal conditions.</div>
-                <div class="sv-item-q">Who decides when it's safe to fly, on what evidence, and how is that decision defensible to the CAA?</div>
+                <div class="sv-item-context">Port schedules don't pause for marginal conditions, and a grounded fleet is a liability. But so is a fleet that shouldn't have launched.</div>
+                <div class="sv-item-q">When conditions are marginal, how does the system decide whether to fly, and if it does, how does it stay safe?</div>
               </div>
             </div>
 
             <div class="sv-item">
               <div class="sv-num">03</div>
               <div class="sv-item-body">
-                <div class="sv-item-title">Coordination Fragility</div>
-                <div class="sv-item-context">Independent policies only stay safe if each agent has accurate state information.</div>
-                <div class="sv-item-q">If one drone lies about its position mid-lift, what does that do to every drone coordinating against it?</div>
+                <div class="sv-item-title">Coordination Fragility &amp; Contingency</div>
+                <div class="sv-item-context">Independent agents only stay safe when every neighbour's state can be trusted, yet not every mission ends cleanly.</div>
+                <div class="sv-item-q">If a neighbour is publishing a wrong position, how does the system detect that, stay safe, and what happens if a drone fails mid-operation over an active dock?</div>
               </div>
             </div>
 
             <div class="sv-item">
               <div class="sv-num">04</div>
               <div class="sv-item-body">
-                <div class="sv-item-title">Operational Authority at Scale</div>
-                <div class="sv-item-context">A single BVLOS mission has a clear authority chain. A twelve-drone fleet mid-operation over an active dock does not.</div>
-                <div class="sv-item-q">When a crane swings into a flight path, who overrides — the operator, the system, or neither?</div>
+                <div class="sv-item-title">Access Control &amp; Security</div>
+                <div class="sv-item-context">A twelve-drone fleet has twelve attack surfaces. Centralised control is a single point of failure; fully distributed control is ungovernable.</div>
+                <div class="sv-item-q">Across a twelve-drone fleet, who controls what, how do you prevent unauthorised access, and is one operator really meant to have their hands on everything?</div>
               </div>
             </div>
 
@@ -273,7 +273,7 @@
 
           <div class="insight-row">
             <div class="ins-num">01</div>
-            <div class="ins-text"><strong>Adaptive sensor fusion</strong><br>GPS fails, LiDAR trust rises. Camera struggles in low light, IMU takes over.</div>
+            <div class="ins-text"><strong>Adaptive sensor fusion</strong><br>System perceives the environment and adaptively fuses data. GPS fails, LiDAR trust rises. Camera struggles in low light, IMU takes over.</div>
           </div>
           <div class="insight-row">
             <div class="ins-num">02</div>
@@ -314,20 +314,20 @@
                   <span class="cap-col-hdr">Why It Matters</span>
                 </div>
                 <div class="cap hi">
-                  <span class="cap-name">Each drone runs its own onboard command server — no dependency on a central node</span>
-                  <span class="cap-tag">Ground link drops mid-mission? The drone completes its task anyway.</span>
+                  <span class="cap-name">ROS2 based drone side client with hub and spoke governance</span>
+                  <span class="cap-tag">Enhanced security, cost-efficient resource sharing, easier scalability, and centralized control over traffic policies</span>
                 </div>
                 <div class="cap hi">
-                  <span class="cap-name">Every operator login is cryptographically verified with role-based access controls</span>
-                  <span class="cap-tag">A stolen tablet or rogue signal cannot issue commands to the fleet.</span>
+                  <span class="cap-name">JWT auth and access control management</span>
+                  <span class="cap-tag">Ensures only authorized personnel can issue commands, enhancing security.</span>
                 </div>
                 <div class="cap hi">
-                  <span class="cap-name">Platform-agnostic software — tested across multiple drone makes and models</span>
-                  <span class="cap-tag">Scale to any port fleet without replacing existing hardware or rewriting software.</span>
+                  <span class="cap-name">Hardware Agnostic and  BVLOS capable</span>
+                  <span class="cap-tag">Scale to any port fleet without replacing existing hardware or rewriting software. Cloud based control when C2 Link fails.</span>
                 </div>
                 <div class="cap hi">
-                  <span class="cap-name">Navigation fuses GPS, LiDAR, and camera inputs simultaneously in real time</span>
-                  <span class="cap-tag">Stays accurate inside warehouses, near cranes, and under signal jamming.</span>
+                  <span class="cap-name">SLAM / PNT Integration Ready</span>
+                  <span class="cap-tag">Easily integrates with existing SLAM and PNT systems or security layers for enhanced navigation accuracy.</span>
                 </div>
                 <div class="cap list">
                   <span>Multi-Drone Scheduling</span><span>Live Telemetry</span><span>Mission Control</span>
@@ -411,7 +411,7 @@
             </div>
 
             <div class="right-img-slot">
-              <img src="assets/images/ui_2.gif" alt="Drone BVLOS flight operations - UI Screenshot 2">
+              <img src="assets/images/ui.gif" alt="Drone BVLOS flight operations - UI Screenshot 2">
             </div>
           </div>
         </div>
@@ -518,10 +518,10 @@
         const midY = dRect.height / 2;
         const Gc = rel(colGcs), Cc = rel(colCloud), Dc = rel(colDrone);
         const RED = '#C1121F';
-        // GCS ↔ Cloud — straight horizontal
-        biArrow(Gc.rx, midY, Cc.lx, midY, {color: RED, w: 1.5});
-        // Cloud ↔ Drones — straight horizontal
-        biArrow(Cc.rx, midY, Dc.lx, midY, {color: RED, w: 1.5});
+        // GCS ↔ Cloud: straight horizontal line
+        line(Gc.rx, midY, Cc.lx, midY, {color: RED, w: 1.5});
+        // Cloud ↔ Drones: straight horizontal line
+        line(Cc.rx, midY, Dc.lx, midY, {color: RED, w: 1.5});
       }
 
       function init() { setTimeout(drawConnectors, 80); }
@@ -646,7 +646,7 @@
             </div>
             <div class="brief-row strong">
               <div class="brief-req">Modular Sensor Fusion · PNT</div>
-              <div class="brief-ev">PROGENY Task 79 · a standalone, scalable, modular fusion system. Built it, validated it, shipped it across three platforms.</div>
+              <div class="brief-ev">PROGENY Task 79 · a standalone, scalable, modular fusion system. Built and validated.</div>
             </div>
             <div class="brief-row strong">
               <div class="brief-req">Plug-and-play Integration &amp; System Communication</div>
@@ -654,15 +654,15 @@
             </div>
             <div class="brief-row strong">
               <div class="brief-req">Simulation, Mission Planning &amp; Robotic Systems</div>
-              <div class="brief-ev">Gazebo, Isaac Sim, PyBullet · each project picked the right tool. Simulation is where assumptions get tested.</div>
+              <div class="brief-ev"> Have worked extensively with Gazebo, Isaac Sim, PyBullet </div>
             </div>
             <div class="brief-row">
               <div class="brief-req">ML-Based Control &amp; Multi-Agent Systems</div>
-              <div class="brief-ev">RL across quadrupeds, humanoids, and multi-agent drones. Diffusion-based trajectory planning. Domain randomisation throughout · robustness isn't an afterthought.</div>
+              <div class="brief-ev">RL across quadrupeds, humanoids, and multi-agent drones. Diffusion-based trajectory planning. Have also worked with computer vision and Generative AI</div>
             </div>
             <div class="brief-row">
               <div class="brief-req">Software Development &amp; Practical Application</div>
-              <div class="brief-ev">ROS2, Python, Docker, Flutter, FastAPI, PostgreSQL, Azure CI/CD. Research and production experience across the stack.</div>
+              <div class="brief-ev"> Have worked with frontend backend and deployment pipelines, My stack consists of  - ROS2, Python, Docker, Flutter, FastAPI, PostgreSQL, Azure CI/CD with Research and production experience across the stack.</div>
             </div>
             <div class="brief-row">
               <div class="brief-req">Defence Exposure &amp; Industry Collaboration</div>
@@ -696,52 +696,73 @@
             <div class="slide-tag">10 / 12</div>
           </div>
 
-          <div class="sg-cards">
+          <div class="sg-timeline">
 
-            <!-- Card 1 -->
-            <div class="sg-card">
-              <div class="sg-card-num">01</div>
-              <div class="sg-card-title">Regulatory Frameworks</div>
-              <div class="sg-card-tag warn">Studied · Not Yet Applied</div>
-              <div class="sg-card-liner">“Mapped the full SORA pathway for this application. Never authored a live ConOps or submitted to the CAA.”</div>
-              <ul class="sg-card-bullets">
-                <li>ARPAS-UK GVC course &mdash; flight operations certification and the practical gateway to understanding how operational authorisations work on real systems</li>
-                <li>ARPAS-UK Practitioner Programme &mdash; regulatory fluency across SORA, JARUS, PDRA frameworks</li>
-                <li>Shadow ISS Aerospace’s existing OA submissions from month one</li>
-                <li>Lead SAFEPOS ConOps authoring by month 3 under supervisor sign-off</li>
-              </ul>
-              <div class="sg-card-budget">£ 1,800 – £ 2,300</div>
+            <!-- ── Track (horizontal line + nodes) ── -->
+            <div class="sg-tl-track">
+              <div class="sg-tl-line"></div>
+
+              <!-- Node 01 · Regulatory Frameworks -->
+              <div class="sg-tl-node">
+                <div class="sg-tl-dot"></div>
+                <div class="sg-tl-stem"></div>
+                <div class="sg-tl-card">
+                  <div class="sg-tl-num">01</div>
+                  <div class="sg-tl-title">Regulatory Frameworks</div>
+                  <div class="sg-tl-status warn">Studied · Not Yet Applied</div>
+                  <div class="sg-tl-body">Eagle Eye Innovation's Mastering UK SORA for Drone Operations course: regulatory fluency across SORA, JARUS, and PDRA frameworks</div>
+                  <div class="sg-tl-budget">£ 500 - 700</div>
+                </div>
+              </div>
+
+              <!-- Node 02 · Safety Case & FMEA -->
+              <div class="sg-tl-node">
+                <div class="sg-tl-dot"></div>
+                <div class="sg-tl-stem"></div>
+                <div class="sg-tl-card">
+                  <div class="sg-tl-num">02</div>
+                  <div class="sg-tl-title">Safety Case &amp; FMEA</div>
+                  <div class="sg-tl-status warn">Adjacent Evidence · No Direct Experience</div>
+                  <div class="sg-tl-body">BSI FMEA Training Course: methodology for identifying and mitigating failure modes in safety-critical systems</div>
+                  <div class="sg-tl-budget">£ 500 – £ 700</div>
+                </div>
+              </div>
+
+              <!-- Node 03 · Real-World Drone Operations -->
+              <div class="sg-tl-node">
+                <div class="sg-tl-dot"></div>
+                <div class="sg-tl-stem"></div>
+                <div class="sg-tl-card">
+                  <div class="sg-tl-num">03</div>
+                  <div class="sg-tl-title">Real-World Drone Operations</div>
+                  <div class="sg-tl-status info">Sim-Validated · Field Experience Building</div>
+                  <div class="sg-tl-body">Eagle Eyes Remote Pilot Certificate (RPC) Level 1: practical flight operations certification · Structured flight hours alongside ISS Aerospace's operational team from month 2 onward</div>
+                  <div class="sg-tl-budget">£ 1.25k exc. VAT</div>
+                </div>
+              </div>
+
+              <!-- Node 04 · Research & Publications -->
+              <div class="sg-tl-node">
+                <div class="sg-tl-dot"></div>
+                <div class="sg-tl-stem"></div>
+                <div class="sg-tl-card">
+                  <div class="sg-tl-num">04</div>
+                  <div class="sg-tl-title">Research &amp; Publications</div>
+                  <div class="sg-tl-status info">High Performance · Domain Peer Review</div>
+                  <div class="sg-tl-body">Conducting original research and publishing peer-reviewed papers at major robotics conferences (ICRA/IROS), establishing domain authority and industry leadership for ISS Aerospace.</div>
+                  <div class="sg-tl-budget">£ 1,500 – £ 2,000</div>
+                </div>
+              </div>
+
+            </div><!-- end sg-tl-track -->
+
+            <!-- ── Footer: mitigation statement + total budget ── -->
+            <div class="sg-tl-footer">
+              <div class="sg-tl-fc-text">These gaps will be systematically closed through the KTP training budget, translating directly into live deliverables: a filed ConOps, a shipped safety case, and field-validated flight operations alongside ISS Aerospace’s team.</div>
+              <div class="sg-tl-fc-cost">Total Training Budget<span>£ 3,749 – £ 4,649 exc. VAT</span></div>
             </div>
 
-            <!-- Card 2 -->
-            <div class="sg-card">
-              <div class="sg-card-num">02</div>
-              <div class="sg-card-title">Safety Case &amp; FMEA</div>
-              <div class="sg-card-tag warn">Adjacent Evidence · No Direct Experience</div>
-              <div class="sg-card-liner">“PROGENY involved defence-grade validation and delivery to DSTL. Never framed it as a formal safety case or applied FMEA methodology explicitly.”</div>
-              <ul class="sg-card-bullets">
-                <li>IET or Lloyd’s Register FMEA &amp; Safety Case fundamentals short course</li>
-                <li>Apply FMEA methodology directly to SAFEPOS sensor fusion failure modes from month 2</li>
-                <li>Use OSO compliance work in the roadmap as the live safety case artefact</li>
-              </ul>
-              <div class="sg-card-budget">£ 600 – £ 900</div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="sg-card">
-              <div class="sg-card-num">03</div>
-              <div class="sg-card-title">Real-World Drone Operations</div>
-              <div class="sg-card-tag info">Sim-Validated · Field Experience Building</div>
-              <div class="sg-card-liner">“PROGENY gave me real field data across drone, UGV and USV. My own builds have been validated in simulation &mdash; the KTP is where that changes.”</div>
-              <ul class="sg-card-bullets">
-                <li>GVC covered under ARPAS-UK &mdash; provides legal flying rights and operational ground school</li>
-                <li>Structured flight hours alongside ISS Aerospace’s operational team from month 2 onward</li>
-                <li>SITL rigour means arriving knowing exactly what needs field validation &mdash; not learning that from scratch</li>
-              </ul>
-              <div class="sg-card-budget">Covered under Card 01</div>
-            </div>
-
-          </div>
+          </div><!-- end sg-timeline -->
         </div>
       </div>
     </section>
@@ -842,7 +863,7 @@
                 <ul class="s8-ul">
                   <li><strong>ConOps (Step 1):</strong> Define operational volume; AAE / ARC-a classification for port</li>
                   <li><strong>Risk (iGRC / ARC):</strong> Port population density &amp; airspace class assessment</li>
-                  <li><strong>SAIL (Step 9):</strong> Final SAIL decision from CAA — defines robustness level</li>
+                  <li><strong>SAIL (Step 9):</strong> Final SAIL decision from CAA: defines robustness level</li>
                 </ul>
               </div>
               <div class="s8-sw-cell s8-sw-cell-reg">
@@ -867,7 +888,7 @@
                   <li>Submit CSP for Operational Authorisation (Step 14)</li>
                   <li>FI2 pathway: controlled airspace operations</li>
                   <li>FI3 pathway: integrated controlled / uncontrolled airspace</li>
-                  <li>Middle-mile logistics across UK — 2027/28+</li>
+                  <li>Middle-mile logistics across UK (2027/28+)</li>
                 </ul>
               </div>
             </div>
