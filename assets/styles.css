@@ -161,7 +161,7 @@ h2.display.white { color: #fff; }
 }
 #s2 .brief-hcell {
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-  color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--red); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
 }
 #s2 .brief-hcell:first-child { width: 28%; padding-left: 6px; }
 #s2 .brief-hcell:last-child { flex: 1; padding-left: 20px; }
@@ -503,12 +503,13 @@ h2.display.white { color: #fff; }
 #s6 .s6-left {
   width: 40%; background: var(--black); padding: 32px 28px;
   display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  overflow: hidden; min-height: 0;
 }
 #s6 .s6-caption {
   font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.65);
   border-top: 1px solid #222; padding-top: 9px; letter-spacing: 0.03em; line-height: 1.5;
 }
-#s6 .spec-list { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+#s6 .spec-list { display: flex; flex-direction: column; gap: 10px; flex: 1; min-height: 0; overflow: hidden; }
 #s6 .spec-item { display: flex; flex-direction: column; gap: 3px; padding-bottom: 10px; border-bottom: 1px solid #1e1e1e; }
 #s6 .spec-item:last-child { border-bottom: none; padding-bottom: 0; }
 #s6 .spec-label { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.1em; }
